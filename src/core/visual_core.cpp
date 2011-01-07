@@ -308,16 +308,6 @@ void visual_core::checkXMLNode(xmlNode * a_node)
 			checkXMLNode(cur_node->children);		
 		}
 
-        if (cur_node->type == XML_ELEMENT_NODE && node_name == "module")
-		{
-			OSG_DEBUG << "XML node module found" << std::endl;
-
-			parseModule(cur_node);
-	
-            //OSG_DEBUG << "node type=Element, name:" << cur_node->name << std::endl;
-			//OSG_DEBUG << "Processing children at " << cur_node->children << std::endl;
-        }	// IF(module) END
-
 		if (cur_node->type == XML_ELEMENT_NODE && node_name == "scenery")
 		{
 			OSG_DEBUG << "XML node scenery found" << std::endl;
@@ -328,34 +318,6 @@ void visual_core::checkXMLNode(xmlNode * a_node)
 			//OSG_DEBUG << "Processing children at " << cur_node->children << std::endl;
         }	// IF(scenery) END
     }	// FOR END
-}
-
-void visual_core::parseModule(xmlNode * a_node)
-{
-	OSG_ALWAYS << "parseModule()" << std::endl;
-
-// Extract infos
-	std::string name = "";
-	bool enabled = false;
-
-	xmlAttr  *attr = a_node->properties;
-	while ( attr ) 
-	{ 
-		std::string attr_name=reinterpret_cast<const char*>(attr->name);
-		std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-		if( attr_name == "name" )
-			name = reinterpret_cast<const char*>(attr->children->content);
-		if( attr_name == "enabled" && attr_value== "yes" )
-			enabled = true;
-		if( attr_name == "enabled" && attr_value== "no" )
-			enabled = false;
-
-		attr = attr->next; 
-	} 
-	OSG_ALWAYS << "Module '" << name << "' found. Enabled = " << enabled << std::endl;
-
-	// Pass the nodes to the corresponding modules...
-	if(name == "core") this->config(a_node);
 }
 
 void visual_core::parseScenery(xmlNode * a_node)
