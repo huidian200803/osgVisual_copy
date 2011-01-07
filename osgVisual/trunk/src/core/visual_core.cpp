@@ -76,8 +76,12 @@ void visual_core::initialize()
 
 #ifdef USE_SKY_SILVERLINING
 	// Initialize sky
-	sky = new visual_skySilverLining( viewer, configFilename );
-	sky->init(distortedSceneGraph, rootNode);	// Without distortion: distortedSceneGraph=NULL
+	bool disabled = false;	// to ask if the skyp is disabled or enabled
+	sky = new visual_skySilverLining( viewer, configFilename, disabled );
+	if(disabled)
+		sky = NULL;
+	if(sky.valid())
+		sky->init(distortedSceneGraph, rootNode);	// Without distortion: distortedSceneGraph=NULL
 #endif
 
 	// Initialize DataIO interface
@@ -403,19 +407,22 @@ bool visual_core::checkCommandlineArgumentsForFinalErrors()
 void visual_core::setupScenery()
 {
 
-	// Sky settings: 	
-	sky->setTime(15,30,00);
-	sky->setVisibility(50000);
-	sky->addWindVolume( 0.0, 15000.0, 25.0, 90.0 );
-	
-	//sky->addCloudLayer( 0, 20000, 20000, 600.0, 1000.0, 0.5, CUMULONIMBUS_CAPPILATUS );
-	//sky->addCloudLayer( 1, 5000000, 5000000, 600.0, 7351.0, 0.2, CIRRUS_FIBRATUS );
-	//sky->addCloudLayer( 2, 50000, 50000, 600.0, 7351.0, 0.2, CIRROCUMULUS );
-	///sky->addCloudLayer( 2, 100000, 100000, 600.0, 2351.0, 0.75, STRATUS );
-	sky->addCloudLayer( 3, 50000, 50000, 1300.0, 700.0, 0.07, CUMULUS_CONGESTUS );
-	//sky->addCloudLayer( 1, 100000, 100000, 3500.0, 2000.0, 0.30, STRATOCUMULUS );
+	// Sky settings: 
+	if(sky.valid())
+	{
+		sky->setTime(15,30,00);
+		sky->setVisibility(50000);
+		sky->addWindVolume( 0.0, 15000.0, 25.0, 90.0 );
+		
+		//sky->addCloudLayer( 0, 20000, 20000, 600.0, 1000.0, 0.5, CUMULONIMBUS_CAPPILATUS );
+		//sky->addCloudLayer( 1, 5000000, 5000000, 600.0, 7351.0, 0.2, CIRRUS_FIBRATUS );
+		//sky->addCloudLayer( 2, 50000, 50000, 600.0, 7351.0, 0.2, CIRROCUMULUS );
+		///sky->addCloudLayer( 2, 100000, 100000, 600.0, 2351.0, 0.75, STRATUS );
+		sky->addCloudLayer( 3, 50000, 50000, 1300.0, 700.0, 0.07, CUMULUS_CONGESTUS );
+		//sky->addCloudLayer( 1, 100000, 100000, 3500.0, 2000.0, 0.30, STRATOCUMULUS );
 
-	//sky->setSlotPrecipitation( 1, 0.0, 0.0, 0.0, 25.0 );
+		//sky->setSlotPrecipitation( 1, 0.0, 0.0, 0.0, 25.0 );
+	}
 
 
 	//testObj = new visual_object( rootNode, "testStab", objectMountedCameraManip );
