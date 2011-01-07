@@ -1,0 +1,10 @@
+osgVisual 0.5
+
+Project lead: Torben Dannhauer
+
+2 Contributors:
+
+Firstname Surname
+----------------
+Dannhauer Torben
+Heise Marius

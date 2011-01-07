@@ -1,0 +1,1 @@
+osgVisual.exe -s --server 192.168.0.101 12345 --window 950 450 600 350 D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive
