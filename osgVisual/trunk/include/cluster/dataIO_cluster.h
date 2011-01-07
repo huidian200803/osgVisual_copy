@@ -22,6 +22,11 @@
 
 #include "dataIO_transportContainer.h"
 
+// XML Parser
+#include <stdio.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 
 namespace osgVisual
 {
@@ -47,7 +52,7 @@ public:
 	 * \brief Empty constructor.
 	 * 
 	 */ 
-	dataIO_cluster() {}
+	dataIO_cluster():hardSync(false) {}
 
 	/**
 	 * \brief Empty destructor
@@ -60,9 +65,9 @@ public:
 	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
 	 * 
 	 */ 
-	virtual void init( osg::ArgumentParser& arguments_, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool compressionEnabled_, bool asAscii_ ) = 0;
+ 	virtual bool init( xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_) = 0;
 
-	void enableHardSync(bool hardSync_){hardSync=hardSync_;};
+	virtual bool processXMLConfiguration(xmlNode* clusterConfig_) = 0;
 	
 	bool isHardSyncEnabled(){return hardSync;};
 
@@ -126,6 +131,7 @@ protected:
 	bool initialized;
 	int port;
 	bool hardSync;
+	bool compressionEnabled; // to indicate if OSGs compression alorithm should be used.
 
 	/**
 	 * Referenced Pointer to the applications viewer.

@@ -34,8 +34,11 @@ dataIO_clusterENet::~dataIO_clusterENet(void)
 }
 
 
-void dataIO_clusterENet::init( osg::ArgumentParser& arguments_, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool compressionEnabled_, bool asAscii_ )
+bool dataIO_clusterENet::init(xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_)
 {
+	if (!configurationNode || !processXMLConfiguration(configurationNode))
+		return false;
+
 	OSG_NOTIFY( osg::ALWAYS ) << "clusterENet init();" << std::endl;
 	
 	// Store viewer
@@ -55,7 +58,7 @@ void dataIO_clusterENet::init( osg::ArgumentParser& arguments_, osgViewer::Viewe
 		readOptionString = "Ascii";
 		writeOptionString = "Ascii";
 	}
-	if (compressionEnabled_)
+	if (compressionEnabled)
 		writeOptionString+=" Compressor=zlib";
 	readOptions = new osgDB::Options( readOptionString.c_str() );
 	writeOptions = new osgDB::Options( writeOptionString.c_str() );
@@ -76,14 +79,6 @@ void dataIO_clusterENet::init( osg::ArgumentParser& arguments_, osgViewer::Viewe
 	}
 	if(clusterMode == SLAVE)
 	{
-		// Get the server IP
-		if(!arguments_.read("--server",serverToConnect, port))
-		{
-			// try server discovery
-			//discoverServer(serverToConnect,port);
-			/* todo : implement a udp server discovery based on ASIO */
-		}
-
 		// Init ENet
 		enet_impl->init(dataIO_clusterENet_implementation::CLIENT, port);
 
@@ -104,9 +99,60 @@ void dataIO_clusterENet::init( osg::ArgumentParser& arguments_, osgViewer::Viewe
 		{
 			initialized = false;
 			std::cout << "Finally failed to establish connection to server " << serverToConnect << std::endl;
-			exit(-1);
+			return false;
 		}
 	}	// IF SLAVE END
+
+	return true;
+}
+
+bool dataIO_clusterENet::processXMLConfiguration(xmlNode* clusterConfig_)
+{
+				// Extract cluster role
+				xmlAttr  *attr = clusterConfig_->properties;
+				while ( attr ) 
+				{ 
+					std::string attr_name=reinterpret_cast<const char*>(attr->name);
+					std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+					if( attr_name == "implementation" )
+					{
+						if(attr_value != "enet")
+						{
+							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration does not match the 'enet' implementation, falling back to clusterDummy" << std::endl;
+							return false;
+						}
+					}
+					if( attr_name == "hardsync" )
+					{
+						if(attr_value == "yes")
+							hardSync = true;
+						else
+							hardSync = false;
+					}
+					if( attr_name == "master_ip" )
+					{
+						serverToConnect = attr_value;
+					}
+					if( attr_name == "port" )
+					{
+						std::istringstream i(attr_value);
+						if (!(i >> port))
+						{
+							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration : Invalid port number '" << attr_value << "', falling back to clusterDummy" << std::endl;
+							return false;
+						}
+					}
+					if( attr_name == "use_zlib_compressor" )
+					{
+						if(attr_value == "yes")
+							compressionEnabled = true;
+						else
+							compressionEnabled = false;
+					}
+					attr = attr->next; 
+				}	// WHILE attrib END
+
+	return true;
 }
 
 

@@ -194,12 +194,17 @@ ENDIF(WIN32)
 
 
 # Module cluster
+SET(SOURCES
+	${SOURCES}
+	include/cluster/dataIO_cluster.h
+	include/cluster/dataIO_clusterDummy.h
+	src/cluster/dataIO_clusterDummy.cpp
+)
 SET(USE_CLUSTER_ASIO_TCP_IOSTREAM OFF CACHE BOOL "Enable to use the Boost ASIO TCP iostream implementation for the cluster interface")
 SET(USE_CLUSTER_ENET ON CACHE BOOL "Enable to use the ENet reliable UDP library implementation for the cluster interface")
 IF( USE_CLUSTER_ASIO_TCP_IOSTREAM )
 		SET(SOURCES
 			${SOURCES}
-			include/cluster/dataIO_cluster.h
 			include/cluster/dataIO_clusterAsioTcpIostream.h
 			src/cluster/dataIO_clusterAsioTcpIostream.cpp
 		)
@@ -217,7 +222,6 @@ ENDIF()
 IF( USE_CLUSTER_ENET )
 		SET(SOURCES
 			${SOURCES}
-			include/cluster/dataIO_cluster.h
 			include/cluster/dataIO_clusterENet.h
 			src/cluster/dataIO_clusterENet.cpp
 			include/cluster/dataIO_clusterENet_implementation.h
@@ -241,24 +245,17 @@ IF( USE_CLUSTER_ENET )
 			include/cluster/enet/utility.h
 			include/cluster/enet/win32.h
 		)
-		ADD_DEFINITIONS( "-DUSE_CLUSTER_ENET" )
-		
+		ADD_DEFINITIONS( "-DUSE_CLUSTER_ENET" )	
 ENDIF()
 
-IF(NOT USE_CLUSTER_ASIO_TCP_IOSTREAM AND NOT USE_CLUSTER_ENET)
-		SET(SOURCES
-			${SOURCES}
-			include/cluster/dataIO_cluster.h
-			include/cluster/dataIO_clusterDummy.h
-			src/cluster/dataIO_clusterDummy.cpp
-		)
-		ADD_DEFINITIONS( "-DUSE_CLUSTER_DUMMY" )
-ENDIF()
+
 
 
 # Module extLink
 SET(SOURCES
 	${SOURCES}
+	include/extLink/dataIO_extLinkDummy.h
+	src/extLink/dataIO_extLinkDummy.cpp
 	include/extLink/dataIO_extLink.h
 	include/extLink/manip_extLink.h
 	src/extLink/manip_extLink.cpp
@@ -276,22 +273,12 @@ IF ( WIN32 )
 		ADD_DEFINITIONS( "-DUSE_EXTLINK_VCL" )
 		#Linking: VCL uses #pragma to link, no need for linking configuration in CMAKE
 	ELSE(USE_EXTLINK_VCL)
-		SET(SOURCES
-			${SOURCES}
-			include/extLink/dataIO_extLinkDummy.h
-			src/extLink/dataIO_extLinkDummy.cpp
-		)
 		UNSET(EXTLINK_VCL_INCLUDE_DIR CACHE)
-		ADD_DEFINITIONS( "-DUSE_EXTLINK_DUMMY" )
 	ENDIF(USE_EXTLINK_VCL)
 ELSE(WIN32)
 	UNSET(EXTLINK_VCL_INCLUDE_DIR CACHE)
-	SET(SOURCES
-		${SOURCES}
-		include/extLink/dataIO_extLinkDummy.h
-		src/extLink/dataIO_extLinkDummy.cpp
-	)
-	ADD_DEFINITIONS( "-DUSE_EXTLINK_DUMMY" )
+
+
 ENDIF(WIN32)
 
 

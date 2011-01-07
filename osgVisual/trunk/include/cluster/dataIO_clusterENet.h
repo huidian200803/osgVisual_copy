@@ -43,7 +43,8 @@ public:
 	dataIO_clusterENet();
 	virtual ~dataIO_clusterENet(void);
 
-	void init( osg::ArgumentParser& arguments_, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool compressionEnabled_, bool asAscii_ );
+	bool init(xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_);
+	bool processXMLConfiguration(xmlNode* clusterConfig_);
 	void shutdown();
 
 	void init();

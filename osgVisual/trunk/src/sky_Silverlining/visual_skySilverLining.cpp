@@ -20,7 +20,7 @@ using namespace osgVisual;
 
 visual_skySilverLining::visual_skySilverLining(osgViewer::Viewer* viewer_, std::string configFileName, bool& disabled)
 {
-	OSG_NOTIFY( osg::ALWAYS ) << "Initialize visual_skySilverlining...";
+	OSG_NOTIFY( osg::ALWAYS ) << "Initialize visual_skySilverlining..." << std::endl;
 
 	atmosphereInitialized = false;
 	postInitialized = false;
@@ -40,8 +40,7 @@ visual_skySilverLining::visual_skySilverLining(osgViewer::Viewer* viewer_, std::
 	xmlNode* config = util::getModuleXMLConfig( configFileName, "sky_silverlining", tmpDoc, disabled );
 	if( disabled)
 		OSG_NOTIFY( osg::ALWAYS ) << "..disabled by XML configuration file." << std::endl;
-	else
-		OSG_NOTIFY( osg::ALWAYS ) << std::endl;
+ 
 	if(config)
 		xmlFreeDoc(tmpDoc); xmlCleanupParser();
 
