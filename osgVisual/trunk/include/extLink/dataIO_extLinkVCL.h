@@ -31,20 +31,20 @@
 // VCL
 //// To keep the VS 2005 Solution file clean from VCL dependencies: Link dependencies here:
 #ifndef _DEBUG
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib/releasemtdll/libexpatMT.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib/releasemtdll/expatpp.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/releasemtdll/libexpatMT.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/releasemtdll/expatpp.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/lib/x86/VCL1_34.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/lib/x64/VCL1_34.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib/releasemtdll/libexpatMT.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib/releasemtdll/expatpp.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/releasemtdll/libexpatMT.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/releasemtdll/expatpp.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/lib/x86/VCL1_34.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/lib/x64/VCL1_34.lib" )
 #endif
 #ifdef _DEBUG
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib/debugmtdll/libexpatMT_d.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib/debugmtdll/expatpp_d.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/debugmtdll/libexpatMT_d.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/debugmtdll/expatpp_d.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/lib/x86/VCL1_34D.lib" )
-#pragma comment ( lib, "../VCL_1.0.3.4/source/lib/x64/VCL1_34D.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib/debugmtdll/libexpatMT_d.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib/debugmtdll/expatpp_d.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/debugmtdll/libexpatMT_d.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/3rdParty/expatpp/lib.x64/debugmtdll/expatpp_d.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/lib/x86/VCL1_34D.lib" )
+#pragma comment ( lib, "../../VCL_1.0.3.4/source/lib/x64/VCL1_34D.lib" )
 #endif
 //// include VCL header
 #ifdef WIN32

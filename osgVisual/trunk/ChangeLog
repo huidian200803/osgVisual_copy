@@ -1,3 +1,7 @@
+2011-01-07 10:05  torben
+
+	* SVN refactoring to meet SVN standard and allow tagging (Preparation for release 0.6)
+
 2010-04-05 20:29  torben
 
 	* Initial software version of osgVisual
