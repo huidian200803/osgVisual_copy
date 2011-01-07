@@ -51,8 +51,8 @@ IF(DESTINATION_ARCH STREQUAL "x64")
 ENDIF ()
 
 # LIBXML2
-SET(LIBXML2_LIBRARY ../../OpenSceneGraph/3rdParty_x86_x64/${DESTINATION_ARCH}/lib/libxml2 CACHE FILEPATH "Select the libxml2 library to link osgVisual against. REQUIRED!" )
-SET(LIBXML2_INCLUDE ../../OpenSceneGraph/3rdParty_x86_x64/${DESTINATION_ARCH}/include CACHE PATH "Select the libxml2 include path to link osgVisual against. REQUIRED!" )
+SET(LIBXML2_LIBRARY ../../../OpenSceneGraph/3rdParty_x86_x64/${DESTINATION_ARCH}/lib/libxml2 CACHE FILEPATH "Select the libxml2 library to link osgVisual against. REQUIRED!" )
+SET(LIBXML2_INCLUDE ../../../OpenSceneGraph/3rdParty_x86_x64/${DESTINATION_ARCH}/include CACHE PATH "Select the libxml2 include path to link osgVisual against. REQUIRED!" )
 INCLUDE_DIRECTORIES( ${LIBXML2_INCLUDE} )	
 
 # Module sky-silverlining
@@ -205,8 +205,8 @@ IF( USE_CLUSTER_ASIO_TCP_IOSTREAM )
 		)
 		ADD_DEFINITIONS( "-DUSE_CLUSTER_ASIO_TCP_IOSTREAM" )
 		ADD_DEFINITIONS( "-D_WIN32_WINNT=0x0501" )
-		SET(BOOST_LIBRARY_PATH "../../3rdParty_x86_x64/lib/${DESTINATION_ARCH}/" CACHE PATH "Select the library folder of Boost libraries to link against." )
-		SET(BOOST_INCLUDE_DIR "../../3rdParty_x86_x64/include/boost-1.43.0/" CACHE PATH "Enter the path to the the include directory of Boost" )
+		SET(BOOST_LIBRARY_PATH "../../../3rdParty_x86_x64/lib/${DESTINATION_ARCH}/" CACHE PATH "Select the library folder of Boost libraries to link against." )
+		SET(BOOST_INCLUDE_DIR "../../../3rdParty_x86_x64/include/boost-1.43.0/" CACHE PATH "Enter the path to the the include directory of Boost" )
 		INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR})
 		LINK_DIRECTORIES(${BOOST_LIBRARY_PATH})
 ELSE()
@@ -266,7 +266,7 @@ SET(SOURCES
 IF ( WIN32 )
 	SET(USE_EXTLINK_VCL ON CACHE BOOL "Enable to use the VCL Implementation for the externalLink interface")
 	IF( USE_EXTLINK_VCL )
-		SET(EXTLINK_VCL_INCLUDE_DIR ../VCL_1.0.3.4/source/include/VCL CACHE PATH "Select the INCLUDE directory path for extLink VCL Implementation." )
+		SET(EXTLINK_VCL_INCLUDE_DIR ../../VCL_1.0.3.4/source/include/VCL CACHE PATH "Select the INCLUDE directory path for extLink VCL Implementation." )
 		SET(SOURCES
 			${SOURCES}
 			include/extLink/dataIO_extLinkVCL.h
