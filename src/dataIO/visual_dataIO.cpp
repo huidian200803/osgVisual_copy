@@ -46,7 +46,7 @@ visual_dataIO* visual_dataIO::getInstance()
 	return &instance; 
 };
 
-void visual_dataIO::init(osgViewer::Viewer* viewer_, osg::ArgumentParser& arguments_, std::string configFileName)
+void visual_dataIO::init(osgViewer::Viewer* viewer_, std::string configFileName)
 {
 	OSG_NOTIFY( osg::ALWAYS ) << "visual_dataIO initialize..";
 

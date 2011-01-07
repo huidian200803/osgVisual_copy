@@ -207,7 +207,7 @@ public:
 	 */ 
 	static visual_dataIO* getInstance();
 
-	void init(osgViewer::Viewer* viewer_,osg::ArgumentParser& arguments_, std::string configFileName);
+	void init(osgViewer::Viewer* viewer_, std::string configFileName);
 	void shutdown();
 	bool isMaster(){if (clusterMode==osgVisual::dataIO_cluster::MASTER) return true; else return false;};
 	bool isSlave(){if (clusterMode==osgVisual::dataIO_cluster::SLAVE) return true; else return false;};

@@ -85,7 +85,7 @@ void visual_core::initialize()
 #endif
 
 	// Initialize DataIO interface
-	visual_dataIO::getInstance()->init(viewer, arguments, configFilename);
+	visual_dataIO::getInstance()->init(viewer, configFilename);
 
 	// Add manipulators for user interaction - after dataIO to be able to skip it in slaves rendering machines.
 	addManipulators();

@@ -67,10 +67,23 @@ public:
 	 */ 
  	virtual bool init( xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_) = 0;
 
+	/**
+	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
+	 * 
+	 */ 
 	virtual bool processXMLConfiguration(xmlNode* clusterConfig_) = 0;
 	
+	/**
+	 * \brief Acess function to retrieve whether hardSync is enabled.
+	 * 
+	 * @return : True if hardsync is enabled
+	 */ 
 	bool isHardSyncEnabled(){return hardSync;};
 
+	/**
+	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
+	 * 
+	 */ 
 	virtual void shutdown() = 0;
 
 	/**
@@ -127,18 +140,44 @@ public:
 
 
 protected:
-	osgVisual::dataIO_cluster::clustermode clusterMode;	// This variable only mirrors the variable of dataIO. will be set during initialize.
+	/**
+	 * This variable only mirrors the variable of dataIO. will be set during initialize.
+	 */ 
+	osgVisual::dataIO_cluster::clustermode clusterMode;
+
+	/**
+	 * Flag to indicate the cluster's initialization status
+	 */ 
 	bool initialized;
+
+	/**
+	 * Port to use for the cluster network traffic
+	 */ 
 	int port;
+
+	/**
+	 * Flag if hardSync is enabled
+	 */ 
 	bool hardSync;
-	bool compressionEnabled; // to indicate if OSGs compression alorithm should be used.
+
+	/**
+	 * // Flag if OSGs compression alorithm should be used.
+	 */ 
+	bool compressionEnabled; 
 
 	/**
 	 * Referenced Pointer to the applications viewer.
 	 */ 
 	osg::ref_ptr<osgViewer::Viewer> viewer;
 
-	osg::ref_ptr<osgVisual::dataIO_transportContainer> sendContainer;	// Points to the send container of dataIO.
+	/**
+	 * Pointerto the send container of dataIO.
+	 */ 
+	osg::ref_ptr<osgVisual::dataIO_transportContainer> sendContainer;
+
+	/**
+	 * Temporary buffer to store the data into which was recieved via cluster.
+	 */ 
 	std::string receivedTransportContainer;
 };
 
