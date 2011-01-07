@@ -37,11 +37,12 @@ public:
 	dataIO_clusterDummy();
 	virtual ~dataIO_clusterDummy(void);
 
-	void init( osg::ArgumentParser& arguments_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool compressionEnabled_, bool asAscii_ );
+	bool init(xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_);
+	bool processXMLConfiguration(xmlNode* clusterConfig_);
 	void shutdown();
 
 	void init();
-	bool sendTO_OBJvaluesToSlaves();
+	bool sendTO_OBJvaluesToSlaves(osg::Matrixd viewMatrix_);
 	bool readTO_OBJvaluesFromMaster();
 	void reportAsReadyToSwap();
 	bool waitForSwap();

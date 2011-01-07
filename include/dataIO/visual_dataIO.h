@@ -25,21 +25,19 @@
 #include <visual_util.h>
 
 // Cluster
+#include <dataIO_clusterDummy.h>
 #ifdef USE_CLUSTER_ASIO_TCP_IOSTREAM
 	#include <dataIO_clusterAsioTcpIostream.h>
 #endif
 #ifdef USE_CLUSTER_ENET
 	#include <dataIO_clusterENet.h>
 #endif
-#ifdef USE_CLUSTER_DUMMY
-	#include <dataIO_clusterDummy.h>
-#endif
+	
+
 
 
 //ExtLink 
-#ifdef USE_EXTLINK_DUMMY
-	#include <dataIO_extLinkDummy.h>
-#endif
+#include <dataIO_extLinkDummy.h>
 #ifdef USE_EXTLINK_VCL
 	#include <dataIO_extLinkVCL.h>
 #endif
@@ -134,7 +132,7 @@ private:
 	 * 
 	 * @return : True if parsing was successful.
 	 */ 
-	bool processXMLConfiguration(); 
+	bool processXMLConfiguration(xmlNode* extLinkConfig_); 
 
 	/**
 	 * \brief Todo: required?

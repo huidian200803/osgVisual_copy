@@ -48,31 +48,16 @@ visual_dataIO* visual_dataIO::getInstance()
 
 void visual_dataIO::init(osgViewer::Viewer* viewer_, osg::ArgumentParser& arguments_, std::string configFileName)
 {
-	OSG_NOTIFY( osg::ALWAYS ) << "visual_dataIO initialize.." << std::endl;
+	OSG_NOTIFY( osg::ALWAYS ) << "visual_dataIO initialize..";
 
 	// Init variables
 	viewer = viewer_;
 
 	// Process XML configuration
 	this->configFileName = configFileName;
-	if(!processXMLConfiguration())
+	xmlNode *extLinkConfig=NULL;
+	if(!processXMLConfiguration(extLinkConfig))
 		OSG_FATAL << "ERROR: visual_dataIO::init() - Failed to initialize dataIO via XML configuration!";
-
-
-	// Create Cluster.
-	#ifdef USE_CLUSTER_ASIO_TCP_IOSTREAM
-		cluster = new dataIO_clusterAsioTcpIostream();
-	#endif 
-	#ifdef USE_CLUSTER_ENET
-		cluster = new dataIO_clusterENet();
-		cluster->enableHardSync( false );	/** \todo : rebuild this structure in cluster.h and move it this way to a general implementation. */
-	#endif
-	#ifdef USE_CLUSTER_DUMMY
-		cluster = new dataIO_clusterDummy();
-	#endif
-	if(cluster.valid())
-		//cluster->init(arguments_, clusterMode, slotContainer, true, false);
-		cluster->init(arguments_, viewer_, clusterMode, slotContainer, false, false);
 
 	// Create extLink.
 	#ifdef USE_EXTLINK_DUMMY
@@ -84,7 +69,6 @@ void visual_dataIO::init(osgViewer::Viewer* viewer_, osg::ArgumentParser& argume
 	extLink->init();
 
 	
-
 	// Install callbacks to perform DataIO activities every frame:
 	//// EventCallback at the absolute beginning of the frame
 	eventCallback = new dataIO_eventCallback(this);
@@ -96,15 +80,18 @@ void visual_dataIO::init(osgViewer::Viewer* viewer_, osg::ArgumentParser& argume
 	initialized = true;
 }
 
-bool visual_dataIO::processXMLConfiguration()
+bool visual_dataIO::processXMLConfiguration(xmlNode* extLinkConfig_)
 {
 	// Init XML
 	xmlDoc* tmpDoc;
 	bool disabled;
 	xmlNode* config = util::getModuleXMLConfig( configFileName, "dataio", tmpDoc, disabled );
+	xmlNode* clusterConfig = NULL;
 
 	if( disabled)
 		OSG_NOTIFY( osg::ALWAYS ) << "..disabled by XML configuration file. dataIO can't be disabled. Ignoring." << std::endl;
+	else
+		OSG_NOTIFY( osg::ALWAYS ) << std::endl;
 
 	// extract configuration values
 	if(config)
@@ -151,9 +138,9 @@ bool visual_dataIO::processXMLConfiguration()
 			// Check for cluster node
 			if(cur_node->type == XML_ELEMENT_NODE && node_name == "cluster")
 			{
-				// Check Attributes to determine if the dummy implementation or any other implementation must be instantiated
-
-				// Pass XML attributes to cluster to analyse and configure it by cluster itself
+				// Pass cluster configuration to the used cluster implementation. 
+				// The implementation will use the configuration if it matches, otherwise falls back to dummy cluster
+				clusterConfig = cur_node;
 			}
 
 			// Check for extLink node
@@ -166,6 +153,23 @@ bool visual_dataIO::processXMLConfiguration()
 
 		}	// FOR all nodes END
 
+
+
+		// Create Cluster.
+		#ifdef USE_CLUSTER_ASIO_TCP_IOSTREAM
+			cluster = new dataIO_clusterAsioTcpIostream();
+		#endif 
+		#ifdef USE_CLUSTER_ENET
+			cluster = new dataIO_clusterENet();
+		#endif
+		if( !cluster.valid() || !clusterConfig || !cluster->init(clusterConfig, viewer, clusterMode, slotContainer, false) )
+		{
+			cluster = new dataIO_clusterDummy();
+			cluster->init(clusterConfig, viewer, clusterMode, slotContainer, false);
+		}
+
+
+
 		// clean up
 		xmlFreeDoc(tmpDoc); xmlCleanupParser();
 		return true;
@@ -175,7 +179,6 @@ bool visual_dataIO::processXMLConfiguration()
 		OSG_WARN << "ERROR: visual_data::processXMLConfiguration() - Module configuration not found" << std::endl;
 		return false;
 	}
-
 	return true;
 }
 
