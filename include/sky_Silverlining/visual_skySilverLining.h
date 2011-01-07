@@ -64,8 +64,9 @@ public:
 	 * 
 	 * @param viewer_ : Pointer to the applications viewer
 	 * @param configFileName : Filename of the XML configfile to read the configuration from. Currently not used because skySilverlining currently does not need any configuration parameters.
+	 * @param disabled : Flag to the caller which indicates if the sky was enabled or disabled by the XML configuration file.
 	 */ 
-	visual_skySilverLining(osgViewer::Viewer* viewer_, std::string configFileName);
+	visual_skySilverLining(osgViewer::Viewer* viewer_, std::string configFileName, bool& disabled);
 
 	/**
 	 * \brief Destrcutor: The updateCallback is removed and the atmosphere, if instantiated.
