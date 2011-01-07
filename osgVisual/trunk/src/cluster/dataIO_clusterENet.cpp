@@ -118,7 +118,7 @@ bool dataIO_clusterENet::processXMLConfiguration(xmlNode* clusterConfig_)
 					{
 						if(attr_value != "enet")
 						{
-							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration does not match the 'enet' implementation, falling back to clusterDummy" << std::endl;
+							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration does not match the currently used 'enet' implementation, falling back to clusterDummy" << std::endl;
 							return false;
 						}
 					}
