@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="osgVisual.svg"
+   inkscape:export-filename="D:\osgVisual\osgVisual\resources\osgVisual.png"
+   inkscape:export-xdpi="90.092026"
+   inkscape:export-ydpi="90.092026">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3755">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop3757" />
+      <stop
+         style="stop-color:#c3c4c5;stop-opacity:0;"
+         offset="1"
+         id="stop3759" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3745">
+      <stop
+         style="stop-color:#3939e8;stop-opacity:0.60392159;"
+         offset="0"
+         id="stop3747" />
+      <stop
+         style="stop-color:#c3c4c5;stop-opacity:0;"
+         offset="1"
+         id="stop3749" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3735">
+      <stop
+         style="stop-color:#c3c4c5;stop-opacity:1;"
+         offset="0"
+         id="stop3737" />
+      <stop
+         style="stop-color:#c3c4c5;stop-opacity:0;"
+         offset="1"
+         id="stop3739" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="3.4482759 : 588.25006 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3626"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3658"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3685"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3735"
+       id="linearGradient3741"
+       x1="144.20068"
+       y1="521.10553"
+       x2="204.51643"
+       y2="521.10553"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7056133,0,0,1.9461714,-29.808136,-447.71593)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3745"
+       id="linearGradient3751"
+       x1="68.278275"
+       y1="516.02405"
+       x2="291.41208"
+       y2="516.02405"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.7056133,0,0,1.9511538,-29.808136,-449.70289)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3755"
+       id="radialGradient3761"
+       cx="260.14559"
+       cy="511.35497"
+       fx="260.14559"
+       fy="511.35497"
+       r="10.22366"
+       gradientTransform="matrix(1.7056133,0,0,5.0224229,-29.808136,-2020.7725)"
+       gradientUnits="userSpaceOnUse" />
+    <inkscape:perspective
+       id="perspective3783"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3807"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.68"
+     inkscape:cx="338.28255"
+     inkscape:cy="553.76555"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:object-nodes="true"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:object-paths="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3821"
+       width="525.84265"
+       height="549.43823"
+       x="16.853933"
+       y="383.82285"
+       inkscape:export-filename="D:\osgVisual\osgVisual\resources\osgVisual_100.png"
+       inkscape:export-xdpi="17.035583"
+       inkscape:export-ydpi="17.035583" />
+    <a
+       id="a3672"
+       transform="matrix(1.7056133,0,0,1.9461714,-29.808136,-447.71593)"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       style="stroke-width:2.74434795;stroke-miterlimit:4;stroke-dasharray:none">
+      <path
+         d="m 292.31725,520.08673 c 0,25.90204 -50.32795,46.8998 -112.41062,46.8998 -62.08267,0 -112.41062,-20.99776 -112.41062,-46.8998 0,-25.90204 50.32795,-46.89979 112.41062,-46.89979 62.08267,0 112.41062,20.99775 112.41062,46.89979 z"
+         sodipodi:ry="46.899796"
+         sodipodi:rx="112.41062"
+         sodipodi:cy="520.08673"
+         sodipodi:cx="179.90663"
+         id="path2836"
+         style="fill:none;stroke:#000000;stroke-width:2.74434795;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         sodipodi:type="arc" />
+    </a>
+    <rect
+       style="fill:none"
+       id="rect3612"
+       width="460.48831"
+       height="143.91515"
+       x="58.226391"
+       y="562.04718"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1"
+       id="rect3616"
+       width="446.94455"
+       height="113.00719"
+       x="42.244297"
+       y="561.64331"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       transform="matrix(1.7056133,0,0,1.9461714,-29.626561,-271.13058)"
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:2.74434794999999990;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2836-1"
+       sodipodi:cx="179.90663"
+       sodipodi:cy="520.08673"
+       sodipodi:rx="112.41062"
+       sodipodi:ry="46.899796"
+       d="m 292.31725,520.08673 a 112.41062,46.899796 0 1 1 -224.82124,0 112.41062,46.899796 0 1 1 224.82124,0 z"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none"
+       id="rect3612-7"
+       width="460.48831"
+       height="143.91515"
+       x="58.407959"
+       y="738.63257"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1"
+       id="rect3616-4"
+       width="446.94455"
+       height="113.00719"
+       x="42.42585"
+       y="738.2287"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 85.313954,561.56438 0.181574,176.58535"
+       id="path3648"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 468.4547,561.44712 0.18158,176.58535"
+       id="path3648-0"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:3.64385271;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 84.467456,634.43006 279.06826,882.54771 467.28286,633.46486"
+       id="path3675"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 116.76758,634.14209 C 261.4708,483.7255 166.35398,545.1926 306.05964,595.91383"
+       id="path3691"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 85.90203,631.27497 c 11.546371,1.39455 28.67241,-1.21531 35.45042,-1.91141"
+       id="path3699"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 293.26144,607.4433 c 56.77894,-55.38741 98.04395,-48.11105 134.08336,16.99938"
+       id="path3705"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 413.11538,602.14363 c 39.50671,-37.53494 15.55853,2.25608 53.93167,42.93221"
+       id="path3711"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 211.94823,537.90041 c 43.98641,-8.55169 70.42339,35.10146 109.02738,45.58924"
+       id="path3713"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:url(#linearGradient3741);fill-opacity:1;stroke:none"
+       d="M 298.60826,591.60443 C 270.66298,580.6058 248.24617,567.20635 229.8736,550.5189 c -8.12508,-7.37986 -10.90591,-9.67313 -13.182,-10.87092 -1.42545,-0.75014 -0.33963,-0.91147 6.41012,-0.95246 16.9505,-0.10295 27.89123,4.544 56.20666,23.873 16.46426,11.23903 25.58476,16.51644 34.07568,19.71725 l 5.63374,2.12376 -2.92499,1.97126 c -1.60875,1.08419 -4.51184,3.29913 -6.45133,4.92206 -1.93947,1.62295 -3.76789,2.92443 -4.06313,2.89218 -0.29524,-0.0323 -3.43179,-1.198 -6.97009,-2.5906 z"
+       id="path3733"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:url(#linearGradient3751);fill-opacity:1;stroke:none"
+       d="m 458.5364,632.93857 c -5.96765,-9.05978 -9.27291,-15.90984 -13.0395,-27.02397 -5.74974,-16.96591 -7.27423,-19.51641 -11.65206,-19.49421 -2.52605,0.0136 -7.98529,3.37731 -14.24182,8.77712 -3.28798,2.83773 -6.12524,5.15951 -6.30504,5.15951 -0.17981,0 -2.78024,-2.80648 -5.77872,-6.23663 -10.91685,-12.48847 -21.82447,-19.82407 -34.08165,-22.92069 -7.64794,-1.93215 -19.62028,-1.6 -27.58495,0.7653 -6.34618,1.88464 -17.56356,6.88289 -21.90729,9.7615 -2.0611,1.36588 -2.18145,1.34978 -9.00588,-1.20445 -8.98082,-3.36132 -16.76857,-7.87198 -35.34832,-20.47369 -23.62242,-16.02188 -33.72242,-20.98255 -47.3679,-23.26501 -5.95788,-0.99657 -20.22863,-0.51883 -20.92697,0.70056 -0.21119,0.36877 -2.00249,1.2799 -3.98066,2.02473 -6.07383,2.28698 -10.27673,6.45099 -46.22477,45.79708 -11.70586,12.81238 -25.57458,27.8404 -30.8194,33.39563 l -9.53604,10.10043 -9.08665,0.89731 c -15.488646,1.52948 -16.31872,1.57372 -20.718145,1.10375 l -4.282447,-0.45747 0,-34.97302 c 0,-38.37328 0.112145,-39.69473 4.13784,-48.75722 10.757512,-24.21696 43.858092,-46.11908 88.975612,-58.87376 53.82284,-15.21564 121.0494,-16.82657 177.76203,-4.25968 32.54863,7.21244 62.26289,19.80359 81.50717,34.53804 8.16431,6.25102 19.37309,18.73049 22.77214,25.35375 1.2993,2.53179 3.04366,6.88934 3.87634,9.68344 1.48515,4.98356 1.51428,5.80302 1.53144,43.08108 l 0.0174,38.00086 -2.28314,2.53148 -2.28313,2.53147 -4.12557,-6.26324 1e-5,0 z"
+       id="path3743"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:url(#radialGradient3761);fill-opacity:1;stroke:none"
+       d="m 407.29703,592.96889 c -3.35207,-3.61513 -7.16127,-7.40069 -8.46485,-8.41233 l -2.37016,-1.83934 0.20594,-10.45846 c 0.19231,-9.76587 0.29321,-10.45845 1.52367,-10.45845 1.28486,0 1.31774,-0.81955 1.31774,-32.83969 0,-18.06184 0.14447,-32.8397 0.32097,-32.8397 0.17653,0 2.69058,1.08077 5.5868,2.40169 2.89622,1.32095 5.57059,2.4723 5.94304,2.55857 0.37244,0.0862 2.58177,1.27064 4.90961,2.63195 2.32784,1.36131 4.23243,2.30392 4.23243,2.09466 0,-0.20925 1.41588,0.64411 3.14641,1.89637 1.73053,1.25225 3.40657,2.09336 3.72453,1.86912 0.31798,-0.22423 0.57813,-0.0952 0.57813,0.28658 0,0.38186 0.76185,1.09034 1.69298,1.57443 l 1.69297,0.88018 0,24.74292 0,24.74292 -2.37017,0 -2.37015,0 0,13.35889 0,13.35889 -4.73248,3.83367 c -2.60285,2.1085 -4.736,4.09443 -4.74031,4.41317 -0.005,0.31873 -0.36478,0.57952 -0.80102,0.57952 -0.43623,0 -1.27425,0.49442 -1.86226,1.09871 -0.94546,0.97162 -1.77403,0.33847 -7.16382,-5.47427 l 0,0 z"
+       id="path3753"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 437.50822,587.00891 c 13.29764,4.18314 21.96163,19.42388 31.00411,30.4787"
+       id="path3767"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#c3c4c5;fill-opacity:1;stroke:none"
+       d="m 459.72204,634.19528 c -6.66069,-9.30346 -11.06399,-18.4731 -15.54835,-32.37855 -1.44648,-4.4854 -2.97744,-8.92195 -3.4021,-9.859 -0.42468,-0.93706 -0.65588,-1.83638 -0.51378,-1.99852 0.57197,-0.65265 6.47445,3.57864 10.17139,7.29151 2.16242,2.17175 6.83913,7.67595 10.39267,12.23159 l 6.46099,8.28296 0,7.84979 0,7.8498 -2.24333,2.51218 -2.24332,2.51215 -3.07417,-4.29391 0,0 z"
+       id="path3771"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#00ff00;stroke-width:25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 227.11466,902.98611 42.42585,803.23589 41.195132,593.72789"
+       id="path3773-9"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccc"
+       id="path3797"
+       d="m 333.95117,905.13875 184.68881,-99.75022 1.23072,-209.508"
+       style="fill:none;stroke:#0000ff;stroke-width:25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 71.905724,497.90823 280.26964,409.99803 485.7714,502.87931"
+       id="path3773-9-4"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="D:\EigeneDateien\Dokumente\osgVisual.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

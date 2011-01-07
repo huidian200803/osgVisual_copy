@@ -1,0 +1,1 @@
+Please copy the content of the Resource directory from the silverlining SDK into this directory.
