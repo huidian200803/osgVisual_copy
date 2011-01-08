@@ -108,49 +108,49 @@ bool dataIO_clusterENet::init(xmlNode* configurationNode, osgViewer::Viewer* vie
 
 bool dataIO_clusterENet::processXMLConfiguration(xmlNode* clusterConfig_)
 {
-				// Extract cluster role
-				xmlAttr  *attr = clusterConfig_->properties;
-				while ( attr ) 
-				{ 
-					std::string attr_name=reinterpret_cast<const char*>(attr->name);
-					std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-					if( attr_name == "implementation" )
-					{
-						if(attr_value != "enet")
-						{
-							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration does not match the currently used 'enet' implementation, falling back to clusterDummy" << std::endl;
-							return false;
-						}
-					}
-					if( attr_name == "hardsync" )
-					{
-						if(attr_value == "yes")
-							hardSync = true;
-						else
-							hardSync = false;
-					}
-					if( attr_name == "master_ip" )
-					{
-						serverToConnect = attr_value;
-					}
-					if( attr_name == "port" )
-					{
-						std::istringstream i(attr_value);
-						if (!(i >> port))
-						{
-							OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration : Invalid port number '" << attr_value << "', falling back to clusterDummy" << std::endl;
-							return false;
-						}
-					}
-					if( attr_name == "use_zlib_compressor" )
-					{
-						if(attr_value == "yes")
-							compressionEnabled = true;
-						else
-							compressionEnabled = false;
-					}
-					attr = attr->next; 
-				}	// WHILE attrib END
+	// Extract cluster role
+	xmlAttr  *attr = clusterConfig_->properties;
+	while ( attr ) 
+	{ 
+		std::string attr_name=reinterpret_cast<const char*>(attr->name);
+		std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+		if( attr_name == "implementation" )
+		{
+			if(attr_value != "enet")
+			{
+				OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration does not match the currently used 'enet' implementation, falling back to clusterDummy" << std::endl;
+				return false;
+			}
+		}
+		if( attr_name == "hardsync" )
+		{
+			if(attr_value == "yes")
+				hardSync = true;
+			else
+				hardSync = false;
+		}
+		if( attr_name == "master_ip" )
+		{
+			serverToConnect = attr_value;
+		}
+		if( attr_name == "port" )
+		{
+			std::istringstream i(attr_value);
+			if (!(i >> port))
+			{
+				OSG_NOTIFY( osg::ALWAYS ) << "WARNING: Cluster configuration : Invalid port number '" << attr_value << "', falling back to clusterDummy" << std::endl;
+				return false;
+			}
+		}
+		if( attr_name == "use_zlib_compressor" )
+		{
+			if(attr_value == "yes")
+				compressionEnabled = true;
+			else
+				compressionEnabled = false;
+		}
+		attr = attr->next; 
+	}	// WHILE attrib END
 
 	return true;
 }

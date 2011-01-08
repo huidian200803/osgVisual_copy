@@ -68,7 +68,7 @@ public:
  	virtual bool init( xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_) = 0;
 
 	/**
-	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
+	 * \brief Pure virtual function for XML configuration. Must be implemented in derived class.
 	 * 
 	 */ 
 	virtual bool processXMLConfiguration(xmlNode* clusterConfig_) = 0;
@@ -81,7 +81,7 @@ public:
 	bool isHardSyncEnabled(){return hardSync;};
 
 	/**
-	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
+	 * \brief Pure virtual function for shutdown. Must be implemented in derived class.
 	 * 
 	 */ 
 	virtual void shutdown() = 0;

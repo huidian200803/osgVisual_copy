@@ -30,12 +30,13 @@ dataIO_extLinkVCL::~dataIO_extLinkVCL(void)
 	OSG_NOTIFY( osg::ALWAYS ) << "extLinkVCL destroyed" << std::endl;
 }
 
-void dataIO_extLinkVCL::init()
+bool dataIO_extLinkVCL::init(xmlNode* configurationNode)
 {
+	if (!configurationNode || !processXMLConfiguration(configurationNode))
+		return false;
+
 	OSG_NOTIFY( osg::ALWAYS ) << "extLinkVCL init()" << std::endl;
 
-	VCLConfigFilename = "osgVisual.xml";
-	
 	if ( osgDB::fileExists( VCLConfigFilename ) )
 	{
 		CVCLIO::GetInstance().LoadProject(VCLConfigFilename.c_str());
@@ -46,10 +47,36 @@ void dataIO_extLinkVCL::init()
 	}
 	else
 	{
-		OSG_NOTIFY( osg::FATAL ) << "ERROR: Could not find VCL Configuration file " << VCLConfigFilename << std::endl;
-		exit(-1);
+		OSG_NOTIFY( osg::FATAL ) << "ERROR: Could not find VCL Configuration file '" << VCLConfigFilename << "', falling back to extLinkDummy" << std::endl;
+		return false;
 	}
+	return true;
+}
 
+bool dataIO_extLinkVCL::processXMLConfiguration(xmlNode* extLinkConfig_)
+{
+	// Extract VCL config file
+	xmlAttr  *attr = extLinkConfig_->properties;
+	while ( attr ) 
+	{ 
+		std::string attr_name=reinterpret_cast<const char*>(attr->name);
+		std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+		if( attr_name == "implementation" )
+		{
+			if(attr_value != "vcl")
+			{
+				OSG_NOTIFY( osg::ALWAYS ) << "WARNING: extLink configuration does not match the currently used 'vcl' implementation, falling back to extLinkDummy" << std::endl;
+				return false;
+			}
+		}
+		if( attr_name == "filename" )
+		{
+			VCLConfigFilename = attr_value;
+		}
+		attr = attr->next; 
+	}	// WHILE attrib END
+
+	return true;
 }
 
 void dataIO_extLinkVCL::shutdown()

@@ -31,13 +31,13 @@ dataIO_clusterDummy::~dataIO_clusterDummy(void)
 bool dataIO_clusterDummy::init(xmlNode* configurationNode, osgViewer::Viewer* viewer_, clustermode clusterMode_, osgVisual::dataIO_transportContainer* sendContainer_, bool asAscii_)
 {
 	sendContainer = sendContainer_;
-	OSG_NOTIFY( osg::ALWAYS ) << "clusterDummy init();" << std::endl;
+	OSG_NOTIFY( osg::ALWAYS ) << "clusterDummy init()" << std::endl;
 	return true;
 }
 
 bool dataIO_clusterDummy::processXMLConfiguration(xmlNode* clusterConfig_)
 {
-	OSG_NOTIFY( osg::ALWAYS ) << "clusterDummy processXMLConfiguration();" << std::endl;
+	OSG_NOTIFY( osg::ALWAYS ) << "clusterDummy processXMLConfiguration()" << std::endl;
 	return true;
 }
 

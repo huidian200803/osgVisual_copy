@@ -78,7 +78,8 @@ public:
 	dataIO_extLinkVCL(std::vector<dataIO_slot *>& dataSlots_);
 	virtual ~dataIO_extLinkVCL(void);
 
-	void init();
+	bool init(xmlNode* configurationNode);
+	bool processXMLConfiguration(xmlNode* extLinkConfig_);
 	void shutdown();
 
 	bool readTO_OBJvalues();
