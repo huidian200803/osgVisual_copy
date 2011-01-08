@@ -272,12 +272,68 @@ void visual_core::addManipulators()
     viewer->addEventHandler(new osgViewer::ScreenCaptureHandler);
 }
 
-void visual_core::parseScenery(xmlNode * a_node)
+void visual_core::parseScenery(xmlNode* a_node)
 {
 	OSG_ALWAYS << "parseScenery()" << std::endl;
 
-	if (a_node)
-		OSG_ALWAYS << "gefunden!" << std::endl;
+	a_node = a_node->children;
+
+	for (xmlNode *cur_node = a_node; cur_node; cur_node = cur_node->next)
+	{
+		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "terrain")
+		{
+			//<terrain filename="d:\my\path\database.ive"></terrain>
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "animationpath")
+		{
+			//<animationpath filename="salzburgerEcke.path"></animationpath>
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "models")
+		{
+			/*
+			<models>
+			  <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
+				<position lat="47.12345" lon="11.234567" alt="1500.0"></position>
+				<attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
+				<cameraoffset>
+				  <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
+				  <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
+				</cameraoffset>
+			  </model>
+			</models>
+			*/
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "datetime")
+		{
+			//<datetime day="01" month="02" year="2010" hour="23" minute="45"></datetime>
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "visibility")
+		{
+			//<visibility range="50000" turbidity="2.2" ></visibility>
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cloudlayer")
+		{
+			/*
+			<cloudlayer slot="1" type="cumulusCongestus" enabled="true" fadetime="15">
+			  <geometry baselength="50000" basewidth="50000" thickness="500" baseHeight="1700" density="0.3"></geometry>
+			  <precipitation rate_mmPerHour_rain="5.0" rate_mmPerHour_drySnow="7.0" rate_mmPerHour_wetSnow="10.0" rate_mmPerHour_sleet="0.0"></precipitation>
+			</cloudlayer>
+			*/
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "windlayer")
+		{
+			//<windlayer bottom="500.0" top="700." speed="25.0" direction="90.0"></windlayer>
+		}
+	}// FOR all nodes END
+
 }
 
 bool visual_core::checkCommandlineArgumentsForFinalErrors()
