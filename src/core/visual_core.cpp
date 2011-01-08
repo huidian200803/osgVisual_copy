@@ -96,7 +96,13 @@ void visual_core::initialize()
 	viewer->realize();
 
 	// parse Configuration file
-	parseConfigFile(arguments);
+	xmlDoc* tmpDoc;
+	xmlNode* sceneryNode = util::getSceneryXMLConfig( "osgVisualConfig.xml", tmpDoc);
+	parseScenery(sceneryNode);
+	if(sceneryNode)
+	{
+		xmlFreeDoc(tmpDoc); xmlCleanupParser();
+	}
 
 	// All modules are initialized - now check arguments for any unused parameter.
 	checkCommandlineArgumentsForFinalErrors();
@@ -266,68 +272,12 @@ void visual_core::addManipulators()
     viewer->addEventHandler(new osgViewer::ScreenCaptureHandler);
 }
 
-void visual_core::parseConfigFile(osg::ArgumentParser& arguments_)
-{
-	if( configFilename != "" )
-	{
-		xmlDoc *doc = NULL;
-		xmlNode *root_element = NULL;
-	  	
-		doc = xmlReadFile(configFilename.c_str(), NULL, 0);
-		if (doc == NULL)
-		{
-			OSG_ALWAYS << "visual_core::parseConfigFile() - ERROR: could not parse osgVisual config file" << configFilename  << std::endl;
-		}
-		else
-		{
-			//  Get the root element node
-			root_element = xmlDocGetRootElement(doc);
-
-			// Parse the XML document.
-			checkXMLNode(root_element);
-
-			// free the document
-			xmlFreeDoc(doc);;
-		}
-		// Free the global variables that may have been allocated by the parser.
-		xmlCleanupParser();
-
-	}	// IF configfile exists
-}
-
-void visual_core::checkXMLNode(xmlNode * a_node)
-{
-  for (xmlNode *cur_node = a_node; cur_node; cur_node = cur_node->next)
-	{
-		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
-		if(cur_node->type == XML_ELEMENT_NODE && node_name == "osgvisualconfiguration")
-		{
-			OSG_DEBUG << "XML node osgvisualconfiguration found" << std::endl;
-
-			// Iterate to the next nodes to configure modules and scenery.
-			checkXMLNode(cur_node->children);		
-		}
-
-		if (cur_node->type == XML_ELEMENT_NODE && node_name == "scenery")
-		{
-			OSG_DEBUG << "XML node scenery found" << std::endl;
-
-			parseScenery(cur_node);
-	
-            //OSG_DEBUG << "node type=Element, name:" << cur_node->name << std::endl;
-			//OSG_DEBUG << "Processing children at " << cur_node->children << std::endl;
-        }	// IF(scenery) END
-    }	// FOR END
-}
-
 void visual_core::parseScenery(xmlNode * a_node)
 {
 	OSG_ALWAYS << "parseScenery()" << std::endl;
-}
 
-void visual_core::config(xmlNode * a_node)
-{
-	// Currently no configuration options fpr the core module are available.
+	if (a_node)
+		OSG_ALWAYS << "gefunden!" << std::endl;
 }
 
 bool visual_core::checkCommandlineArgumentsForFinalErrors()

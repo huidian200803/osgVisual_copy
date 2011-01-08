@@ -105,10 +105,7 @@ public:
 	void shutdown();
 
 	void addManipulators();
-	void parseConfigFile(osg::ArgumentParser& arguments_);
-	void checkXMLNode(xmlNode * a_node);
 	void parseScenery(xmlNode * a_node);
-	void config(xmlNode * a_node);
 	bool loadTerrain(osg::ArgumentParser& arguments_);
 	bool checkCommandlineArgumentsForFinalErrors();
 
