@@ -53,22 +53,11 @@ void visual_dataIO::init(osgViewer::Viewer* viewer_, std::string configFileName)
 	// Init variables
 	viewer = viewer_;
 
-	// Process XML configuration
+	// Process XML configuration - all XML dependen initializations are performed in processXMLConfiguration()
 	this->configFileName = configFileName;
-	xmlNode *extLinkConfig=NULL;
-	if(!processXMLConfiguration(extLinkConfig))
+	if(!processXMLConfiguration())
 		OSG_FATAL << "ERROR: visual_dataIO::init() - Failed to initialize dataIO via XML configuration!";
 
-	// Create extLink.
-	#ifdef USE_EXTLINK_DUMMY
-		extLink = new dataIO_extLinkDummy( dataSlots );
-	#endif
-	#ifdef USE_EXTLINK_VCL
-		extLink = new dataIO_extLinkVCL( dataSlots );
-	#endif
-	extLink->init();
-
-	
 	// Install callbacks to perform DataIO activities every frame:
 	//// EventCallback at the absolute beginning of the frame
 	eventCallback = new dataIO_eventCallback(this);
@@ -80,13 +69,13 @@ void visual_dataIO::init(osgViewer::Viewer* viewer_, std::string configFileName)
 	initialized = true;
 }
 
-bool visual_dataIO::processXMLConfiguration(xmlNode* extLinkConfig_)
+bool visual_dataIO::processXMLConfiguration()
 {
 	// Init XML
 	xmlDoc* tmpDoc;
 	bool disabled;
 	xmlNode* config = util::getModuleXMLConfig( configFileName, "dataio", tmpDoc, disabled );
-	xmlNode* clusterConfig = NULL;
+	xmlNode* clusterConfig = NULL, *extLinkConfig = NULL;
 
 	if( disabled)
 		OSG_NOTIFY( osg::ALWAYS ) << "..disabled by XML configuration file. dataIO can't be disabled. Ignoring." << std::endl;
@@ -146,13 +135,12 @@ bool visual_dataIO::processXMLConfiguration(xmlNode* extLinkConfig_)
 			// Check for extLink node
 			if(cur_node->type == XML_ELEMENT_NODE && node_name == "extlink")
 			{
-				// Check Attributes to determine if the dummy implementation or any other implementation must be instantiated
-
-				// Pass XML attributes to extlink to analyse and configure it by extLink itself
+				// Pass extLink configuration to the used extLink implementation. 
+				// The implementation will use the configuration if it matches, otherwise falls back to dummy extLink
+				extLinkConfig = cur_node;
 			}
 
 		}	// FOR all nodes END
-
 
 
 		// Create Cluster.
@@ -168,6 +156,15 @@ bool visual_dataIO::processXMLConfiguration(xmlNode* extLinkConfig_)
 			cluster->init(clusterConfig, viewer, clusterMode, slotContainer, false);
 		}
 
+		// Create extLink.
+		#ifdef USE_EXTLINK_VCL
+			extLink = new dataIO_extLinkVCL( dataSlots );
+		#endif
+		if( !extLink.valid() || !extLinkConfig || !extLink->init(extLinkConfig) )
+		{
+			extLink = new dataIO_extLinkDummy( dataSlots );
+			extLink->init(extLinkConfig);
+		}
 
 
 		// clean up

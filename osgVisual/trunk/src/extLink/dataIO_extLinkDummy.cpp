@@ -31,9 +31,16 @@ dataIO_extLinkDummy::~dataIO_extLinkDummy(void)
 	OSG_NOTIFY( osg::ALWAYS ) << "extLinkDummy destroyed" << std::endl;
 }
 
-void dataIO_extLinkDummy::init()
+bool dataIO_extLinkDummy::init(xmlNode* configurationNode)
 {
 	OSG_NOTIFY( osg::ALWAYS ) << "extLinkDummy init()" << std::endl;
+	return true;
+}
+
+bool dataIO_extLinkDummy::processXMLConfiguration(xmlNode* extLinkConfig_)
+{
+	OSG_NOTIFY( osg::ALWAYS ) << "extLinkDummy processXMLConfiguration()" << std::endl;
+	return true;
 }
 
 void dataIO_extLinkDummy::shutdown()

@@ -132,7 +132,7 @@ private:
 	 * 
 	 * @return : True if parsing was successful.
 	 */ 
-	bool processXMLConfiguration(xmlNode* extLinkConfig_); 
+	bool processXMLConfiguration(); 
 
 	/**
 	 * \brief Todo: required?

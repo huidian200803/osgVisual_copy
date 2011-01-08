@@ -19,6 +19,11 @@
 #include <osg/Node>
 #include <dataIO_slot.h>
 
+// XML Parser
+#include <stdio.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 
 namespace osgVisual
 { 
@@ -53,8 +58,18 @@ public:
 	 * \brief Pure virtual function for initialization. Must be implemented in derived class.
 	 * 
 	 */ 
-	virtual void init() = 0;
+	virtual bool init( xmlNode* configurationNode) = 0;
 
+	/**
+	 * \brief Pure virtual function for XML configuration. Must be implemented in derived class.
+	 * 
+	 */ 
+	virtual bool processXMLConfiguration(xmlNode* extLinkConfig_) = 0;
+
+	/**
+	 * \brief Pure virtual function for shutdown. Must be implemented in derived class.
+	 * 
+	 */ 
 	virtual void shutdown() = 0;
 
 	/**

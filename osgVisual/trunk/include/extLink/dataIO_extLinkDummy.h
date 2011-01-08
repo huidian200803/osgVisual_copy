@@ -36,7 +36,8 @@ public:
 	dataIO_extLinkDummy(std::vector<dataIO_slot *>& dataSlots_);
 	virtual ~dataIO_extLinkDummy(void);
 
-	void init();
+	bool processXMLConfiguration(xmlNode* extLinkConfig_);
+	bool init(xmlNode* configurationNode);
 	void shutdown();
 
 	bool readTO_OBJvalues();
