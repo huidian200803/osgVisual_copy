@@ -90,14 +90,14 @@ void visual_core::initialize()
 	// Add manipulators for user interaction - after dataIO to be able to skip it in slaves rendering machines.
 	addManipulators();
 
-	loadTerrain(arguments);
-
 	// create the windows and run the threads.
 	viewer->realize();
 
+	loadTerrain(arguments);
+
 	// parse Configuration file
 	xmlDoc* tmpDoc;
-	xmlNode* sceneryNode = util::getSceneryXMLConfig( "osgVisualConfig.xml", tmpDoc);
+	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
 	parseScenery(sceneryNode);
 	if(sceneryNode)
 	{
@@ -310,7 +310,48 @@ void visual_core::parseScenery(xmlNode* a_node)
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "datetime")
 		{
-			//<datetime day="01" month="02" year="2010" hour="23" minute="45"></datetime>
+			int hour, minute;
+			int day=0,month=0,year=0;
+
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "day" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> day;
+				}
+				if( attr_name == "month" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> month;
+				}
+				if( attr_name == "year" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> year;
+				}
+				if( attr_name == "hour" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> hour;
+				}
+				if( attr_name == "minute" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> minute;
+				}
+				attr = attr->next; 
+			}
+			if(sky.valid())
+			{
+				if(day!=0 && month!=0 && year!=0)
+					sky->setDate(year, month, day);
+				sky->setTime(hour,minute,00);
+			}
+
 		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "visibility")

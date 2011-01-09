@@ -49,7 +49,7 @@
         </cameraoffset>
       </model>
     </models>
-    <datetime day="01" month="02" year="2010" hour="23" minute="45"></datetime>
+    <datetime day="0" month="0" year="0" hour="15" minute="30"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
     <cloudlayer slot="1" type="cumulusCongestus" enabled="true" fadetime="15">
       <geometry baselength="50000" basewidth="50000" thickness="500" baseHeight="1700" density="0.3"></geometry>
