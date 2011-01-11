@@ -258,7 +258,7 @@ public:
 	 * @param configFilename : Filename of the XML configuration file.
 	 * @return : On error an empty string, otherwise the terrain path specified in the configuration file.
 	 */ 
-	static std::string getTerrainFromXMLConfig(std::string configFilename);
+	static std::vector<std::string> getTerrainFromXMLConfig(std::string configFilename);
 
 	/**
 	 * \brief This function returns the path of the animationpath file specified in the configuration file.

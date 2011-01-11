@@ -77,8 +77,8 @@ public:
 	/**
 	 * \brief This static function must be called to instantiate a vista2D project.
 	 * 
-	 * @param vista2DFilename_ : Vista2D project file to display.
-	 * @param sceneGraphRoot_ : Scenegraph to add the vista2D note as child.
+	 * @param sceneGraphRoot_ : Coordinate system node to display the Vista2D project in.
+	 * @param configFileName : Filename of the XML configuration file.
 	 * @return : True if successful.
 	 */ 
 	bool init( osg::CoordinateSystemNode *sceneGraphRoot_, std::string configFileName );
