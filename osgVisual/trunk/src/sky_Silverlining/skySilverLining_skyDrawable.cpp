@@ -88,7 +88,7 @@ void skySilverLining_skyDrawable::setSceneFog(SilverLining::Atmosphere *atmosphe
 {    
 	osg::ref_ptr<osg::Fog> fog = new osg::Fog;
     fog->setMode(osg::Fog::EXP);
-	//fog->setUseRadialFog( true );
+	fog->setUseRadialFog( true );
 
 	//_objectsNode  = erde oder object, das mit nebel bedacht werden soll	
 	sceneRoot->getOrCreateStateSet()->setAttributeAndModes(fog.get());
