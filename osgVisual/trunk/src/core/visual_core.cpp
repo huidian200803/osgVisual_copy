@@ -230,9 +230,9 @@ void visual_core::addManipulators()
 		keyswitchManipulator->addMatrixManipulator( '7', "Object mounted Camera", objectMountedCameraManip );
 
 		// Animation path manipulator
-        std::string pathfile;
+		std::string pathfile = util::getAnimationPathFromXMLConfig(configFilename);
         char keyForAnimationPath = '8';
-        while (arguments.read("-p",pathfile))
+		if( pathfile != "" )
         {
             osgGA::AnimationPathManipulator* apm = new osgGA::AnimationPathManipulator(pathfile);
             if (apm || !apm->valid()) 
