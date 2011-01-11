@@ -463,11 +463,11 @@ bool util::setTransparentWindowBackground(osgViewer::Viewer* viewer_)
 	return true;
 }
 
-std::string util::getTerrainFromXMLConfig(std::string configFilename)
+std::vector<std::string> util::getTerrainFromXMLConfig(std::string configFilename)
 {
 	xmlDoc* tmpDoc;
 	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
-	std::string filename = "";
+	std::vector<std::string> filenames;
 
 	// Iterate through nodes and search for terrian entry
 	for (xmlNode *cur_node = sceneryNode->children; cur_node; cur_node = cur_node->next)
@@ -481,9 +481,9 @@ std::string util::getTerrainFromXMLConfig(std::string configFilename)
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "filename" )
+				if( attr_name.find("filename") != std::string::npos )
 				{
-					filename = attr_value;
+					filenames.push_back(attr_value);
 				}
 				attr = attr->next; 
 			}
@@ -501,7 +501,7 @@ std::string util::getTerrainFromXMLConfig(std::string configFilename)
 		xmlFreeDoc(tmpDoc); xmlCleanupParser();
 	}
 
-	return filename;
+	return filenames;
 }
 
 std::string util::getAnimationPathFromXMLConfig(std::string configFilename)
