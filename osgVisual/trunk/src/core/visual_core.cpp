@@ -95,15 +95,6 @@ void visual_core::initialize()
 
 	loadTerrain(arguments);
 
-	// parse Configuration file
-	xmlDoc* tmpDoc;
-	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
-	parseScenery(sceneryNode);
-	if(sceneryNode)
-	{
-		xmlFreeDoc(tmpDoc); xmlCleanupParser();
-	}
-
 	// All modules are initialized - now check arguments for any unused parameter.
 	checkCommandlineArgumentsForFinalErrors();
 
@@ -282,15 +273,8 @@ void visual_core::parseScenery(xmlNode* a_node)
 	{
 		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
 
-		if(cur_node->type == XML_ELEMENT_NODE && node_name == "terrain")
-		{
-			//<terrain filename="d:\my\path\database.ive"></terrain>
-		}
-
-		if(cur_node->type == XML_ELEMENT_NODE && node_name == "animationpath")
-		{
-			//<animationpath filename="salzburgerEcke.path"></animationpath>
-		}
+		// terrain is parsend seperately
+		// animationpath is parsend seperately
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "models")
 		{
@@ -415,11 +399,21 @@ bool visual_core::checkCommandlineArgumentsForFinalErrors()
 
 void visual_core::setupScenery()
 {
+	// Parse Scenery from Configuration file
+	xmlDoc* tmpDoc;
+	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
+	parseScenery(sceneryNode);
+	if(sceneryNode)
+	{
+		xmlFreeDoc(tmpDoc); xmlCleanupParser();
+	}
+
+
 
 	// Sky settings: 
 	if(sky.valid())
 	{
-		sky->setTime(15,30,00);
+		//sky->setTime(15,30,00);
 		sky->setVisibility(50000);
 		sky->addWindVolume( 0.0, 15000.0, 25.0, 90.0 );
 		
