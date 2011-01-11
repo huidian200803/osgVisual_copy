@@ -340,7 +340,29 @@ void visual_core::parseScenery(xmlNode* a_node)
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "visibility")
 		{
-			//<visibility range="50000" turbidity="2.2" ></visibility>
+			float range = 50000, turbidity=2.2;
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "range" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> range;
+				}
+				if( attr_name == "turbidity" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> turbidity;
+				}
+				attr = attr->next; 
+			}
+			if(sky.valid())
+			{
+				sky->setVisibility( range );
+				sky->setTurbidity( turbidity );
+			}
 		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cloudlayer")
@@ -355,7 +377,38 @@ void visual_core::parseScenery(xmlNode* a_node)
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "windlayer")
 		{
-			//<windlayer bottom="500.0" top="700." speed="25.0" direction="90.0"></windlayer>
+			float bottom = 0.0, top=5000.0, speed=25.0, direction=0.0;
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "bottom" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> bottom;
+				}
+				if( attr_name == "top" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> top;
+				}
+				if( attr_name == "speed" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> speed;
+				}
+				if( attr_name == "direction" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> direction;
+				}
+				attr = attr->next; 
+			}
+			if(sky.valid())
+			{
+				sky->addWindVolume( bottom, top, speed, direction );
+			}
 		}
 	}// FOR all nodes END
 
@@ -413,10 +466,6 @@ void visual_core::setupScenery()
 	// Sky settings: 
 	if(sky.valid())
 	{
-		//sky->setTime(15,30,00);
-		sky->setVisibility(50000);
-		sky->addWindVolume( 0.0, 15000.0, 25.0, 90.0 );
-		
 		//sky->addCloudLayer( 0, 20000, 20000, 600.0, 1000.0, 0.5, CUMULONIMBUS_CAPPILATUS );
 		//sky->addCloudLayer( 1, 5000000, 5000000, 600.0, 7351.0, 0.2, CIRRUS_FIBRATUS );
 		//sky->addCloudLayer( 2, 50000, 50000, 600.0, 7351.0, 0.2, CIRROCUMULUS );
