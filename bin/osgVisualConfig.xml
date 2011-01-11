@@ -38,7 +38,7 @@
   
   <scenery>
     <terrain filename="d:\my\path\database.ive"></terrain>
-    <animationpath filename="salzburgerEcke.path"></animationpath>
+    <animationpath filename="salzburg.path"></animationpath>
     <models>
       <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
         <position lat="47.12345" lon="11.234567" alt="1500.0"></position>

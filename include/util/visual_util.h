@@ -252,8 +252,20 @@ public:
 	 */ 
 	static xmlNode* getSceneryXMLConfig(std::string configFilename, xmlDoc*& doc);
 
+	/**
+	 * \brief This function returns the path of the terrainfile specified in the configuration file.
+	 * 
+	 * @param configFilename : Filename of the XML configuration file.
+	 * @return : On error an empty string, otherwise the terrain path specified in the configuration file.
+	 */ 
 	static std::string getTerrainFromXMLConfig(std::string configFilename);
 
+	/**
+	 * \brief This function returns the path of the animationpath file specified in the configuration file.
+	 * 
+	 * @param configFilename : Filename of the XML configuration file.
+	 * @return : On error an empty string, otherwise the path of the animationpath specified in the configuration file.
+	 */ 
 	static std::string getAnimationPathFromXMLConfig(std::string configFilename);
 
 private: 
