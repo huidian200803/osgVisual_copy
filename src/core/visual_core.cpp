@@ -186,7 +186,7 @@ void visual_core::shutdown()
 
 bool visual_core::loadTerrain(osg::ArgumentParser& arguments_)
 {
-	osg::ref_ptr<osg::Node> model = osgDB::readNodeFiles(arguments_);
+	osg::ref_ptr<osg::Node> model = osgDB::readNodeFiles(util::getTerrainFromXMLConfig(configFilename));
 	if( model.valid() )
 	{
         rootNode->addChild( model.get() );
