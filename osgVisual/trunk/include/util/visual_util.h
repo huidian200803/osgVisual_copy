@@ -252,6 +252,10 @@ public:
 	 */ 
 	static xmlNode* getSceneryXMLConfig(std::string configFilename, xmlDoc*& doc);
 
+	static std::string getTerrainFromXMLConfig(std::string configFilename);
+
+	static std::string getAnimationPathFromXMLConfig(std::string configFilename);
+
 private: 
 	/**
 	 * \brief This functions checks a list of nodes and all of its children for the specified module configuration.

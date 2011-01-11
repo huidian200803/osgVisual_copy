@@ -462,3 +462,82 @@ bool util::setTransparentWindowBackground(osgViewer::Viewer* viewer_)
 #endif
 	return true;
 }
+
+std::string util::getTerrainFromXMLConfig(std::string configFilename)
+{
+	xmlDoc* tmpDoc;
+	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
+	std::string filename = "";
+
+	// Iterate through nodes and search for terrian entry
+	for (xmlNode *cur_node = sceneryNode->children; cur_node; cur_node = cur_node->next)
+	{
+		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "terrain")
+		{
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "filename" )
+				{
+					filename = attr_value;
+				}
+				attr = attr->next; 
+			}
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "animationpath")
+		{
+			//<animationpath filename="salzburgerEcke.path"></animationpath>
+		}
+	}// FOR all nodes END
+
+	// Cleanup
+	if(sceneryNode)
+	{
+		xmlFreeDoc(tmpDoc); xmlCleanupParser();
+	}
+
+	return filename;
+}
+
+std::string util::getAnimationPathFromXMLConfig(std::string configFilename)
+{
+	xmlDoc* tmpDoc;
+	xmlNode* sceneryNode = util::getSceneryXMLConfig(configFilename, tmpDoc);
+	std::string animationpath = "";
+
+	// Iterate through nodes and search for terrian entry
+	for (xmlNode *cur_node = sceneryNode->children; cur_node; cur_node = cur_node->next)
+	{
+		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "animationpath")
+		{
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "filename" )
+				{
+					animationpath = attr_value;
+				}
+				attr = attr->next; 
+			}
+		}
+
+
+	}// FOR all nodes END
+
+	// Cleanup
+	if(sceneryNode)
+	{
+		xmlFreeDoc(tmpDoc); xmlCleanupParser();
+	}
+
+	return animationpath;
+}
