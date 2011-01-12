@@ -37,7 +37,7 @@
   </module>
   
   <scenery>
-    <terrain filename="d:\my\path\database.ive"></terrain>
+    <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive"></terrain>
     <animationpath filename="salzburg.path"></animationpath>
     <models>
       <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
