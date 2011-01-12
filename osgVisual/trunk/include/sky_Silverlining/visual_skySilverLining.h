@@ -34,6 +34,14 @@
 
 #include <visual_util.h>
 
+// XML Parser
+#include <stdio.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
+#include <string.h>
+#include <iostream>
+
 namespace osgVisual
 {
 
@@ -251,14 +259,12 @@ public:
 	 * Currently supported CloudTypes are:
 	 *
 	 * \li CloudTypes::CIRROCUMULUS - High planar cloud puffs.
-	 * \li CloudTypes::CIRRUS_FIBRATUS - High, wispy cirrus clouds.
-     * \li CloudTypes::NIMBOSTRATUS - Low stratus decks.
-     * \li CloudTypes::CUMULONIMBUS_CAPPILATUS - A large thunderhead with lightning and rain.
-     * \li CloudTypes::CUMULUS_MEDIOCRIS - Small, puffy clouds.
-     * \li CloudTypes::CUMULUS_CONGESTUS - Larger cumulus clouds with flattened bottoms.
-     * \li CloudTypes::CUMULUS_MEDIOCRIS_INFINITE - A cumulus mediocris layer where the clouds wrap around
-     *  the camera location at all times, to create the illusion of an infinitely large cloud layer.
-     * \li CloudTypes::CUMULUS_CONGESTUS_INFINITE - A cumulus congestus layer where the clouds wrap around
+	 * \li CloudTypes::CIRRUS_FIBRATUS - High, thicker and fibrous clouds that signal changing weather.
+     * \li CloudTypes::STRATUS - Low clouds represented as a slab.
+     * \li CloudTypes::CUMULUS_MEDIOCRIS - Low, puffy clouds on fair days.
+     * \li CloudTypes::CUMULUS_CONGESTUS - Large cumulus clouds that could turn into a thunderhead.
+	 * \li CloudTypes::CUMULONIMBUS_CAPPILATUS - A large thunderhead with lightning and rain.
+     * \li CloudTypes::STRATOCUMULUS - Low, dense, puffy clouds with some sun breaks between them.
      *  the camera location at all times, to create the illusion of an infinitely large cloud layer.
 	 * 
 	 * @param slot_ : Slot to use.
@@ -465,8 +471,12 @@ public:
 //@}
 
 
-
-
+/** @name XML configuration
+ *  The following functions provide the XML functionality to configure sky via XML
+ */
+//@{
+	void configureCloudlayerbyXML( xmlNode* cloudlayerNode_ );
+//@}
 
 private:
 	/**

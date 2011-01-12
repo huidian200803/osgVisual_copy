@@ -741,3 +741,145 @@ void visual_skySilverLining::setSlotPrecipitation( int slot_, double rate_mmPerH
 		}
 	}
 }
+
+void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ )
+{
+	std::string node_name=reinterpret_cast<const char*>(cloudlayerNode_->name);
+	if(cloudlayerNode_->type == XML_ELEMENT_NODE && node_name == "cloudlayer")
+	{
+		int slot = -1;
+		bool enabled;
+		int fadetime = -1, baselength = -1, basewidth = -1, thickness = -1, baseHeight = -1 ;
+		float density = -1.0, rate_mmPerHour_rain = -1.0, rate_mmPerHour_drySnow = -1.0, rate_mmPerHour_wetSnow = -1.0, rate_mmPerHour_sleet = -1.0;
+		CloudTypes ctype = CUMULUS_CONGESTUS; 
+
+
+
+		xmlAttr  *attr = cloudlayerNode_->properties;
+		while ( attr ) 
+		{ 
+			std::string attr_name=reinterpret_cast<const char*>(attr->name);
+			std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+			if( attr_name == "slot" )
+			{
+				std::stringstream sstr(attr_value);
+				sstr >> slot;
+			}
+			if( attr_name == "enabled" )
+			{
+				if(attr_value=="yes")
+					enabled = true;
+				else
+					enabled = false;
+			}
+			if( attr_name == "fadetime" )
+			{
+				std::stringstream sstr(attr_value);
+				sstr >> fadetime;
+			}
+			if( attr_name == "type" )
+			{
+				if(attr_value=="CIRROCUMULUS")
+					ctype = CIRROCUMULUS;
+				if(attr_value=="CIRRUS_FIBRATUS")
+					ctype = CIRRUS_FIBRATUS;
+				if(attr_value=="STRATUS")
+					ctype = STRATUS;
+				if(attr_value=="CUMULUS_MEDIOCRIS")
+					ctype = CUMULUS_MEDIOCRIS;
+				if(attr_value=="CUMULUS_CONGESTUS")
+					ctype = CUMULUS_CONGESTUS;
+				if(attr_value=="CUMULONIMBUS_CAPPILATUS")
+					ctype = CUMULONIMBUS_CAPPILATUS;
+				if(attr_value=="STRATOCUMULUS")
+					ctype = STRATOCUMULUS;
+			}
+			attr = attr->next; 
+		}
+
+		cloudlayerNode_ = cloudlayerNode_->children;
+		if(!cloudlayerNode_)
+		{
+			OSG_NOTIFY( osg::ALWAYS ) << "ERROR - visual_skySilverLining::configureCloudlayerbyXML: Missing geometry specification for a cloudlayer." << std::endl;
+			return;
+		}
+
+		for (xmlNode *cur_node = cloudlayerNode_; cur_node; cur_node = cur_node->next)
+		{
+			if(cur_node->type == XML_ELEMENT_NODE && node_name == "geometry")
+			{
+				xmlAttr  *attr = cloudlayerNode_->properties;
+				while ( attr ) 
+				{ 
+					std::string attr_name=reinterpret_cast<const char*>(attr->name);
+					std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+					if( attr_name == "baselength" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> baselength;
+					}
+					if( attr_name == "basewidth" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> basewidth;
+					}
+					if( attr_name == "thickness" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> thickness;
+					}
+					if( attr_name == "baseHeight" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> baseHeight;
+					}
+					if( attr_name == "density" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> density;
+					}
+					attr = attr->next; 
+				}
+			}
+
+			if(cur_node->type == XML_ELEMENT_NODE && node_name == "precipitation")
+			{
+				xmlAttr  *attr = cloudlayerNode_->properties;
+				while ( attr ) 
+				{ 
+					std::string attr_name=reinterpret_cast<const char*>(attr->name);
+					std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+					if( attr_name == "rate_mmPerHour_rain" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> rate_mmPerHour_rain;
+					}
+					if( attr_name == "rate_mmPerHour_drySnow" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> rate_mmPerHour_drySnow;
+					}
+					if( attr_name == "rate_mmPerHour_wetSnow" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> rate_mmPerHour_wetSnow;
+					}
+					if( attr_name == "rate_mmPerHour_sleet" )
+					{
+						std::stringstream sstr(attr_value);
+						sstr >> rate_mmPerHour_sleet;
+					}
+					attr = attr->next; 
+				}
+			}
+		}
+
+		if(slot!=-1 && baselength!=-1 && basewidth!=-1 && thickness!=-1 && baseHeight!=-1 && density!=-1 )
+			addCloudLayer( slot, baselength, basewidth, thickness, baseHeight, density, ctype );
+
+		if(slot!=-1 && rate_mmPerHour_rain!=-1 && rate_mmPerHour_drySnow!=-1 && thickness!=-1 && baseHeight!=-1 && density!=-1 )
+			setSlotPrecipitation( slot, rate_mmPerHour_rain, rate_mmPerHour_drySnow, rate_mmPerHour_wetSnow, rate_mmPerHour_sleet );
+	}
+	else
+		OSG_NOTIFY( osg::ALWAYS ) << "ERROR - visual_skySilverLining::configureCloudlayerbyXML: Node is not a cloudlayer node." << std::endl;
+}
