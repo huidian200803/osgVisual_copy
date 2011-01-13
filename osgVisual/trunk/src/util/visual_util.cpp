@@ -488,11 +488,6 @@ std::vector<std::string> util::getTerrainFromXMLConfig(std::string configFilenam
 				attr = attr->next; 
 			}
 		}
-
-		if(cur_node->type == XML_ELEMENT_NODE && node_name == "animationpath")
-		{
-			//<animationpath filename="salzburgerEcke.path"></animationpath>
-		}
 	}// FOR all nodes END
 
 	// Cleanup
@@ -529,8 +524,6 @@ std::string util::getAnimationPathFromXMLConfig(std::string configFilename)
 				attr = attr->next; 
 			}
 		}
-
-
 	}// FOR all nodes END
 
 	// Cleanup

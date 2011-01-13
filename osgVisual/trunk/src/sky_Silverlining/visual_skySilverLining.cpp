@@ -753,8 +753,6 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 		float density = -1.0, rate_mmPerHour_rain = -1.0, rate_mmPerHour_drySnow = -1.0, rate_mmPerHour_wetSnow = -1.0, rate_mmPerHour_sleet = -1.0;
 		CloudTypes ctype = CUMULUS_CONGESTUS; 
 
-
-
 		xmlAttr  *attr = cloudlayerNode_->properties;
 		while ( attr ) 
 		{ 
@@ -797,18 +795,18 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 			attr = attr->next; 
 		}
 
-		cloudlayerNode_ = cloudlayerNode_->children;
-		if(!cloudlayerNode_)
+		if(!cloudlayerNode_->children)
 		{
 			OSG_NOTIFY( osg::ALWAYS ) << "ERROR - visual_skySilverLining::configureCloudlayerbyXML: Missing geometry specification for a cloudlayer." << std::endl;
 			return;
 		}
 
-		for (xmlNode *cur_node = cloudlayerNode_; cur_node; cur_node = cur_node->next)
+		for (xmlNode *cur_node = cloudlayerNode_->children; cur_node; cur_node = cur_node->next)
 		{
+			node_name=reinterpret_cast<const char*>(cur_node->name);
 			if(cur_node->type == XML_ELEMENT_NODE && node_name == "geometry")
 			{
-				xmlAttr  *attr = cloudlayerNode_->properties;
+				xmlAttr  *attr = cur_node->properties;
 				while ( attr ) 
 				{ 
 					std::string attr_name=reinterpret_cast<const char*>(attr->name);
@@ -844,7 +842,7 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 
 			if(cur_node->type == XML_ELEMENT_NODE && node_name == "precipitation")
 			{
-				xmlAttr  *attr = cloudlayerNode_->properties;
+				xmlAttr  *attr = cur_node->properties;
 				while ( attr ) 
 				{ 
 					std::string attr_name=reinterpret_cast<const char*>(attr->name);

@@ -367,12 +367,8 @@ void visual_core::parseScenery(xmlNode* a_node)
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cloudlayer")
 		{
-			/*
-			<cloudlayer slot="1" type="cumulusCongestus" enabled="true" fadetime="15">
-			  <geometry baselength="50000" basewidth="50000" thickness="500" baseHeight="1700" density="0.3"></geometry>
-			  <precipitation rate_mmPerHour_rain="5.0" rate_mmPerHour_drySnow="7.0" rate_mmPerHour_wetSnow="10.0" rate_mmPerHour_sleet="0.0"></precipitation>
-			</cloudlayer>
-			*/
+			if(sky.valid())
+				sky->configureCloudlayerbyXML( cur_node );
 		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "windlayer")
@@ -466,14 +462,7 @@ void visual_core::setupScenery()
 	// Sky settings: 
 	if(sky.valid())
 	{
-		//sky->addCloudLayer( 0, 20000, 20000, 600.0, 1000.0, 0.5, CUMULONIMBUS_CAPPILATUS );
-		//sky->addCloudLayer( 1, 5000000, 5000000, 600.0, 7351.0, 0.2, CIRRUS_FIBRATUS );
-		//sky->addCloudLayer( 2, 50000, 50000, 600.0, 7351.0, 0.2, CIRROCUMULUS );
-		///sky->addCloudLayer( 2, 100000, 100000, 600.0, 2351.0, 0.75, STRATUS );
-		sky->addCloudLayer( 3, 50000, 50000, 1300.0, 700.0, 0.07, CUMULUS_CONGESTUS );
-		//sky->addCloudLayer( 1, 100000, 100000, 3500.0, 2000.0, 0.30, STRATOCUMULUS );
 
-		//sky->setSlotPrecipitation( 1, 0.0, 0.0, 0.0, 25.0 );
 	}
 
 

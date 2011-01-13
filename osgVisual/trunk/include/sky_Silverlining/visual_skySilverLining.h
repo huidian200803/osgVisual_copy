@@ -38,9 +38,7 @@
 #include <stdio.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
-
-#include <string.h>
-#include <iostream>
+#include <sstream> 
 
 namespace osgVisual
 {
