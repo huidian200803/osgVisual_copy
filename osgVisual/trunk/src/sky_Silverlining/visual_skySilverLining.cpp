@@ -882,9 +882,9 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 
 				if(slot!=-1 && rate_mmPerHour_rain!=-1 && rate_mmPerHour_drySnow!=-1 && thickness!=-1 && baseHeight!=-1 && density!=-1 )
 					setSlotPrecipitation( slot, rate_mmPerHour_rain, rate_mmPerHour_drySnow, rate_mmPerHour_wetSnow, rate_mmPerHour_sleet );
-			}
-			else
-				OSG_NOTIFY( osg::ALWAYS ) << "ERROR - visual_skySilverLining::configureCloudlayerbyXML: Node is not a cloudlayer node." << std::endl;
+			}	// If Node = cloudlayer END
 		}	// FOR-loop end
 	}	// If Clouds END
+		else
+	OSG_NOTIFY( osg::ALWAYS ) << "ERROR - visual_skySilverLining::configureCloudlayerbyXML: Node is not a <clouds> node." << std::endl;
 }
