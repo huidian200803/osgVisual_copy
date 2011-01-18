@@ -365,7 +365,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 			}
 		}
 
-		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cloudlayer")
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "clouds")
 		{
 			if(sky.valid())
 				sky->configureCloudlayerbyXML( cur_node );
