@@ -455,13 +455,6 @@ void visual_core::setupScenery()
 
 
 
-	// Sky settings: 
-	if(sky.valid())
-	{
-
-	}
-
-
 	//testObj = new visual_object( rootNode, "testStab", objectMountedCameraManip );
 	//testObj->setNewPosition( osg::DegreesToRadians(47.7123), osg::DegreesToRadians(12.84088), 600 );
 	///* using a huge cylinder to test position & orientation */

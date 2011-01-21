@@ -40,9 +40,28 @@
     <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive"></terrain>
     <animationpath filename="salzburg.path"></animationpath>
     <models>
+      <!-- Models can be loaded and placed in the scenerey.
+        - filename: 3D model to load. Leave empty to use model without 3D model.
+        - type: [plain] ? todo
+        - label: text to label the model with.
+        - dynamic: Add an standard updater to the model. todo
+        - position: Poisition to place the model
+        - attitude: Orientation to place the model
+        - updater [optional]: Channels to use for position and attitude update
+        - modeloffset [optional]: Offset for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
+        - cameraoffset [optional]: Offset for the object mounted camera manipulator to the visual_object   
+      -->
       <model filename="cessna.osg" type="plain" label="TestText!" dynamic="yes">
         <position lat="47.12345" lon="11.234567" alt="1500.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
+        <updater>
+          <position lat="channelXYZ" lon="channelXYZ" alt="channelXYZ"></position>
+          <attitude rot_x="channelXYZ" rot_y="channelXYZ" rot_z="channelXYZ"></attitude>
+        </updater>
+        <modeloffset>
+          <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
+          <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
+        </modeloffset>
         <cameraoffset>
           <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
           <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>

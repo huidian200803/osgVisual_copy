@@ -73,6 +73,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << "Try to creating a new Model.." << std::endl;
 	//osg::ref<visual_object> object = new visual_object( root, nodeName);
 
+	std::string filename="", type
 
 			/*
 			<models>
