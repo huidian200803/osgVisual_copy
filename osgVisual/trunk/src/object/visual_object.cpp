@@ -67,6 +67,10 @@ visual_object::~visual_object()
 
 visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode* sceneRoot_, xmlNode* a_node)
 {
+	if(a_node == NULL)
+		return NULL;
+
+	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << "Try to creating a new Model.." << std::endl;
 	//osg::ref<visual_object> object = new visual_object( root, nodeName);
 
 
@@ -83,7 +87,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			</models>
 			*/
 
-
+	OSG_NOTIFY( osg::ALWAYS ) << "Done." << std::endl;
 	return NULL;
 }
 
