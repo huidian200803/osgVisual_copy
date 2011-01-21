@@ -280,7 +280,11 @@ void visual_core::parseScenery(xmlNode* a_node)
 		{
 			for (xmlNode *modelNode = cur_node->children; modelNode; modelNode = modelNode->next)
 			{
-				visual_object::createNodeFromXMLConfig(rootNode, modelNode);
+				std::string name=reinterpret_cast<const char*>(modelNode->name);
+				if(cur_node->type == XML_ELEMENT_NODE && name == "model")
+				{
+					visual_object::createNodeFromXMLConfig(rootNode, modelNode);
+				}
 			}
 		}
 
