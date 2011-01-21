@@ -278,18 +278,10 @@ void visual_core::parseScenery(xmlNode* a_node)
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "models")
 		{
-			/*
-			<models>
-			  <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
-				<position lat="47.12345" lon="11.234567" alt="1500.0"></position>
-				<attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
-				<cameraoffset>
-				  <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
-				  <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
-				</cameraoffset>
-			  </model>
-			</models>
-			*/
+			for (xmlNode *modelNode = cur_node->children; modelNode; modelNode = modelNode->next)
+			{
+				visual_object::createNodeFromXMLConfig(rootNode, modelNode);
+			}
 		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "datetime")
