@@ -40,7 +40,7 @@
     <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive"></terrain>
     <animationpath filename="salzburg.path"></animationpath>
     <models>
-      <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
+      <model filename="cessna.osg" type="plain" label="TestText!" dynamic="yes">
         <position lat="47.12345" lon="11.234567" alt="1500.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
         <cameraoffset>
@@ -75,7 +75,7 @@
         <geometry baselength="50000" basewidth="50000" thickness="1500" baseHeight="1500" density="0.3"></geometry>
       </cloudlayer>-->
     </clouds>
-    <windlayer bottom="500.0" top="700." speed="25.0" direction="90.0"></windlayer>
+    <windlayer bottom="500.0" top="1100." speed="25.0" direction="90.0"></windlayer>
   </scenery>
 </osgvisualconfiguration>
 

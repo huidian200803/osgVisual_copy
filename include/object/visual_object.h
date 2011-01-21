@@ -35,6 +35,11 @@
 #include <string.h>
 #include <iostream>
 
+// XML Parser
+#include <stdio.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 namespace osgVisual
 {
 class visual_objectPositionCallback;
@@ -83,6 +88,8 @@ public:
 	 * 
 	 */ 
 	~visual_object();
+
+	static visual_object* createNodeFromXMLConfig(osg::CoordinateSystemNode* sceneRoot_, xmlNode* a_node);
 
 
 /** @name Position and attitude
