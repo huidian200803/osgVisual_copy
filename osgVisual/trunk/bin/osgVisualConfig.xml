@@ -46,7 +46,7 @@
         - dynamic: "yes" to add an standard updater to the model. 
         - position: Position to place the model
         - attitude: Orientation in degree to place the model
-        - updater [optional]: Channels to use for position and attitude update
+        - updater [optional]: Channels to use for position, attitude and label update
         - cameraoffset [optional]: Rotational (in degree) and translational offset for the object mounted camera manipulator to the visual_object   
         - Geometry [optional]: 3D model to display. Leave empty to use model without 3D model.
         - Geometryoffset [optional]: Rotational offset (in degree) for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
@@ -56,7 +56,9 @@
         <position lat="47.12345" lon="11.234567" alt="1500.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
         <updater>
-          <translation-slots>todo</translation-slots>
+          <position lat="" lon="" alt=""></position>
+          <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
+          <label text=""></label>
         </updater>
         <cameraoffset>
           <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
