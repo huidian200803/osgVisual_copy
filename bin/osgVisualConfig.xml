@@ -40,32 +40,32 @@
     <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive"></terrain>
     <animationpath filename="salzburg.path"></animationpath>
     <models>
-      <!-- Models can be loaded and placed in the scenerey.
-        - filename: 3D model to load. Leave empty to use model without 3D model.
-        - type: [plain] ? todo
+      <!-- Models can be loaded and placed in the scenery.
+        - objectname: Name of the object to identify it in the scenegraph.
         - label: text to label the model with.
-        - dynamic: Add an standard updater to the model. todo
-        - position: Poisition to place the model
-        - attitude: Orientation to place the model
+        - dynamic: "yes" to add an standard updater to the model. 
+        - position: Position to place the model
+        - attitude: Orientation in degree to place the model
         - updater [optional]: Channels to use for position and attitude update
-        - modeloffset [optional]: Offset for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
-        - cameraoffset [optional]: Offset for the object mounted camera manipulator to the visual_object   
+        - cameraoffset [optional]: Rotational (in degree) and translational offset for the object mounted camera manipulator to the visual_object   
+        - Geometry [optional]: 3D model to display. Leave empty to use model without 3D model.
+        - Geometryoffset [optional]: Rotational offset (in degree) for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
+        - Geometryscale [optional]: Scale factors for the loaded 3D model in all three dimensions.
       -->
-      <model filename="cessna.osg" type="plain" label="TestText!" dynamic="yes">
+      <model objectname="TestObject" label="TestText!" dynamic="yes">
         <position lat="47.12345" lon="11.234567" alt="1500.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
         <updater>
-          <position lat="channelXYZ" lon="channelXYZ" alt="channelXYZ"></position>
-          <attitude rot_x="channelXYZ" rot_y="channelXYZ" rot_z="channelXYZ"></attitude>
+          <translation-slots>todo</translation-slots>
         </updater>
-        <modeloffset>
-          <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
-          <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
-        </modeloffset>
         <cameraoffset>
           <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
           <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
         </cameraoffset>
+        <geometry filename="cessna">
+          <offset rot_x="0.0" rot_y="0.0" rot_z="0.0"></offset>
+          <scalefactor scale_x="1.0" scale_y="1.0" scale_z="1.0"></scalefactor>
+        </geometry>
       </model>
     </models>
     <datetime day="0" month="0" year="0" hour="12" minute="30"></datetime>

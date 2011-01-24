@@ -42,7 +42,7 @@ visual_object::visual_object( osg::CoordinateSystemNode* sceneRoot_, std::string
 
 	geometry_offset_rotation.makeRotate( 0.0, 1.0, 1.0, 1.0 );
 
-	// Init Scale
+	// Init Scale factor
 	scaleX = 1.0;
 	scaleY = 1.0;
 	scaleZ = 1.0;
@@ -73,23 +73,48 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << "Try to creating a new Model.." << std::endl;
 	//osg::ref<visual_object> object = new visual_object( root, nodeName);
 
-	std::string filename="", type
+	std::string objectname="", filename="", label="";
+	bool dynamic = false;
+	double lat=0.0, lon=0.0, alt=0.0, rot_x=0.0, rot_y=0.0, rot_z=0.0;
+	double cam_trans_x=0.0, cam_trans_y=0.0, cam_trans_z=0.0, cam_rot_x=0.0, cam_rot_y=0.0, cam_rot_z=0.0;
+	double geometry_rot_x=0.0, geometry_rot_y=0.0, geometry_rot_z=0.0;
+	double geometry_scale_x=1.0, geometry_scale_y=1.0, geometry_scale_z=1.0;
+	osg::ref_ptr<osgVisual::object_updater> updater = NULL;
 
-			/*
-			<models>
-			  <model filename="cessna" type="plain" label="TestText!" dynamic="yes">
-				<position lat="47.12345" lon="11.234567" alt="1500.0"></position>
-				<attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
-				<cameraoffset>
-				  <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
-				  <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
-				</cameraoffset>
-			  </model>
-			</models>
-			*/
+	osgVisual::visual_object* object = new osgVisual::visual_object( sceneRoot_, objectname );
+	object->lat = lat;
+	object->lon = lon;
+	object->alt = alt;
+	object->azimuthAngle_psi = rot_x;
+	object->pitchAngle_theta = rot_y;
+	object->bankAngle_phi = rot_z;
+	if(label!="")
+		object->addLabel("XML_defined_label", label);
+	if(dynamic)
+	{
+		updater = new osgVisual::object_updater(object);
+	}
+	object->setCameraOffset( cam_trans_x, cam_trans_y, cam_trans_z, cam_rot_x, cam_rot_y, cam_rot_z);
+	if(filename!="")
+	{
+		object->loadGeometry( filename );
+		object->setGeometryOffset( geometry_rot_x, geometry_rot_y, geometry_rot_z );
+		object->setScale( geometry_scale_x, geometry_scale_y, geometry_scale_z ); 
+	}
+
+	if(updater.valid())
+ 		object->addUpdater( updater );	
+
+	/*
+        - updater [optional]: Channels to use for position and attitude update
+
+        <updater>
+          <translation-slots>todo</translation-slots>
+        </updater>
+    */
 
 	OSG_NOTIFY( osg::ALWAYS ) << "Done." << std::endl;
-	return NULL;
+	return object;
 }
 
 void visual_object::setNewPositionAttitude( double lat_, double lon_, double alt_, double azimuthAngle_psi_, double pitchAngle_theta_, double bankAngle_phi_ )
