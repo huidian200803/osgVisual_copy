@@ -64,7 +64,7 @@
           <translation trans_x="0.0" trans_y="0.0" trans_z="0.0"></translation>
           <rotation rot_x="0.0" rot_y="0.0" rot_z="0.0"></rotation>
         </cameraoffset>
-        <geometry filename="cessna">
+        <geometry filename="../models/Boing777-200.ive">
           <offset rot_x="0.0" rot_y="0.0" rot_z="0.0"></offset>
           <scalefactor scale_x="1.0" scale_y="1.0" scale_z="1.0"></scalefactor>
         </geometry>
