@@ -71,8 +71,8 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		return NULL;
 
 	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << "Try to creating a new Model.." << std::endl;
-	//osg::ref<visual_object> object = new visual_object( root, nodeName);
-
+	
+	// Prepare Variables
 	std::string objectname="", filename="", label="";
 	bool dynamic = false;
 	double lat=0.0, lon=0.0, alt=0.0, rot_x=0.0, rot_y=0.0, rot_z=0.0;
@@ -80,6 +80,231 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	double geometry_rot_x=0.0, geometry_rot_y=0.0, geometry_rot_z=0.0;
 	double geometry_scale_x=1.0, geometry_scale_y=1.0, geometry_scale_z=1.0;
 	osg::ref_ptr<osgVisual::object_updater> updater = NULL;
+
+	// extract model properties
+	xmlAttr  *attr = a_node->properties;
+	while ( attr ) 
+	{ 
+		std::string attr_name=reinterpret_cast<const char*>(attr->name);
+		std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+		if( attr_name == "objectname" ) objectname = attr_value;
+		if( attr_name == "label" ) label = attr_value;
+		if( attr_name == "dynamic" ) 
+		{
+			if(attr_value=="yes")
+				dynamic=true;
+			else
+				dynamic=false;
+		}
+		attr = attr->next; 
+	}
+	for (xmlNode *cur_node = a_node->children; cur_node; cur_node = cur_node->next)
+	{
+		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "position")
+		{
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "lat" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> lat;
+				}
+				if( attr_name == "lon" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> lon;
+				}
+				if( attr_name == "alt" ) 
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> alt;
+				}
+				attr = attr->next; 
+			}
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "attitude")
+		{
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "rot_x" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> rot_x;
+				}
+				if( attr_name == "rot_y" )
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> rot_y;
+				}
+				if( attr_name == "rot_z" ) 
+				{
+					std::stringstream sstr(attr_value);
+					sstr >> rot_z;
+				}
+				attr = attr->next; 
+			}
+		}
+
+		//if(cur_node->type == XML_ELEMENT_NODE && node_name == "updater")
+		//{
+		//	for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
+		//	{
+		//		std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
+		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "position")
+		//		{
+		//			<position lat="" lon="" alt=""></position>
+		//		}
+		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "attitude")
+		//		{
+		//			<attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
+		//		}
+		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "label")
+		//		{
+		//			<label text=""></label>
+		//		}
+		//	}
+		//}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cameraoffset")
+		{
+			for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
+			{
+				std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "translation")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "trans_x" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_trans_x;
+						}
+						if( attr_name == "trans_y" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_trans_y;
+						}
+						if( attr_name == "trans_z" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_trans_y;
+						}
+						attr = attr->next; 
+					}
+				}
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "rotation")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "rot_x" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_rot_x;
+						}
+						if( attr_name == "rot_y" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_rot_y;
+						}
+						if( attr_name == "rot_z" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> cam_rot_y;
+						}
+						attr = attr->next; 
+					}
+				}
+			}
+		}
+
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "geometry")
+		{
+			// extract filename
+			xmlAttr  *attr = cur_node->properties;
+			while ( attr ) 
+			{ 
+				std::string attr_name=reinterpret_cast<const char*>(attr->name);
+				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+				if( attr_name == "filename" )
+					filename = attr_value;
+				attr = attr->next; 
+			}
+
+			// Extract optional settings
+			for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
+			{
+				std::string sub_node_name=reinterpret_cast<const char*>(sub_cur_node->name);
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "offset")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "rot_x" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_rot_x;
+						}
+						if( attr_name == "rot_y" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_rot_y;
+						}
+						if( attr_name == "rot_z" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_rot_z;
+						}
+						attr = attr->next; 
+					}
+				}
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "scalefactor")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "scale_x" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_scale_x;
+						}
+						if( attr_name == "scale_y" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_scale_y;
+						}
+						if( attr_name == "scale_z" )
+						{
+							std::stringstream sstr(attr_value);
+							sstr >> geometry_scale_z;
+						}
+						attr = attr->next; 
+					}
+				}
+			}
+		}
+	}
+
+
+
 
 	osgVisual::visual_object* object = new osgVisual::visual_object( sceneRoot_, objectname );
 	object->lat = lat;
