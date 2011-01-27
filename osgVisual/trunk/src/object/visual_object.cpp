@@ -51,6 +51,10 @@ visual_object::visual_object( osg::CoordinateSystemNode* sceneRoot_, std::string
 	cameraTranslationOffset.makeTranslate( osg::Vec3d(0.0, 0.0, 0.0) );	// Trans: (y, x, -z_down)
 	cameraRotationOffset.makeRotate( osg::DegreesToRadians( 90.0 ), osg::Vec3(1, 0, 0) );	// Rot: (-y, +x , -z)
 
+	//setCameraOffsetTranslation(0.0, -150.0, 50.0);	// Trans: (rechts davon, longitudinal, vertikal)
+	setCameraOffsetTranslation( 150.0, 0.0, 30.0);
+	setCameraOffsetRotation( osg::DegreesToRadians(0.0), osg::DegreesToRadians(-15.0), osg::DegreesToRadians(-90.0) );
+
 	// Geometrynode hinzufügen
 	geometry = new osg::Group();
 	this->addChild( geometry );
