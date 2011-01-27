@@ -40,12 +40,7 @@ void object_updater::preUpdate(osgVisual::visual_object* object_ )
 	object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z, osgVisual::dataIO_slot::TO_OBJ ));
 	object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y, osgVisual::dataIO_slot::TO_OBJ ));
 	object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x, osgVisual::dataIO_slot::TO_OBJ ));
-
-	//object_->setCameraOffsetTranslation(0.0, -150.0, 50.0);	// Trans: (rechts davon, longitudinal, vertikal)
-	object_->setCameraOffsetTranslation( 150.0, 0.0, 30.0);
-	object_->setCameraOffsetRotation( osg::DegreesToRadians(0.0), osg::DegreesToRadians(-15.0), osg::DegreesToRadians(-90.0) );
-	
-std::string updater_label;
+	object_->updateLabelText("autoupdated", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
 
 	// Finally execute nested PreUpdater
 	if ( updater.valid() )
@@ -104,5 +99,8 @@ void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std
 	if(label_!="")
 		updater_label = label_;
 	else
+	{
 		updater_label = object_->getName()+"_LABEL";
+		object_->addLabel("autoupdated", " ");
+	}
 }
