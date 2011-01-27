@@ -91,11 +91,32 @@ public:
 	 */ 
 	void addUpdater( object_updater* updater_ );
 
+	/**
+	 * \brief This function defines the slots to use for updating the object.
+	 * 
+	 * If a lot is empty, the objectname will be used with a suffix describing the channel. For details look for the implementation.
+	 * 
+	 * @param lat_ 
+	 * @param lon_ 
+	 * @param alt_ 
+	 * @param rot_x_ 
+	 * @param rot_y_ 
+	 * @param rot_z_ 
+	 * @param label_ 
+	 */ 
+	void setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_, std::string lon_, std::string alt_, std::string rot_x_, std::string rot_y_, std::string rot_z_, std::string label_);
+
+
 protected:
 	/**
 	 * Pointer to nested updater.
 	 */ 
 	osg::ref_ptr<object_updater> updater;
+
+	/**
+	 * Names of the Slots the updater should use
+	 */ 
+	std::string updater_lat, updater_lon, updater_alt, updater_rot_x, updater_rot_y, updater_rot_z, updater_label;
 
 };
 

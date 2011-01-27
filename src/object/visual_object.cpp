@@ -361,14 +361,11 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		object->setScale( geometry_scale_x, geometry_scale_y, geometry_scale_z ); 
 	}
 
-	//if(updater.valid())
-	//{
- //		object->addUpdater( updater );	
-	//	std::string updater_lat="", updater_lon="", updater_alt="", updater_rot_x="", updater_rot_y="", updater_rot_z="", updater_label="";
-	//}
+	if(updater.valid())
+	{
+		updater->setUpdaterSlotNames( object, updater_lat, updater_lon, updater_alt, updater_rot_x, updater_rot_y, updater_rot_z, updater_label);
+	}
 
-
-	
 	OSG_NOTIFY( osg::ALWAYS ) << "Done." << std::endl;
 	return object;
 }
