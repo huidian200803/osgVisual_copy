@@ -57,7 +57,7 @@
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
         <updater>
           <position lat="" lon="" alt=""></position>
-          <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
+          <attitude rot_x="" rot_y="" rot_z=""></attitude>
           <label text=""></label>
         </updater>
         <cameraoffset>

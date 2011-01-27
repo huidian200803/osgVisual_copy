@@ -80,6 +80,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	double geometry_rot_x=0.0, geometry_rot_y=0.0, geometry_rot_z=0.0;
 	double geometry_scale_x=1.0, geometry_scale_y=1.0, geometry_scale_z=1.0;
 	osg::ref_ptr<osgVisual::object_updater> updater = NULL;
+	std::string updater_lat="", updater_lon="", updater_alt="", updater_rot_x="", updater_rot_y="", updater_rot_z="", updater_label="";
 
 	// extract model properties
 	xmlAttr  *attr = a_node->properties;
@@ -154,25 +155,57 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			}
 		}
 
-		//if(cur_node->type == XML_ELEMENT_NODE && node_name == "updater")
-		//{
-		//	for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
-		//	{
-		//		std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
-		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "position")
-		//		{
-		//			<position lat="" lon="" alt=""></position>
-		//		}
-		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "attitude")
-		//		{
-		//			<attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
-		//		}
-		//		if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "label")
-		//		{
-		//			<label text=""></label>
-		//		}
-		//	}
-		//}
+		if(cur_node->type == XML_ELEMENT_NODE && node_name == "updater")
+		{
+			for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
+			{
+				std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "position")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "lat" )
+							updater_lat = attr_value;
+						if( attr_name == "lon" )
+							updater_lon = attr_value;
+						if( attr_name == "alt" ) 
+							updater_alt = attr_value;
+						attr = attr->next; 
+					}
+				}
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "attitude")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "rot_x" )
+							updater_rot_x = attr_value;
+						if( attr_name == "rot_y" )
+							updater_rot_y = attr_value;
+						if( attr_name == "rot_z" ) 
+							updater_rot_z = attr_value;
+						attr = attr->next; 
+					}
+				}
+				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "label")
+				{
+					xmlAttr  *attr = sub_cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "text" )
+							updater_label = attr_value;
+						attr = attr->next; 
+					}
+				}
+			}
+		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "cameraoffset")
 		{
@@ -318,6 +351,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	if(dynamic)
 	{
 		updater = new osgVisual::object_updater(object);
+		object->addUpdater( updater );
 	}
 	object->setCameraOffset( cam_trans_x, cam_trans_y, cam_trans_z, cam_rot_x, cam_rot_y, cam_rot_z);
 	if(filename!="")
@@ -327,17 +361,14 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		object->setScale( geometry_scale_x, geometry_scale_y, geometry_scale_z ); 
 	}
 
-	if(updater.valid())
- 		object->addUpdater( updater );	
+	//if(updater.valid())
+	//{
+ //		object->addUpdater( updater );	
+	//	std::string updater_lat="", updater_lon="", updater_alt="", updater_rot_x="", updater_rot_y="", updater_rot_z="", updater_label="";
+	//}
 
-	/*
-        - updater [optional]: Channels to use for position and attitude update
 
-        <updater>
-          <translation-slots>todo</translation-slots>
-        </updater>
-    */
-
+	
 	OSG_NOTIFY( osg::ALWAYS ) << "Done." << std::endl;
 	return object;
 }
