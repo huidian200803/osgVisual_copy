@@ -288,6 +288,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 			}
 		}
 
+#ifdef USE_SKY_SILVERLINING
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "datetime")
 		{
 			int hour, minute;
@@ -331,7 +332,6 @@ void visual_core::parseScenery(xmlNode* a_node)
 					sky->setDate(year, month, day);
 				sky->setTime(hour,minute,00);
 			}
-
 		}
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "visibility")
@@ -354,6 +354,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 				}
 				attr = attr->next; 
 			}
+
 			if(sky.valid())
 			{
 				sky->setVisibility( range );
@@ -402,6 +403,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 				sky->addWindVolume( bottom, top, speed, direction );
 			}
 		}
+#endif
 	}// FOR all nodes END
 
 }
