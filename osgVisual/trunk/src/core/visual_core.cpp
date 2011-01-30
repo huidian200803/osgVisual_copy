@@ -544,7 +544,11 @@ void visual_core::trackNode( osg::Node* node_ )
 	osgVisual::visual_object* trackedObject = dynamic_cast<osgVisual::visual_object*>(node_);
 	if(trackedObject)
 	{
-		node = trackedObject;
+		if(trackedObject->getGeometry())
+			node = trackedObject->getGeometry();
+		else
+			node = trackedObject;
+
 		// Object mounted manipulator ( Only working with visual_object, not with osg::Node )
 		if (objectMountedCameraManip.valid())
 			objectMountedCameraManip->setAttachedObject( trackedObject );
