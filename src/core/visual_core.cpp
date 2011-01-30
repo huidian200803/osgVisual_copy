@@ -403,6 +403,9 @@ void visual_core::parseScenery(xmlNode* a_node)
 				sky->addWindVolume( bottom, top, speed, direction );
 			}
 		}
+
+		// Track Node
+
 #endif
 	}// FOR all nodes END
 
@@ -413,8 +416,10 @@ bool visual_core::checkCommandlineArgumentsForFinalErrors()
 	// Setup Application Usage
 	arguments.getApplicationUsage()->setApplicationName(arguments.getApplicationName());
 	arguments.getApplicationUsage()->setDescription(arguments.getApplicationName()+" is the new FSD visualization tool, written by Torben Dannhauer");
-    arguments.getApplicationUsage()->setCommandLineUsage(arguments.getApplicationName()+" [options] Terrain_filename");
+    arguments.getApplicationUsage()->setCommandLineUsage(arguments.getApplicationName()+" [OSG options] -c XML-Configurationfile");
 	arguments.getApplicationUsage()->addCommandLineOption("-h or --help","Display this information");
+	arguments.getApplicationUsage()->addCommandLineOption("-c or --config","XML configuration filename");
+
 
     // if user request help write it out to cout.
     if (arguments.read("-h") || arguments.read("--help"))
@@ -469,11 +474,11 @@ void visual_core::setupScenery()
 	//testObj2->loadGeometry( "../models/neuschwanstein.osgb" );
 	////testObj2->addUpdater( new object_updater(testObj2) );	// todo memleak
 
-	osg::ref_ptr<visual_object> testObj3 = new visual_object( rootNode, "SAENGER1" );	// todo memleak
-	testObj3->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 600 );
-	testObj3->loadGeometry( "../models/saenger1.flt" );
-	testObj3->addUpdater( new object_updater(testObj3) );	// todo memleak
-	
+	//osg::ref_ptr<visual_object> testObj3 = new visual_object( rootNode, "SAENGER1" );	// todo memleak
+	//testObj3->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 600 );
+	//testObj3->loadGeometry( "../models/saenger1.flt" );
+	//testObj3->addUpdater( new object_updater(testObj3) );	// todo memleak
+	//
 
 	osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER2" );	// todo memleak
 	testObj4->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 650 );
@@ -481,37 +486,13 @@ void visual_core::setupScenery()
 	testObj4->addUpdater( new object_updater(testObj4) );	// todo memleak
 	testObj4->addLabel("testLabel", "LabelTest!!\nnächste Zeile :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
 
-	osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
-	testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
-	testObj5->loadGeometry( "../models/saengerCombine.flt" );
-	//testObj5->setScale( 2 );
-	testObj5->addUpdater( new object_updater(testObj5) );	// todo memleak
+	//osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
+	//testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
+	//testObj5->loadGeometry( "../models/saengerCombine.flt" );
+	////testObj5->setScale( 2 );
+	//testObj5->addUpdater( new object_updater(testObj5) );	// todo memleak
 
-#ifdef USE_SPACENAVIGATOR
-	// Manipulatoren auf dieses Objekt binden (Primärobjekt)
-	if (objectMountedCameraManip.valid())
-		objectMountedCameraManip->setAttachedObject( testObj4 );
-	if (mouseTrackerManip.valid())
-	{
-		mouseTrackerManip->setTrackNode( testObj4->getGeometry() );
-		mouseTrackerManip->setMinimumDistance( 100 );
-	}
-#endif
-
-	if(nt.valid())
-	{
-		osgGA::NodeTrackerManipulator::TrackerMode trackerMode = osgGA::NodeTrackerManipulator::NODE_CENTER;
-		osgGA::NodeTrackerManipulator::RotationMode rotationMode = osgGA::NodeTrackerManipulator::ELEVATION_AZIM;
-		nt->setTrackerMode(trackerMode);
-		nt->setRotationMode(rotationMode);
-		//nt->setAutoComputeHomePosition( true );
-		nt->setMinimumDistance( 100 );
-		nt->setTrackNode(testObj4->getGeometry());
-		//nt->computeHomePosition();
-		nt->setAutoComputeHomePosition( true );
-		nt->setDistance( 250 );
-	}
-
+	trackNode( testObj4 );
 
 	// Load EDDF
 	//std::string filename = "D:\\DA\\EDDF_test\\eddf.ive";
@@ -551,4 +532,49 @@ void visual_core::setupScenery()
 
 	visual_dataIO::getInstance()->setSlotData("TestSlot1", osgVisual::dataIO_slot::TO_OBJ, 0.12345);
 
+}
+
+void visual_core::trackNode( osg::Node* node_ )
+{
+	if(!node_)
+		return;
+
+	osg::Node* node = NULL;
+	// Check if tracked node is a visual_object
+	osgVisual::visual_object* trackedObject = dynamic_cast<osgVisual::visual_object*>(node_);
+	if(trackedObject)
+	{
+		if(trackedObject->getGeometry())
+			node = trackedObject->getGeometry();
+		else
+			node = trackedObject;
+	}
+	else
+		node = node_;
+
+	// Object mounted manipulator
+	if (objectMountedCameraManip.valid())
+		objectMountedCameraManip->setAttachedObject( node );
+	
+	// Spacemouse Node Tracker
+#ifdef USE_SPACENAVIGATOR
+	if (mouseTrackerManip.valid())
+	{
+		mouseTrackerManip->setTrackNode( node );
+		mouseTrackerManip->setMinimumDistance( 100 );
+	}
+#endif
+
+	// Classical OSG Nodetracker
+	if(nt.valid())
+	{
+		osgGA::NodeTrackerManipulator::TrackerMode trackerMode = osgGA::NodeTrackerManipulator::NODE_CENTER;
+		osgGA::NodeTrackerManipulator::RotationMode rotationMode = osgGA::NodeTrackerManipulator::ELEVATION_AZIM;
+		nt->setTrackerMode(trackerMode);
+		nt->setRotationMode(rotationMode);
+		nt->setMinimumDistance( 100 );
+		nt->setTrackNode( node );
+		nt->setAutoComputeHomePosition( true );
+		nt->setDistance( 250 );
+	}
 }
