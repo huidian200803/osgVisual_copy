@@ -110,6 +110,7 @@ public:
 	bool checkCommandlineArgumentsForFinalErrors();
 
 	void setupScenery();
+	void trackNode( osg::Node* node_ );
 	
 protected:
 	virtual ~visual_core(void);
