@@ -461,7 +461,6 @@ void visual_core::setupScenery()
 	}
 
 
-
 	//testObj = new visual_object( rootNode, "testStab", objectMountedCameraManip );
 	//testObj->setNewPosition( osg::DegreesToRadians(47.7123), osg::DegreesToRadians(12.84088), 600 );
 	///* using a huge cylinder to test position & orientation */
@@ -472,25 +471,25 @@ void visual_core::setupScenery()
 	////testObj2->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 600 );
 	//testObj2->setNewPosition( osg::DegreesToRadians(47.557523564234), osg::DegreesToRadians(10.749646398595), 950 );
 	//testObj2->loadGeometry( "../models/neuschwanstein.osgb" );
-	////testObj2->addUpdater( new object_updater(testObj2) );	// todo memleak
+	////testObj2->addUpdater( new object_updater(testObj2) );
 
 	//osg::ref_ptr<visual_object> testObj3 = new visual_object( rootNode, "SAENGER1" );	// todo memleak
 	//testObj3->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 600 );
 	//testObj3->loadGeometry( "../models/saenger1.flt" );
-	//testObj3->addUpdater( new object_updater(testObj3) );	// todo memleak
+	//testObj3->addUpdater( new object_updater(testObj3) );
 	//
 
 	osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER23" );	// todo memleak
 	testObj4->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 650 );
 	testObj4->loadGeometry( "../models/saenger2.flt" );
-	testObj4->addUpdater( new object_updater(testObj4) );	// todo memleak
+	testObj4->addUpdater( new object_updater(testObj4) );
 	testObj4->addLabel("testLabel", "Object4 :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
 
 	//osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
 	//testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
 	//testObj5->loadGeometry( "../models/saengerCombine.flt" );
 	////testObj5->setScale( 2 );
-	//testObj5->addUpdater( new object_updater(testObj5) );	// todo memleak
+	//testObj5->addUpdater( new object_updater(testObj5) );
 
 	trackNode( testObj4 );
 
