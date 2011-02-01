@@ -235,5 +235,6 @@ void dataIO_extLinkVCL::addChannels(xmlNode * a_node, std::string channelName_, 
 		// Set SLOT data and store SLOT pointer 
 		osgVisual::dataIO_slot* tmpSlot = osgVisual::visual_dataIO::getInstance()->setSlotData( entryName, direction_, 0 );
 		extLinkSlots.push_back( tmpSlot );
+
 	}	// FOR each ENTRY END
 }

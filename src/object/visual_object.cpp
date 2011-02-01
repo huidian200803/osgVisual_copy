@@ -58,6 +58,7 @@ visual_object::visual_object( osg::CoordinateSystemNode* sceneRoot_, std::string
 	// Geometrynode hinzufügen
 	geometry = new osg::Group();
 	this->addChild( geometry );
+	unsetGeometry();	// adds an osg::Node as geometry to make the visual_object trackable for node trackers.
 
 	// Labelnode hinzufügen
 	labels = new osg::Geode();
@@ -74,7 +75,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	if(a_node == NULL)
 		return NULL;
 
-	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << "Try to creating a new Model.." << std::endl;
+	OSG_NOTIFY( osg::ALWAYS ) << __FUNCTION__ << " - Try to creating a new Model.." << std::endl;
 	
 	// Prepare Variables
 	std::string objectname="", filename="", label="";
@@ -341,8 +342,6 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	}
 
 
-
-
 	osgVisual::visual_object* object = new osgVisual::visual_object( sceneRoot_, objectname );
 	object->lat = lat;
 	object->lon = lon;
@@ -461,6 +460,9 @@ void visual_object::unsetGeometry()
 {
 	// remove old geometry
 	geometry->removeChildren(0, geometry->getNumChildren());
+
+	// Set std OSG Node to allow tracking of an osgVisual without
+	geometry->addChild( new osg::Node() ); 
 }
 
 void visual_object::addUpdater( object_updater* updater_ )

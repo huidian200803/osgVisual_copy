@@ -33,14 +33,20 @@ void object_updater::preUpdate(osgVisual::visual_object* object_ )
 	//For each visual_object.member,
 	//	try to search according variable in dataIO with direction TO_OBJ and copy value to visual_object.
 
-	
-	object_->lat = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat, osgVisual::dataIO_slot::TO_OBJ ));
-	object_->lon = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon, osgVisual::dataIO_slot::TO_OBJ ));
-	object_->alt = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_alt, osgVisual::dataIO_slot::TO_OBJ );
-	object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z, osgVisual::dataIO_slot::TO_OBJ ));
-	object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y, osgVisual::dataIO_slot::TO_OBJ ));
-	object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x, osgVisual::dataIO_slot::TO_OBJ ));
-	object_->updateLabelText("autoupdated", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_lat.empty())
+		object_->lat = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_lon.empty())
+		object_->lon = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_alt.empty())
+		object_->alt = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_alt, osgVisual::dataIO_slot::TO_OBJ );
+	if(!updater_rot_z.empty())
+		object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_y.empty())
+		object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_x.empty())
+		object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_label.empty())
+		object_->updateLabelText("autoupdated", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
 
 	// Finally execute nested PreUpdater
 	if ( updater.valid() )
