@@ -480,11 +480,11 @@ void visual_core::setupScenery()
 	//testObj3->addUpdater( new object_updater(testObj3) );	// todo memleak
 	//
 
-	osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER2" );	// todo memleak
+	osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER23" );	// todo memleak
 	testObj4->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 650 );
 	testObj4->loadGeometry( "../models/saenger2.flt" );
 	testObj4->addUpdater( new object_updater(testObj4) );	// todo memleak
-	testObj4->addLabel("testLabel", "LabelTest!!\nnächste Zeile :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
+	testObj4->addLabel("testLabel", "Object4 :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
 
 	//osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
 	//testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
@@ -544,10 +544,7 @@ void visual_core::trackNode( osg::Node* node_ )
 	osgVisual::visual_object* trackedObject = dynamic_cast<osgVisual::visual_object*>(node_);
 	if(trackedObject)
 	{
-		if(trackedObject->getGeometry())
-			node = trackedObject->getGeometry();
-		else
-			node = trackedObject;
+		node = trackedObject->getGeometry();
 
 		// Object mounted manipulator ( Only working with visual_object, not with osg::Node )
 		if (objectMountedCameraManip.valid())

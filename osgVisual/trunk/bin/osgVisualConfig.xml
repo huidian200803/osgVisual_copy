@@ -52,9 +52,9 @@
         - Geometry [optional]: 3D model to display. Leave empty to use model without 3D model.
         - Geometryoffset [optional]: Rotational offset (in degree) for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
         - Geometryscale [optional]: Scale factors for the loaded 3D model in all three dimensions.
-      -->
-      <model objectname="TestObject" trackingid="1" label="TestText!" dynamic="yes">
-        <position lat="47.12345" lon="11.234567" alt="1500.0"></position>
+     -->
+      <model objectname="TestObject" trackingid="1" label="TestText!" dynamic="no">
+        <position lat="47.8123" lon="12.94088" alt="700.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
         <updater>
           <position lat="" lon="" alt=""></position>
@@ -70,7 +70,7 @@
           <scalefactor scale_x="1.0" scale_y="1.0" scale_z="1.0"></scalefactor>
         </geometry>
       </model>
-      <trackmodel id="1"></trackmodel>
+      <trackmodel id="1"></trackmodel> 
     </models>
     <datetime day="0" month="0" year="0" hour="12" minute="30"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
