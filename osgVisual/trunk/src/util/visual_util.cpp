@@ -535,20 +535,30 @@ std::string util::getAnimationPathFromXMLConfig(std::string configFilename)
 	return animationpath;
 }
 
-int util::strToDouble(std::string s)
+double util::strToDouble(std::string s)
 {
 	double tmp;
 	std::stringstream sstr(s);
-	sstr >> tmp;
-	return tmp;
+    if (!(sstr >> tmp))
+	{
+		OSG_ALWAYS << __FUNCTION__ << "Warning:Unable to convert "<< s <<" to double, using 0.0 as default!" << std::endl;
+		return 0.0;
+	}
+	else
+		return tmp;
 }
 
-double util::strToInt(std::string s)
+int util::strToInt(std::string s)
 {
 	int tmp;
 	std::stringstream sstr(s);
-	sstr >> tmp;
-	return tmp;
+	if (!(sstr >> tmp))
+	{
+		OSG_ALWAYS << __FUNCTION__ << "Warning:Unable to convert "<< s <<" to int, using 0 as default!" << std::endl;
+		return 0;
+	}
+	else
+		return tmp;
 }
 
 bool util::strToBool(std::string s)
