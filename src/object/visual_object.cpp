@@ -60,6 +60,9 @@ visual_object::visual_object( osg::CoordinateSystemNode* sceneRoot_, std::string
 	this->addChild( geometry );
 	unsetGeometry();	// adds an osg::Node as geometry to make the visual_object trackable for node trackers.
 
+	// Tracking ID
+	trackingId = -1;
+
 	// Labelnode hinzufügen
 	labels = new osg::Geode();
 	this->addChild( labels ); 
