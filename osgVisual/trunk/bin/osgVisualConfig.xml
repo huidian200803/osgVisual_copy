@@ -75,26 +75,26 @@
     <datetime day="0" month="0" year="0" hour="12" minute="30"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
     <clouds>
-      <!--<cloudlayer slot="0" type="CUMULONIMBUS_CAPPILATUS" enabled="true" fadetime="15">
+      <!--<cloudlayer slot="0" type="CUMULONIMBUS_CAPPILATUS" enabled="yes" fadetime="15">
         <geometry baselength="20000" basewidth="20000" thickness="600" baseHeight="1000" density="0.5"></geometry>
       </cloudlayer>-->
-      <cloudlayer slot="1" type="CUMULUS_CONGESTUS" enabled="true" fadetime="15">
+      <cloudlayer slot="1" type="CUMULUS_CONGESTUS" enabled="yes" fadetime="15">
         <geometry baselength="50000" basewidth="50000" thickness="1600" baseHeight="1000" density="0.07"></geometry>
         <precipitation rate_mmPerHour_rain="5.0" rate_mmPerHour_drySnow="7.0" rate_mmPerHour_wetSnow="10.0" rate_mmPerHour_sleet="0.0"></precipitation>
       </cloudlayer>
-      <cloudlayer slot="2" type="CUMULUS_MEDIOCRIS" enabled="true" fadetime="15">
+      <cloudlayer slot="2" type="CUMULUS_MEDIOCRIS" enabled="yes" fadetime="15">
         <geometry baselength="50000" basewidth="50000" thickness="1600" baseHeight="1000" density="0.07"></geometry>
       </cloudlayer>
-      <!--<cloudlayer slot="3" type="CIRRUS_FIBRATUS" enabled="true" fadetime="15">
+      <!--<cloudlayer slot="3" type="CIRRUS_FIBRATUS" enabled="yes" fadetime="15">
         <geometry baselength="5000000" basewidth="5000000" thickness="600" baseHeight="7351" density="0.2"></geometry>
       </cloudlayer>-->
-      <!--<cloudlayer slot="4" type="CIRROCUMULUS" enabled="true" fadetime="15">
+      <!--<cloudlayer slot="4" type="CIRROCUMULUS" enabled="yes" fadetime="15">
         <geometry baselength="50000" basewidth="50000" thickness="600" baseHeight="7351" density="0.2"></geometry>
       </cloudlayer>-->
-      <!--<cloudlayer slot="5" type="STRATOCUMULUS" enabled="true" fadetime="15">
+      <!--<cloudlayer slot="5" type="STRATOCUMULUS" enabled="yes" fadetime="15">
         <geometry baselength="100000" basewidth="100000" thickness="2500" baseHeight="2000" density="0.3"></geometry>
       </cloudlayer>-->
-      <!--<cloudlayer slot="6" type="STRATUS" enabled="true" fadetime="15">
+      <!--<cloudlayer slot="6" type="STRATUS" enabled="yes" fadetime="15">
         <geometry baselength="50000" basewidth="50000" thickness="1500" baseHeight="1500" density="0.3"></geometry>
       </cloudlayer>-->
     </clouds>
