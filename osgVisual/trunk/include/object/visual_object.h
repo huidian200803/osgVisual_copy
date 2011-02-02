@@ -276,13 +276,29 @@ public:
 	 */ 
 	void setCameraOffsetTranslation( double x_, double y_, double z_);
 
+	/**
+	 * \brief This function sets the trackingId to allow to identify the visual_obejct for tracking purposes.
+	 * 
+	 * See also getTrackingId() and trackingId
+	 * 
+	 * @param trackindID_ : trackingId to set.
+	 */ 
+	void setTrackingId(int trackingId_) {trackingId = trackingId_;};
+
+	/**
+	 * \brief This function returns the trackingId to allow to identify the visual_obejct for tracking purposes.
+	 * 
+	 * @return : -1 If no trackingId is set, othwerwise the trackingId.
+	 */ 
+	int getTrackingId() {return trackingId;};
+
 /*@}*/
 /** @name Label management
  *  These functions allow to display labels attached to visual_object.
  */
 /*@{*/
 	/**
-	 * \brief This Function removes all labels attached to this object.
+	 * \brief This function removes all labels attached to this object.
 	 * 
 	 */ 
 	void clearLabels();
@@ -446,6 +462,11 @@ protected:
 	 * Pointer to the updater class which updates this visual_object.
 	 */ 
 	osg::ref_ptr<object_updater> updater;
+
+	/**
+	 * Tracking ID of the visual_object. Used to identify which node should be tracked by tracking-manipulators.
+	 */ 
+	int trackingId;
 
 // Labels
 	/**
