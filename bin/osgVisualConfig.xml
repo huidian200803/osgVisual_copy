@@ -82,7 +82,7 @@
         <geometry baselength="50000" basewidth="50000" thickness="1600" baseHeight="1000" density="0.07"></geometry>
         <precipitation rate_mmPerHour_rain="5.0" rate_mmPerHour_drySnow="7.0" rate_mmPerHour_wetSnow="10.0" rate_mmPerHour_sleet="0.0"></precipitation>
       </cloudlayer>
-      <cloudlayer slot="2" type="CUMULUS_MEDIOCRIS" enabled="yes" fadetime="15">
+      <cloudlayer slot="2" type="CUMULUS_MEDIOCRIS" enabled="no" fadetime="15">
         <geometry baselength="50000" basewidth="50000" thickness="1600" baseHeight="1000" density="0.07"></geometry>
       </cloudlayer>
       <!--<cloudlayer slot="3" type="CIRRUS_FIBRATUS" enabled="yes" fadetime="15">

@@ -275,7 +275,7 @@ public:
 	 * @param s : String to convert.
 	 * @return : double representation of the string.
 	 */ 
-	static int strToDouble(std::string s);
+	static double strToDouble(std::string s);
 
 	/**
 	 * \brief This function converts a string into an Integer.
@@ -283,7 +283,7 @@ public:
 	 * @param s : String to convert.
 	 * @return : Integer representation of the string.
 	 */ 
-	static double strToInt(std::string s);
+	static int strToInt(std::string s);
 
 	/**
 	 * \brief This function converts a string into a bool.
