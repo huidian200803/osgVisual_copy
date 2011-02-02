@@ -17,6 +17,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <sstream>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
@@ -267,6 +268,10 @@ public:
 	 * @return : On error an empty string, otherwise the path of the animationpath specified in the configuration file.
 	 */ 
 	static std::string getAnimationPathFromXMLConfig(std::string configFilename);
+
+	static int strToDouble(std::string s);
+	static double strToInt(std::string s);
+	static bool strToBool(std::string s);
 
 private: 
 	/**

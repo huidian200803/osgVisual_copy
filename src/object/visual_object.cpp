@@ -83,6 +83,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	// Prepare Variables
 	std::string objectname="", filename="", label="";
 	bool dynamic = false;
+	int trackingID=-1;
 	double lat=0.0, lon=0.0, alt=0.0, rot_x=0.0, rot_y=0.0, rot_z=0.0;
 	double cam_trans_x=0.0, cam_trans_y=0.0, cam_trans_z=0.0, cam_rot_x=0.0, cam_rot_y=0.0, cam_rot_z=0.0;
 	double geometry_rot_x=0.0, geometry_rot_y=0.0, geometry_rot_z=0.0;
@@ -97,14 +98,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		std::string attr_name=reinterpret_cast<const char*>(attr->name);
 		std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
 		if( attr_name == "objectname" ) objectname = attr_value;
+		if( attr_name == "trackingid" ) trackingID = util::strToInt(attr_value);
 		if( attr_name == "label" ) label = attr_value;
-		if( attr_name == "dynamic" ) 
-		{
-			if(attr_value=="yes")
-				dynamic=true;
-			else
-				dynamic=false;
-		}
+		if( attr_name == "dynamic" ) dynamic = util::strToBool(attr_value);
+
 		attr = attr->next; 
 	}
 	for (xmlNode *cur_node = a_node->children; cur_node; cur_node = cur_node->next)
@@ -118,21 +115,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "lat" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> lat;
-				}
-				if( attr_name == "lon" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> lon;
-				}
-				if( attr_name == "alt" ) 
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> alt;
-				}
+				if( attr_name == "lat" ) lat = util::strToDouble(attr_value);
+				if( attr_name == "lon" ) lon = util::strToDouble(attr_value);
+				if( attr_name == "alt" ) alt = util::strToDouble(attr_value);
+
 				attr = attr->next; 
 			}
 		}
@@ -144,21 +130,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "rot_x" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> rot_x;
-				}
-				if( attr_name == "rot_y" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> rot_y;
-				}
-				if( attr_name == "rot_z" ) 
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> rot_z;
-				}
+				if( attr_name == "rot_x" ) rot_x = util::strToDouble(attr_value);
+				if( attr_name == "rot_y" ) rot_y = util::strToDouble(attr_value);
+				if( attr_name == "rot_z" ) rot_z = util::strToDouble(attr_value);
+
 				attr = attr->next; 
 			}
 		}
@@ -227,21 +202,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "trans_x" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_trans_x;
-						}
-						if( attr_name == "trans_y" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_trans_y;
-						}
-						if( attr_name == "trans_z" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_trans_y;
-						}
+						if( attr_name == "trans_x" ) cam_trans_x = util::strToDouble(attr_value);
+						if( attr_name == "trans_y" ) cam_trans_y = util::strToDouble(attr_value);
+						if( attr_name == "trans_z" ) cam_trans_z = util::strToDouble(attr_value);
+
 						attr = attr->next; 
 					}
 				}
@@ -252,21 +216,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "rot_x" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_rot_x;
-						}
-						if( attr_name == "rot_y" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_rot_y;
-						}
-						if( attr_name == "rot_z" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> cam_rot_y;
-						}
+						if( attr_name == "rot_x" ) cam_rot_x = util::strToDouble(attr_value);
+						if( attr_name == "rot_y" ) cam_rot_y = util::strToDouble(attr_value);
+						if( attr_name == "rot_z" ) cam_rot_z = util::strToDouble(attr_value);
+
 						attr = attr->next; 
 					}
 				}
@@ -297,21 +250,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "rot_x" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_rot_x;
-						}
-						if( attr_name == "rot_y" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_rot_y;
-						}
-						if( attr_name == "rot_z" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_rot_z;
-						}
+						if( attr_name == "rot_x" ) geometry_rot_x = util::strToDouble(attr_value);
+						if( attr_name == "rot_y" ) geometry_rot_y = util::strToDouble(attr_value);
+						if( attr_name == "rot_z" ) geometry_rot_z = util::strToDouble(attr_value);
+
 						attr = attr->next; 
 					}
 				}
@@ -322,21 +264,10 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "scale_x" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_scale_x;
-						}
-						if( attr_name == "scale_y" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_scale_y;
-						}
-						if( attr_name == "scale_z" )
-						{
-							std::stringstream sstr(attr_value);
-							sstr >> geometry_scale_z;
-						}
+						if( attr_name == "scale_x" ) geometry_scale_x = util::strToDouble(attr_value);
+						if( attr_name == "scale_y" ) geometry_scale_y = util::strToDouble(attr_value);
+						if( attr_name == "scale_z" ) geometry_scale_z = util::strToDouble(attr_value);
+
 						attr = attr->next; 
 					}
 				}
@@ -353,7 +284,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	object->pitchAngle_theta = rot_y;
 	object->bankAngle_phi = rot_z;
 	if(label!="")
-		object->addLabel("XML_defined_label", label);
+		object->addLabel("default", label);
 	if(dynamic)
 	{
 		updater = new osgVisual::object_updater(object);

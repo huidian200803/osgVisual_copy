@@ -46,7 +46,7 @@ void object_updater::preUpdate(osgVisual::visual_object* object_ )
 	if(!updater_rot_x.empty())
 		object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x, osgVisual::dataIO_slot::TO_OBJ ));
 	if(!updater_label.empty())
-		object_->updateLabelText("autoupdated", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
+		object_->updateLabelText("default", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
 
 	// Finally execute nested PreUpdater
 	if ( updater.valid() )
