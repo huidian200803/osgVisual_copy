@@ -763,23 +763,9 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 				{ 
 					std::string attr_name=reinterpret_cast<const char*>(attr->name);
 					std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-					if( attr_name == "slot" )
-					{
-						std::stringstream sstr(attr_value);
-						sstr >> slot;
-					}
-					if( attr_name == "enabled" )
-					{
-						if(attr_value=="yes")
-							enabled = true;
-						else
-							enabled = false;
-					}
-					if( attr_name == "fadetime" )
-					{
-						std::stringstream sstr(attr_value);
-						sstr >> fadetime;
-					}
+					if( attr_name == "slot" ) slot = util::strToInt(attr_value);
+					if( attr_name == "enabled" ) enabled = util::strToBool(attr_value);
+					if( attr_name == "fadetime" ) fadetime = util::strToInt(attr_value);
 					if( attr_name == "type" )
 					{
 						if(attr_value=="CIRROCUMULUS")
@@ -816,31 +802,12 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 						{ 
 							std::string attr_name=reinterpret_cast<const char*>(attr->name);
 							std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-							if( attr_name == "baselength" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> baselength;
-							}
-							if( attr_name == "basewidth" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> basewidth;
-							}
-							if( attr_name == "thickness" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> thickness;
-							}
-							if( attr_name == "baseHeight" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> baseHeight;
-							}
-							if( attr_name == "density" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> density;
-							}
+							if( attr_name == "baselength" )	baselength = util::strToInt(attr_value);
+							if( attr_name == "basewidth" )	basewidth = util::strToInt(attr_value);
+							if( attr_name == "thickness" )	thickness = util::strToInt(attr_value);
+							if( attr_name == "baseHeight" )	baseHeight = util::strToInt(attr_value);
+							if( attr_name == "density" ) density = util::strToDouble(attr_value);
+
 							attr = attr->next; 
 						}
 					}
@@ -852,26 +819,11 @@ void visual_skySilverLining::configureCloudlayerbyXML( xmlNode* cloudlayerNode_ 
 						{ 
 							std::string attr_name=reinterpret_cast<const char*>(attr->name);
 							std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-							if( attr_name == "rate_mmPerHour_rain" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> rate_mmPerHour_rain;
-							}
-							if( attr_name == "rate_mmPerHour_drySnow" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> rate_mmPerHour_drySnow;
-							}
-							if( attr_name == "rate_mmPerHour_wetSnow" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> rate_mmPerHour_wetSnow;
-							}
-							if( attr_name == "rate_mmPerHour_sleet" )
-							{
-								std::stringstream sstr(attr_value);
-								sstr >> rate_mmPerHour_sleet;
-							}
+							if( attr_name == "rate_mmPerHour_rain" ) rate_mmPerHour_rain = util::strToDouble(attr_value);
+							if( attr_name == "rate_mmPerHour_drySnow" ) rate_mmPerHour_drySnow = util::strToDouble(attr_value);
+							if( attr_name == "rate_mmPerHour_wetSnow" ) rate_mmPerHour_wetSnow = util::strToDouble(attr_value);
+							if( attr_name == "rate_mmPerHour_sleet" ) rate_mmPerHour_sleet = util::strToDouble(attr_value);
+
 							attr = attr->next; 
 						}
 					}

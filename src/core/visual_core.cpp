@@ -299,31 +299,12 @@ void visual_core::parseScenery(xmlNode* a_node)
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "day" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> day;
-				}
-				if( attr_name == "month" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> month;
-				}
-				if( attr_name == "year" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> year;
-				}
-				if( attr_name == "hour" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> hour;
-				}
-				if( attr_name == "minute" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> minute;
-				}
+				if( attr_name == "day" ) day = util::strToInt(attr_value);
+				if( attr_name == "month" ) month = util::strToInt(attr_value);
+				if( attr_name == "year" ) year = util::strToInt(attr_value);
+				if( attr_name == "hour" ) hour = util::strToInt(attr_value);
+				if( attr_name == "minute" ) minute = util::strToInt(attr_value);
+
 				attr = attr->next; 
 			}
 			if(sky.valid())
@@ -342,16 +323,9 @@ void visual_core::parseScenery(xmlNode* a_node)
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "range" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> range;
-				}
-				if( attr_name == "turbidity" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> turbidity;
-				}
+				if( attr_name == "range" ) range = util::strToDouble(attr_value);
+				if( attr_name == "turbidity" ) turbidity = util::strToDouble(attr_value);
+
 				attr = attr->next; 
 			}
 
@@ -376,26 +350,11 @@ void visual_core::parseScenery(xmlNode* a_node)
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "bottom" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> bottom;
-				}
-				if( attr_name == "top" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> top;
-				}
-				if( attr_name == "speed" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> speed;
-				}
-				if( attr_name == "direction" )
-				{
-					std::stringstream sstr(attr_value);
-					sstr >> direction;
-				}
+				if( attr_name == "bottom" ) bottom = util::strToDouble(attr_value);
+				if( attr_name == "top" ) top = util::strToDouble(attr_value);
+				if( attr_name == "speed" ) speed = util::strToDouble(attr_value);
+				if( attr_name == "direction" ) direction = util::strToDouble(attr_value);
+
 				attr = attr->next; 
 			}
 			if(sky.valid())

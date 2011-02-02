@@ -269,8 +269,28 @@ public:
 	 */ 
 	static std::string getAnimationPathFromXMLConfig(std::string configFilename);
 
+	/**
+	 * \brief This function converts a string into a double.
+	 * 
+	 * @param s : String to convert.
+	 * @return : double representation of the string.
+	 */ 
 	static int strToDouble(std::string s);
+
+	/**
+	 * \brief This function converts a string into an Integer.
+	 * 
+	 * @param s : String to convert.
+	 * @return : Integer representation of the string.
+	 */ 
 	static double strToInt(std::string s);
+
+	/**
+	 * \brief This function converts a string into a bool.
+	 * 
+	 * @param s : String to convert.
+	 * @return : Bool representation of the string. Returns 'false' on error.
+	 */ 
 	static bool strToBool(std::string s);
 
 private: 
