@@ -1,4 +1,4 @@
-/* -*-c++-*- osgVisual - Copyright (C) 2009-2010 Torben Dannhauer
+/* -*-c++-*- osgVisual - Copyright (C) 2009-2011 Torben Dannhauer
  *
  * This library is based on OpenSceneGraph, open source and may be redistributed and/or modified under 
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or
