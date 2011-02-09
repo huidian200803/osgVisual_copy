@@ -386,33 +386,33 @@ protected:
 	
 // Position
 	/**
-	 * Latitude of the object.
+	 * Latitude of the object in RAD.
 	 */ 
 	double lat;
 
 	/**
-	 * Longitude of the object.
+	 * Longitude of the object in RAD.
 	 */ 
 	double lon;
 
 	/**
-	 * Altitude of the object over the ellipsoid. 
+	 * Altitude of the object over the ellipsoid in meter. 
 	 */ 
 	double alt;
 
 // Attitude
 	/**
-	 * Azimuth angle (Rotation along Z axis, "heading") of the object 
+	 * Azimuth angle (Rotation along Z axis, "heading") of the object in RAD.
 	 */ 
 	double azimuthAngle_psi;
 
 	/**
-	 * Pitch ("nose relative to horizon") angle of the object 
+	 * Pitch ("nose relative to horizon") angle of the object in RAD.
 	 */ 
 	double pitchAngle_theta;
 
 	/**
-	 * Bank angle of the object.
+	 * Bank angle of the object in RAD.
 	 */ 
 	double bankAngle_phi;
 

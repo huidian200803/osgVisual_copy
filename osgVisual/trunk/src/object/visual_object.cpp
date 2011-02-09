@@ -115,8 +115,8 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "lat" ) lat = util::strToDouble(attr_value);
-				if( attr_name == "lon" ) lon = util::strToDouble(attr_value);
+				if( attr_name == "lat" ) lat = osg::DegreesToRadians(util::strToDouble(attr_value));
+				if( attr_name == "lon" ) lon = osg::DegreesToRadians(util::strToDouble(attr_value));
 				if( attr_name == "alt" ) alt = util::strToDouble(attr_value);
 
 				attr = attr->next; 
@@ -130,9 +130,9 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 			{ 
 				std::string attr_name=reinterpret_cast<const char*>(attr->name);
 				std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-				if( attr_name == "rot_x" ) rot_x = util::strToDouble(attr_value);
-				if( attr_name == "rot_y" ) rot_y = util::strToDouble(attr_value);
-				if( attr_name == "rot_z" ) rot_z = util::strToDouble(attr_value);
+				if( attr_name == "rot_x" ) rot_x = osg::DegreesToRadians(util::strToDouble(attr_value));
+				if( attr_name == "rot_y" ) rot_y = osg::DegreesToRadians(util::strToDouble(attr_value));
+				if( attr_name == "rot_z" ) rot_z = osg::DegreesToRadians(util::strToDouble(attr_value));
 
 				attr = attr->next; 
 			}
@@ -216,9 +216,9 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "rot_x" ) cam_rot_x = util::strToDouble(attr_value);
-						if( attr_name == "rot_y" ) cam_rot_y = util::strToDouble(attr_value);
-						if( attr_name == "rot_z" ) cam_rot_z = util::strToDouble(attr_value);
+						if( attr_name == "rot_x" ) cam_rot_x = osg::DegreesToRadians(util::strToDouble(attr_value));
+						if( attr_name == "rot_y" ) cam_rot_y = osg::DegreesToRadians(util::strToDouble(attr_value));
+						if( attr_name == "rot_z" ) cam_rot_z = osg::DegreesToRadians(util::strToDouble(attr_value));
 
 						attr = attr->next; 
 					}
@@ -250,9 +250,9 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "rot_x" ) geometry_rot_x = util::strToDouble(attr_value);
-						if( attr_name == "rot_y" ) geometry_rot_y = util::strToDouble(attr_value);
-						if( attr_name == "rot_z" ) geometry_rot_z = util::strToDouble(attr_value);
+						if( attr_name == "rot_x" ) geometry_rot_x = osg::DegreesToRadians(util::strToDouble(attr_value));
+						if( attr_name == "rot_y" ) geometry_rot_y = osg::DegreesToRadians(util::strToDouble(attr_value));
+						if( attr_name == "rot_z" ) geometry_rot_z = osg::DegreesToRadians(util::strToDouble(attr_value));
 
 						attr = attr->next; 
 					}
