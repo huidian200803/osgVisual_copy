@@ -63,6 +63,8 @@ namespace osgVisual
  * you can configure a geometry off set in translation in translation and rotation
  * For object mounted camera, you can configure the camera offset in rotation and translation.
  * 
+ * All angles are defined in degree.
+ * 
  * Derive from this class to implement your custom visual_object.
  * 
  * \todo: Labelmanagement to allow to display a label attached to this object: set/unset label, size, color, offset to object, LOD for label display.

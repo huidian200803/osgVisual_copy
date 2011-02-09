@@ -33,18 +33,18 @@ void object_updater::preUpdate(osgVisual::visual_object* object_ )
 	//For each visual_object.member,
 	//	try to search according variable in dataIO with direction TO_OBJ and copy value to visual_object.
 
-	if(!updater_lat.empty())
-		object_->lat = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_lon.empty())
-		object_->lon = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_lat_deg.empty())
+		object_->lat = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat_deg, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_lon_deg.empty())
+		object_->lon = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon_deg, osgVisual::dataIO_slot::TO_OBJ ));
 	if(!updater_alt.empty())
 		object_->alt = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_alt, osgVisual::dataIO_slot::TO_OBJ );
-	if(!updater_rot_z.empty())
-		object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_rot_y.empty())
-		object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_rot_x.empty())
-		object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_z_deg.empty())
+		object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z_deg, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_y_deg.empty())
+		object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y_deg, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_x_deg.empty())
+		object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x_deg, osgVisual::dataIO_slot::TO_OBJ ));
 	if(!updater_label.empty())
 		object_->updateLabelText("default", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
 
@@ -70,37 +70,37 @@ void object_updater::addUpdater( object_updater* updater_ )
 		updater = updater_;
 }
 
-void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_, std::string lon_, std::string alt_, std::string rot_x_, std::string rot_y_, std::string rot_z_, std::string label_)
+void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_deg_, std::string lon_deg_, std::string alt_, std::string rot_x_deg_, std::string rot_y_deg_, std::string rot_z_deg_, std::string label_)
 {
-	if(lat_!="")
-		updater_lat = lat_;
+	if(lat_deg_!="")
+		updater_lat_deg = lat_deg_;
 	else
-		updater_lat = object_->getName()+"_POS_LAT";
+		updater_lat_deg = object_->getName()+"_POS_LAT";
 
-	if(lon_!="")
-		updater_lon = lon_;
+	if(lon_deg_!="")
+		updater_lon_deg = lon_deg_;
 	else
-		updater_lon = object_->getName()+"_POS_LON";
+		updater_lon_deg = object_->getName()+"_POS_LON";
 
 	if(alt_!="")
 		updater_alt = alt_;
 	else
 		updater_alt = object_->getName()+"_POS_ALT";
 
-	if(rot_x_!="")
-		updater_rot_x = rot_x_;
+	if(rot_x_deg_!="")
+		updater_rot_x_deg = rot_x_deg_;
 	else
-		updater_rot_x = object_->getName()+"_ROT_X";
+		updater_rot_x_deg = object_->getName()+"_ROT_X";
 
-	if(rot_y_!="")
-		updater_rot_y = rot_y_;
+	if(rot_y_deg_!="")
+		updater_rot_y_deg = rot_y_deg_;
 	else
-		updater_rot_y = object_->getName()+"_ROT_Y";
+		updater_rot_y_deg = object_->getName()+"_ROT_Y";
 
-	if(rot_z_!="")
-		updater_rot_z = rot_z_;
+	if(rot_z_deg_!="")
+		updater_rot_z_deg = rot_z_deg_;
 	else
-		updater_rot_z = object_->getName()+"_ROT_Z";
+		updater_rot_z_deg = object_->getName()+"_ROT_Z";
 
 	if(label_!="")
 		updater_label = label_;
