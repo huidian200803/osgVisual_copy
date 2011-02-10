@@ -285,6 +285,12 @@ void visual_core::parseScenery(xmlNode* a_node)
 				{
 					visual_object::createNodeFromXMLConfig(rootNode, modelNode);
 				}
+				if(cur_node->type == XML_ELEMENT_NODE && name == "trackmodel")
+				{
+					// Extract model to track
+
+					trackNode( testObj4 );
+				}
 			}
 		}
 
@@ -532,4 +538,11 @@ void visual_core::trackNode( osg::Node* node_ )
 		nt->setAutoComputeHomePosition( true );
 		nt->setDistance( 250 );
 	}
+}
+
+void visual_core::trackNode( int trackingID )
+{
+	osg::Node tmp = util::findNodeByTrackingID(trackingID);
+	if(tmp.valid())
+		trackNode(tmp);
 }
