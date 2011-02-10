@@ -33,6 +33,8 @@
 
 #include <osgUtil/LineSegmentIntersector>
 
+
+
 #ifdef FUNFUNCTIONS_ENABLED
 #ifdef WIN32
 #include <osgViewer/api/Win32/GraphicsHandleWin32>

@@ -76,6 +76,8 @@ class visual_object  : public osg::MatrixTransform
 {
 	#include <leakDetection.h>
 public:
+	//META_Object(osgVisual,visual_object);
+
 	/**
 	 * \brief Constuctor: Adds this object to the scenegraph,
 	 * initializes this object and installs the callback to calculate its local to world matrix
@@ -92,6 +94,15 @@ public:
 	~visual_object();
 
 	static visual_object* createNodeFromXMLConfig(osg::CoordinateSystemNode* sceneRoot_, xmlNode* a_node);
+
+	/**
+	 * \brief This functions searches in the scene graph for a node with a tracking ID
+	 * 
+	 * @param trackingID : Id to search for.
+	 * @param currNode_ : Scene graph to search in.
+	 * @return : Pointer to the first found node, otherwise NULL.
+	 */ 
+	static osg::Node* findNodeByTrackingID(int trackingID, osg::Node* currNode_);
 
 
 /** @name Position and attitude

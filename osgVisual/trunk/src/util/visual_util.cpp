@@ -236,9 +236,7 @@ osg::Node* util::findNamedNode(const std::string& searchName_, osg::Node* currNo
       return NULL; // We have checked each child node - no match found.
    }
    else 
-   {
-      return NULL; // leaf node, no match 
-   }
+	   return NULL; // leaf node, no match 
 }
 
 osg::ref_ptr<osg::Geode> util::getDemoCylinder(double length_, double width_, osg::Vec3 offset_ )
