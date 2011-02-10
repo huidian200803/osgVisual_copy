@@ -283,6 +283,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	object->azimuthAngle_psi = rot_x;
 	object->pitchAngle_theta = rot_y;
 	object->bankAngle_phi = rot_z;
+	object->trackingId = trackingID;
 	if(label!="")
 		object->addLabel("default", label);
 	if(dynamic)
@@ -321,13 +322,10 @@ osg::Node* visual_object::findNodeByTrackingID(int trackingID, osg::Node* currNo
 
    // We have a valid node, check to see if this is the node we 
    // are looking for. If so, return the current node.
-   if (currNode_->className() == "visual_object")
-   {
-	   //Check if it is the right tracking Id
-		osgVisual::visual_object* tmp = dynamic_cast<osgVisual::visual_object*>(currNode_);
-		if(tmp && tmp->getTrackingId()==trackingID)
-			return currNode_;
-   }
+	osgVisual::visual_object* tmp = dynamic_cast<osgVisual::visual_object*>(currNode_);
+	if(tmp && tmp->getTrackingId()==trackingID)
+		return currNode_;
+   
 
    // We have a valid node, but not the one we are looking for.
    // Check to see if it has children (non-leaf node). If the node
