@@ -111,7 +111,8 @@ public:
 
 	void setupScenery();
 	void trackNode( osg::Node* node_ );
-	
+	void trackNode( int trackingID );
+
 protected:
 	virtual ~visual_core(void);
 
