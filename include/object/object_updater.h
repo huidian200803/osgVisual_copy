@@ -99,12 +99,12 @@ public:
 	 * @param lat_ 
 	 * @param lon_ 
 	 * @param alt_ 
-	 * @param rot_x_deg_ 
-	 * @param rot_y_deg_
-	 * @param rot_z_deg_
+	 * @param rot_x_rad_ 
+	 * @param rot_y_rad_
+	 * @param rot_z_rad_
 	 * @param label_ 
 	 */ 
-	void setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_deg_, std::string lon_deg_, std::string alt_, std::string rot_x_deg_, std::string rot_y_deg_, std::string rot_z_deg_, std::string label_);
+	void setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_rad_, std::string lon_rad_, std::string alt_, std::string rot_x_rad_, std::string rot_y_rad_, std::string rot_z_rad_, std::string label_);
 
 
 protected:
@@ -116,7 +116,7 @@ protected:
 	/**
 	 * Names of the Slots the updater should use
 	 */ 
-	std::string updater_lat_deg, updater_lon_deg, updater_alt, updater_rot_x_deg, updater_rot_y_deg, updater_rot_z_deg, updater_label;
+	std::string updater_lat_rad, updater_lon_rad, updater_alt, updater_rot_x_rad, updater_rot_y_rad, updater_rot_z_rad, updater_label;
 
 };
 

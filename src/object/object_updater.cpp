@@ -20,6 +20,12 @@ using namespace osgVisual;
 
 object_updater::object_updater(osgVisual::visual_object* object_ )
 {
+	updater_lat_rad = object_->getName()+"_POS_LAT";
+	updater_lon_rad = object_->getName()+"_POS_LON";
+	updater_alt		= object_->getName()+"_POS_ALT";
+	updater_rot_x_rad = object_->getName()+"_ROT_X";
+	updater_rot_y_rad = object_->getName()+"_ROT_Y";
+	updater_rot_z_rad = object_->getName()+"_ROT_Z";
 }
 
 object_updater::~object_updater(void)
@@ -33,18 +39,18 @@ void object_updater::preUpdate(osgVisual::visual_object* object_ )
 	//For each visual_object.member,
 	//	try to search according variable in dataIO with direction TO_OBJ and copy value to visual_object.
 
-	if(!updater_lat_deg.empty())
-		object_->lat = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat_deg, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_lon_deg.empty())
-		object_->lon = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon_deg, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_lat_rad.empty())
+		object_->lat = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lat_rad, osgVisual::dataIO_slot::TO_OBJ );
+	if(!updater_lon_rad.empty())
+		object_->lon = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_lon_rad, osgVisual::dataIO_slot::TO_OBJ );
 	if(!updater_alt.empty())
 		object_->alt = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_alt, osgVisual::dataIO_slot::TO_OBJ );
-	if(!updater_rot_z_deg.empty())
-		object_->azimuthAngle_psi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z_deg, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_rot_y_deg.empty())
-		object_->pitchAngle_theta = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y_deg, osgVisual::dataIO_slot::TO_OBJ ));
-	if(!updater_rot_x_deg.empty())
-		object_->bankAngle_phi = osg::DegreesToRadians(osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x_deg, osgVisual::dataIO_slot::TO_OBJ ));
+	if(!updater_rot_z_rad.empty())
+		object_->azimuthAngle_psi = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_z_rad, osgVisual::dataIO_slot::TO_OBJ );
+	if(!updater_rot_y_rad.empty())
+		object_->pitchAngle_theta = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_y_rad, osgVisual::dataIO_slot::TO_OBJ );
+	if(!updater_rot_x_rad.empty())
+		object_->bankAngle_phi = osgVisual::visual_dataIO::getInstance()->getSlotDataAsDouble(updater_rot_x_rad, osgVisual::dataIO_slot::TO_OBJ );
 	if(!updater_label.empty())
 		object_->updateLabelText("default", osgVisual::visual_dataIO::getInstance()->getSlotDataAsString(updater_label, osgVisual::dataIO_slot::TO_OBJ ));
 
@@ -70,43 +76,26 @@ void object_updater::addUpdater( object_updater* updater_ )
 		updater = updater_;
 }
 
-void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_deg_, std::string lon_deg_, std::string alt_, std::string rot_x_deg_, std::string rot_y_deg_, std::string rot_z_deg_, std::string label_)
+void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_rad_, std::string lon_rad_, std::string alt_, std::string rot_x_rad_, std::string rot_y_rad_, std::string rot_z_rad_, std::string label_)
 {
-	if(lat_deg_!="")
-		updater_lat_deg = lat_deg_;
-	else
-		updater_lat_deg = object_->getName()+"_POS_LAT";
-
-	if(lon_deg_!="")
-		updater_lon_deg = lon_deg_;
-	else
-		updater_lon_deg = object_->getName()+"_POS_LON";
-
+	if(lat_rad_!="")
+		updater_lat_rad = lat_rad_;
+	if(lon_rad_!="")
+		updater_lon_rad = lon_rad_;
 	if(alt_!="")
 		updater_alt = alt_;
-	else
-		updater_alt = object_->getName()+"_POS_ALT";
-
-	if(rot_x_deg_!="")
-		updater_rot_x_deg = rot_x_deg_;
-	else
-		updater_rot_x_deg = object_->getName()+"_ROT_X";
-
-	if(rot_y_deg_!="")
-		updater_rot_y_deg = rot_y_deg_;
-	else
-		updater_rot_y_deg = object_->getName()+"_ROT_Y";
-
-	if(rot_z_deg_!="")
-		updater_rot_z_deg = rot_z_deg_;
-	else
-		updater_rot_z_deg = object_->getName()+"_ROT_Z";
+	if(rot_x_rad_!="")
+		updater_rot_x_rad = rot_x_rad_;
+	if(rot_y_rad_!="")
+		updater_rot_y_rad = rot_y_rad_;
+	if(rot_z_rad_!="")
+		updater_rot_z_rad = rot_z_rad_;
 
 	if(label_!="")
 		updater_label = label_;
 	else
 	{
 		updater_label = object_->getName()+"_LABEL";
-		object_->addLabel("autoupdated", " ");
+		object_->addLabel("default", " ");
 	}
 }
