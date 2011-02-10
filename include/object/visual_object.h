@@ -76,7 +76,29 @@ class visual_object  : public osg::MatrixTransform
 {
 	#include <leakDetection.h>
 public:
-	//META_Object(osgVisual,visual_object);
+	META_Node(osgVisual,visual_object);
+	visual_object() {};
+	visual_object(const osgVisual::visual_object& object_, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY):
+            MatrixTransform(object_,copyop),
+			upVector(object_.upVector),
+			lat(object_.lat),
+			lon(object_.lon),
+			alt(object_.alt),
+			azimuthAngle_psi(object_.azimuthAngle_psi),
+			pitchAngle_theta(object_.pitchAngle_theta),
+			bankAngle_phi(object_.bankAngle_phi),
+			scaleX(object_.scaleX),
+			scaleY(object_.scaleY),
+			scaleZ(object_.scaleZ),
+			cameraMatrix(object_.cameraMatrix),
+			cameraTranslationOffset(object_.cameraTranslationOffset),
+			cameraRotationOffset(object_.cameraRotationOffset),
+			geometry_offset_rotation(object_.geometry_offset_rotation),
+			geometry(object_.geometry),
+			updater(object_.updater),
+ 			trackingId(object_.trackingId),
+			labels(object_.labels)		
+			{}
 
 	/**
 	 * \brief Constuctor: Adds this object to the scenegraph,

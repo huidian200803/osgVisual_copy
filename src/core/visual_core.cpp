@@ -281,19 +281,20 @@ void visual_core::parseScenery(xmlNode* a_node)
 			for (xmlNode *modelNode = cur_node->children; modelNode; modelNode = modelNode->next)
 			{
 				std::string name=reinterpret_cast<const char*>(modelNode->name);
-				if(cur_node->type == XML_ELEMENT_NODE && name == "model")
+				if(modelNode->type == XML_ELEMENT_NODE && name == "model")
 				{
 					visual_object::createNodeFromXMLConfig(rootNode, modelNode);
 				}
-				if(cur_node->type == XML_ELEMENT_NODE && name == "trackmodel")
+				if(modelNode->type == XML_ELEMENT_NODE && name == "trackmodel")
 				{
 					// Extract track-ID and track the model
-					xmlAttr  *attr = cur_node->properties;
+					xmlAttr  *attr = modelNode->properties;
 					while ( attr ) 
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "id" ) trackNode( util::strToInt(attr_value) );
+						if( attr_name == "id" ) 
+							trackNode( util::strToInt(attr_value) );
 						attr = attr->next; 
 					}
 					
@@ -463,7 +464,7 @@ void visual_core::setupScenery()
 	////testObj5->setScale( 2 );
 	//testObj5->addUpdater( new object_updater(testObj5) );
 
-	trackNode( testObj4 );
+	//trackNode( testObj4 );
 
 	// Load EDDF
 	//std::string filename = "D:\\DA\\EDDF_test\\eddf.ive";
