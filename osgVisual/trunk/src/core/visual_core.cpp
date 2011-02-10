@@ -22,6 +22,8 @@ using namespace osgVisual;
 visual_core::visual_core(osg::ArgumentParser& arguments_) : arguments(arguments_)
 {
 	OSG_NOTIFY( osg::ALWAYS ) << "visual_core instantiated." << std::endl;
+
+	currentTrackingID = -1;
 }
 
 visual_core::~visual_core(void)
@@ -202,6 +204,7 @@ void visual_core::addManipulators()
         keyswitchManipulator->addMatrixManipulator( '2', "Flight", new osgGA::FlightManipulator() );
         keyswitchManipulator->addMatrixManipulator( '3', "Terrain", new osgGA::TerrainManipulator() );
 		nt = new osgGA::NodeTrackerManipulator();
+		nt->setTrackNode(NULL);
 		keyswitchManipulator->addMatrixManipulator( '4', "NodeTrackerManipulator", nt );
 		
 #ifdef USE_SPACENAVIGATOR
@@ -293,8 +296,9 @@ void visual_core::parseScenery(xmlNode* a_node)
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "id" ) 
-							trackNode( util::strToInt(attr_value) );
+						if( attr_name == "id" ) trackNode( util::strToInt(attr_value) );
+
+
 						attr = attr->next; 
 					}
 					
@@ -552,5 +556,8 @@ void visual_core::trackNode( int trackingID )
 {
 	osg::ref_ptr<osg::Node> tmp = visual_object::findNodeByTrackingID(trackingID, rootNode);
 	if(tmp.valid())
+	{
+		currentTrackingID = trackingID;
 		trackNode(tmp);
+	}
 }

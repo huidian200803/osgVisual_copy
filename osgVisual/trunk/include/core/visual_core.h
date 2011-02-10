@@ -112,6 +112,7 @@ public:
 	void setupScenery();
 	void trackNode( osg::Node* node_ );
 	void trackNode( int trackingID );
+	int getCurrentTrackingID(){return currentTrackingID;};
 
 protected:
 	virtual ~visual_core(void);
@@ -182,6 +183,8 @@ private:
 	osg::ref_ptr<osgGA::NodeTrackerManipulator> nt;
 
 	osg::ref_ptr<visual_debug_hud> hud;
+
+	int currentTrackingID;
 };
 
 }	// END NAMESPACE
