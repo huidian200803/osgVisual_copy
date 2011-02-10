@@ -307,6 +307,53 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 	return object;
 }
 
+osg::Node* visual_object::findNodeByTrackingID(int trackingID, osg::Node* currNode_)
+{
+	osg::Group* currGroup;
+   osg::Node* foundNode;
+
+   // check to see if we have a valid (non-NULL) node.
+   // if we do have a null node, return NULL.
+   if ( !currNode_)
+   {
+      return NULL;
+   }
+
+   // We have a valid node, check to see if this is the node we 
+   // are looking for. If so, return the current node.
+   if (currNode_->className() == "visual_object")
+   {
+	   //Check if it is the right tracking Id
+		osgVisual::visual_object* tmp = dynamic_cast<osgVisual::visual_object*>(currNode_);
+		if(tmp && tmp->getTrackingId()==trackingID)
+			return currNode_;
+   }
+
+   // We have a valid node, but not the one we are looking for.
+   // Check to see if it has children (non-leaf node). If the node
+   // has children, check each of the child nodes by recursive call.
+   // If one of the recursive calls returns a non-null value we have
+   // found the correct node, so return this node.
+   // If we check all of the children and have not found the node,
+   // return NULL
+   currGroup = currNode_->asGroup(); // returns NULL if not a group.
+   if ( currGroup ) 
+   {
+      for (unsigned int i = 0 ; i < currGroup->getNumChildren(); i ++)
+      { 
+         foundNode = findNodeByTrackingID( trackingID, currGroup->getChild(i));
+         if (foundNode)
+		 {
+			 std::cout << "Node gefunden in Ebene: " << i << std::endl;
+            return foundNode; // found a match!
+		}
+      }
+      return NULL; // We have checked each child node - no match found.
+   }
+   else 
+      return NULL; // leaf node, no match 
+}
+
 void visual_object::setNewPositionAttitude( double lat_, double lon_, double alt_, double azimuthAngle_psi_, double pitchAngle_theta_, double bankAngle_phi_ )
 {
 	lat = lat_;

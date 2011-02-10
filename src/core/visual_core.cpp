@@ -287,9 +287,16 @@ void visual_core::parseScenery(xmlNode* a_node)
 				}
 				if(cur_node->type == XML_ELEMENT_NODE && name == "trackmodel")
 				{
-					// Extract model to track
-
-					trackNode( testObj4 );
+					// Extract track-ID and track the model
+					xmlAttr  *attr = cur_node->properties;
+					while ( attr ) 
+					{ 
+						std::string attr_name=reinterpret_cast<const char*>(attr->name);
+						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
+						if( attr_name == "id" ) trackNode( util::strToInt(attr_value) );
+						attr = attr->next; 
+					}
+					
 				}
 			}
 		}
@@ -542,7 +549,7 @@ void visual_core::trackNode( osg::Node* node_ )
 
 void visual_core::trackNode( int trackingID )
 {
-	osg::Node tmp = util::findNodeByTrackingID(trackingID);
+	osg::ref_ptr<osg::Node> tmp = visual_object::findNodeByTrackingID(trackingID, rootNode);
 	if(tmp.valid())
 		trackNode(tmp);
 }
