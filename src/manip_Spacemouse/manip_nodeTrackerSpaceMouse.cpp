@@ -38,7 +38,6 @@ NodeTrackerSpaceMouse::NodeTrackerSpaceMouse(SpaceMouse* spacemouse) : _spaceMou
 	RX=0;
 	RY=0;
 	RZ=0;
-
 }
 
 
@@ -318,9 +317,13 @@ void NodeTrackerSpaceMouse::setByMatrix(const osg::Matrixd& matrix)
 
 void NodeTrackerSpaceMouse::computeNodeCenterAndRotation(osg::Vec3d& nodeCenter, osg::Quat& nodeRotation) const
 {
+	if (_trackNodePath.empty())
+		return;
+
     osg::Matrixd localToWorld, worldToLocal;
     osg::NodePath nodePath;
-    if (_trackNodePath.getNodePath(nodePath))
+	
+    if (  _trackNodePath.getNodePath(nodePath))
     {
         worldToLocal = osg::computeWorldToLocal(nodePath);
         localToWorld = osg::computeLocalToWorld(nodePath);
