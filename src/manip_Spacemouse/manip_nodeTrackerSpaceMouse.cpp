@@ -315,20 +315,36 @@ void NodeTrackerSpaceMouse::setByMatrix(const osg::Matrixd& matrix)
     computePosition(eye,center,up);
 }
 
+void NodeTrackerSpaceMouse::computeNodeWorldToLocal(osg::Matrixd& worldToLocal) const
+{
+    osg::NodePath nodePath;
+    if (_trackNodePath.getNodePath(nodePath))
+    {
+        worldToLocal = osg::computeWorldToLocal(nodePath);
+    }
+}
+
+void NodeTrackerSpaceMouse::computeNodeLocalToWorld(osg::Matrixd& localToWorld) const
+{
+    osg::NodePath nodePath;
+    if (_trackNodePath.getNodePath(nodePath))
+    {
+        localToWorld = osg::computeLocalToWorld(nodePath);
+    }
+
+}
+
 void NodeTrackerSpaceMouse::computeNodeCenterAndRotation(osg::Vec3d& nodeCenter, osg::Quat& nodeRotation) const
 {
 	if (_trackNodePath.empty())
 		return;
 
-    osg::Matrixd localToWorld, worldToLocal;
+    osg::Matrixd localToWorld;
+	computeNodeLocalToWorld(localToWorld);
+
     osg::NodePath nodePath;
-	
 	if (_trackNodePath.getNodePath(nodePath) && !nodePath.empty())
-	{
-		worldToLocal = osg::computeWorldToLocal(nodePath);
-		localToWorld = osg::computeLocalToWorld(nodePath);
         nodeCenter = osg::Vec3d(nodePath.back()->getBound().center())*localToWorld;
-	}
     else
         nodeCenter = osg::Vec3d(0.0f,0.0f,0.0f)*localToWorld;
 
