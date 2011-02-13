@@ -22,8 +22,6 @@ using namespace osgVisual;
 visual_core::visual_core(osg::ArgumentParser& arguments_) : arguments(arguments_)
 {
 	OSG_NOTIFY( osg::ALWAYS ) << "visual_core instantiated." << std::endl;
-
-	currentTrackingID = -1;
 }
 
 visual_core::~visual_core(void)
@@ -60,10 +58,6 @@ void visual_core::initialize()
 	// Test memory leak (todo)
 	double* test = new double[1000];
 
-	#ifdef USE_SPACENAVIGATOR
-		mouse = NULL;
-	#endif
-
 	//osg::DisplaySettings::instance()->setNumOfDatabaseThreadsHint( 8 );
 
 	// Show model
@@ -90,7 +84,8 @@ void visual_core::initialize()
 	visual_dataIO::getInstance()->init(viewer, configFilename);
 
 	// Add manipulators for user interaction - after dataIO to be able to skip it in slaves rendering machines.
-	addManipulators();
+	manipulators = new core_manipulator();
+	manipulators->init( viewer, arguments, configFilename, rootNode);
 
 	// create the windows and run the threads.
 	viewer->realize();
@@ -163,15 +158,9 @@ void visual_core::shutdown()
 	// Shutdown dataIO
 	visual_dataIO::getInstance()->shutdown();
 
-	
-#ifdef USE_SPACENAVIGATOR
-	//Delete SpaceMouse driver
-	if(mouse)
-	{
-		mouse->shutdown();
-		delete mouse;
-	}
-#endif
+	// Shutdown manipulators
+	if(manipulators.valid())
+		manipulators->shutdown();
 
 	// Destroy osgViewer
 	viewer = NULL;
@@ -196,74 +185,7 @@ bool visual_core::loadTerrain(osg::ArgumentParser& arguments_)
 
 void visual_core::addManipulators()
 {
-	if(!visual_dataIO::getInstance()->isSlave()) // set up the camera manipulators if not slave.
-    {
-        osg::ref_ptr<osgGA::KeySwitchMatrixManipulator> keyswitchManipulator = new osgGA::KeySwitchMatrixManipulator;
 
-        keyswitchManipulator->addMatrixManipulator( '1', "Trackball", new osgGA::TrackballManipulator() );
-        keyswitchManipulator->addMatrixManipulator( '2', "Flight", new osgGA::FlightManipulator() );
-        keyswitchManipulator->addMatrixManipulator( '3', "Terrain", new osgGA::TerrainManipulator() );
-		nt = new osgGA::NodeTrackerManipulator();
-		nt->setTrackNode(NULL);
-		keyswitchManipulator->addMatrixManipulator( '4', "NodeTrackerManipulator", nt );
-		
-#ifdef USE_SPACENAVIGATOR
-		// SpaceNavigator manipulator
-		mouse = new SpaceMouse();
-		mouse->initialize();
-		mouseTrackerManip = new NodeTrackerSpaceMouse(mouse);
-		mouseTrackerManip->setTrackerMode(NodeTrackerSpaceMouse::NODE_CENTER);
-		mouseTrackerManip->setRotationMode(NodeTrackerSpaceMouse::ELEVATION_AZIM);
-		mouseTrackerManip->setAutoComputeHomePosition( true );
-		keyswitchManipulator->addMatrixManipulator( '5', "Spacemouse Node Tracker", mouseTrackerManip );
-		keyswitchManipulator->addMatrixManipulator( '6', "Spacemouse Free (Airplane)", new FreeManipulator(mouse) );
-#endif
-
-		// objectMounted Manipulator for Camera control by Nodes
-		objectMountedCameraManip = new objectMountedManipulator();
-		keyswitchManipulator->addMatrixManipulator( '7', "Object mounted Camera", objectMountedCameraManip );
-
-		// Animation path manipulator
-		std::string pathfile = util::getAnimationPathFromXMLConfig(configFilename);
-        char keyForAnimationPath = '8';
-		if( pathfile != "" )
-        {
-            osgGA::AnimationPathManipulator* apm = new osgGA::AnimationPathManipulator(pathfile);
-            if (apm || !apm->valid()) 
-            {
-                unsigned int num = keyswitchManipulator->getNumMatrixManipulators();
-                keyswitchManipulator->addMatrixManipulator( keyForAnimationPath, "Path", apm );
-                keyswitchManipulator->selectMatrixManipulator(num);
-                ++keyForAnimationPath;
-            }
-        }
-
-        viewer->setCameraManipulator( keyswitchManipulator.get() );
-    }	// If not Slave END
-
-    // add the state manipulator
-    viewer->addEventHandler( new osgGA::StateSetManipulator(rootNode->getOrCreateStateSet()) );
-    
-    // add the thread model handler
-    viewer->addEventHandler(new osgViewer::ThreadingHandler);
-
-    // add the window size toggle handler
-    viewer->addEventHandler(new osgViewer::WindowSizeHandler);
-        
-    // add the stats handler
-    viewer->addEventHandler(new osgViewer::StatsHandler);
-
-    // add the help handler
-    viewer->addEventHandler(new osgViewer::HelpHandler(arguments.getApplicationUsage()));
-
-    // add the record camera path handler
-    viewer->addEventHandler(new osgViewer::RecordCameraPathHandler);
-
-    // add the LOD Scale handler
-    viewer->addEventHandler(new osgViewer::LODScaleHandler);
-
-    // add the screen capture handler
-    viewer->addEventHandler(new osgViewer::ScreenCaptureHandler);
 }
 
 void visual_core::parseScenery(xmlNode* a_node)
@@ -296,7 +218,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 					{ 
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
-						if( attr_name == "id" ) trackNode( util::strToInt(attr_value) );
+						if( attr_name == "id" ) manipulators->trackNode( util::strToInt(attr_value) );
 
 
 						attr = attr->next; 
@@ -508,56 +430,4 @@ void visual_core::setupScenery()
 
 	visual_dataIO::getInstance()->setSlotData("TestSlot1", osgVisual::dataIO_slot::TO_OBJ, 0.12345);
 
-}
-
-void visual_core::trackNode( osg::Node* node_ )
-{
-	if(!node_)
-		return;
-
-	osg::Node* node = NULL;
-	// Check if tracked node is a visual_object
-	osgVisual::visual_object* trackedObject = dynamic_cast<osgVisual::visual_object*>(node_);
-	if(trackedObject)
-	{
-		node = trackedObject->getGeometry();
-
-		// Object mounted manipulator ( Only working with visual_object, not with osg::Node )
-		if (objectMountedCameraManip.valid())
-			objectMountedCameraManip->setAttachedObject( trackedObject );
-	}
-	else
-		node = node_;
-
-	// Spacemouse Node Tracker
-#ifdef USE_SPACENAVIGATOR
-	if (mouseTrackerManip.valid())
-	{
-		mouseTrackerManip->setTrackNode( node );
-		mouseTrackerManip->setMinimumDistance( 100 );
-	}
-#endif
-
-	// Classical OSG Nodetracker
-	if(nt.valid())
-	{
-		osgGA::NodeTrackerManipulator::TrackerMode trackerMode = osgGA::NodeTrackerManipulator::NODE_CENTER;
-		osgGA::NodeTrackerManipulator::RotationMode rotationMode = osgGA::NodeTrackerManipulator::ELEVATION_AZIM;
-		nt->setTrackerMode(trackerMode);
-		nt->setRotationMode(rotationMode);
-		nt->setMinimumDistance( 100 );
-		nt->setTrackNode( node );
-		nt->setAutoComputeHomePosition( true );
-		nt->setDistance( 250 );
-	}
-}
-
-void visual_core::trackNode( int trackingID )
-{
-	osg::ref_ptr<osg::Node> tmp = visual_object::findNodeByTrackingID(trackingID, rootNode);
-	if(tmp.valid())
-	{
-		currentTrackingID = trackingID;
-		trackNode(tmp);
-	}
 }

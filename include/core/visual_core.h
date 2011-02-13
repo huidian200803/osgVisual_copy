@@ -23,33 +23,12 @@
 
 #include <osg/Referenced>
 #include <osg/Notify>
-
 #include <osgViewer/Viewer>
-
 #include <osgDB/ReadFile>
 
-// OSG eventhandler
-#include <osgViewer/ViewerEventHandlers>
+// Manipulator and eventhandler
+#include <core_manipulator.h>
 
-// OSG manipulator
-#include <osgGA/TrackballManipulator>
-#include <osgGA/FlightManipulator>
-#include <osgGA/DriveManipulator>
-#include <osgGA/KeySwitchMatrixManipulator>
-#include <osgGA/StateSetManipulator>
-#include <osgGA/AnimationPathManipulator>
-#include <osgGA/TerrainManipulator>
-#include <osgGA/NodeTrackerManipulator>
-
-// Spacenavigator manipulator
-#ifdef USE_SPACENAVIGATOR
-#include <manip_spaceMouse.h>
-#include <manip_nodeTrackerSpaceMouse.h>
-#include <manip_freeSpaceMouse.h>
-#endif
-
-// Object mounted manipulator
-#include <manip_objectMounted.h>
 
 #ifdef USE_DISTORTION
 // Distortion
@@ -84,6 +63,8 @@
 #include <visual_vista2D.h>
 #endif
 
+
+
 // Test
 #include <dataIO_transportContainer.h>
 #include <osgDB/OutputStream>
@@ -104,21 +85,24 @@ public:
 	void initialize();
 	void shutdown();
 
-	void addManipulators();
 	void parseScenery(xmlNode * a_node);
 	bool loadTerrain(osg::ArgumentParser& arguments_);
 	bool checkCommandlineArgumentsForFinalErrors();
 
 	void setupScenery();
-	void trackNode( osg::Node* node_ );
-	void trackNode( int trackingID );
-	int getCurrentTrackingID(){return currentTrackingID;};
 
 protected:
+	/**
+	 * \brief Destrcutor
+	 * 
+	 */ 
 	virtual ~visual_core(void);
 
-
 private:
+	/**
+	 * \brief This function starts the main rendering loop
+	 * 
+	 */ 
 	void mainLoop();
 
 	/**
@@ -142,23 +126,6 @@ private:
 	std::string configFilename;
 
 
-#ifdef USE_SPACENAVIGATOR
-	/**
-	 * Spacemouse node tracker manipulator
-	 */ 
-	osg::ref_ptr<NodeTrackerSpaceMouse> mouseTrackerManip;
-
-	/**
-	 * Space mouse hardware driver instance
-	 */ 
-	SpaceMouse* mouse;
-#endif
-
-	/**
-	 * This Matrix manipulator is used for controlling Camera by Nodes.
-	 */ 
-	osg::ref_ptr<objectMountedManipulator> objectMountedCameraManip;
-
 
 #ifdef USE_SKY_SILVERLINING
 	/**
@@ -180,11 +147,9 @@ private:
 
 	osg::ref_ptr<visual_object> testObj;
 
-	osg::ref_ptr<osgGA::NodeTrackerManipulator> nt;
-
 	osg::ref_ptr<visual_debug_hud> hud;
 
-	int currentTrackingID;
+	osg::ref_ptr<core_manipulator> manipulators;
 };
 
 }	// END NAMESPACE
