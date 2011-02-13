@@ -61,7 +61,7 @@ void visual_dataIO::init(osgViewer::Viewer* viewer_, std::string configFileName)
 	// Install callbacks to perform DataIO activities every frame:
 	//// EventCallback at the absolute beginning of the frame
 	eventCallback = new dataIO_eventCallback(this);
-	viewer->getCamera()->setEventCallback( eventCallback );
+	viewer->getCamera()->addEventCallback( eventCallback );
 	//// FinalDrawCallback at the end of event and update handling, but BEFORE rendering the frame
 	finalDrawCallback = new dataIO_finalDrawCallback(this);
 	viewer->getCamera()->setFinalDrawCallback( finalDrawCallback );
