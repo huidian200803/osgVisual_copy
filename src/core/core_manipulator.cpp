@@ -30,6 +30,7 @@ core_manipulator::core_manipulator()
 bool core_manipulator::init(osgViewer::Viewer* viewer, osg::ArgumentParser& arguments, std::string configFilename, osg::Node* rootNode)
 {
 	_rootNode = rootNode;
+	_viewer = viewer;
 
 	// Setup manipulators
 	if(!visual_dataIO::getInstance()->isSlave()) // set up the camera manipulators if not slave.
@@ -86,13 +87,19 @@ bool core_manipulator::init(osgViewer::Viewer* viewer, osg::ArgumentParser& argu
     viewer->addEventHandler(new osgViewer::LODScaleHandler);				// add the LOD Scale handler
     viewer->addEventHandler(new osgViewer::ScreenCaptureHandler);			// add the screen capture handler
 
-
+	// Install Callback
+	_callback = new core_manipulatorCallback(this);
+	viewer->getCamera()->addEventCallback(_callback);
 
 	return true;
 }
 
 void core_manipulator::shutdown()
 {
+	// Remove and Delete Callback
+	_viewer->getCamera()->removeEventCallback(_callback);
+	_callback= NULL;
+
 #ifdef USE_SPACENAVIGATOR
 	//Delete SpaceMouse driver
 	if(_mouse)
@@ -106,6 +113,7 @@ void core_manipulator::shutdown()
 	_mouseTrackerManip = NULL;
 	_nt = NULL;
 	_rootNode = NULL;
+	_viewer = NULL;
 }
 
 void core_manipulator::trackNode( int trackingID )
@@ -158,4 +166,18 @@ void core_manipulator::trackNode( osg::Node* node_ )
 		_nt->setAutoComputeHomePosition( true );
 		_nt->setDistance( 250 );
 	}
+}
+
+void core_manipulator::core_manipulatorCallback::operator()(osg::Node* node, osg::NodeVisitor* nv)
+{
+	//OSG_NOTIFY( osg::ALWAYS ) << "---- Executing core_manipulatorCallback .." <<  std::endl;
+
+	if(!_manipulators->_updaterSlot.empty())
+	{
+		int idToTrack = visual_dataIO::getInstance()->getSlotDataAsDouble(_manipulators->_updaterSlot, osgVisual::dataIO_slot::TO_OBJ );
+		if(idToTrack!=_manipulators->_currentTrackingID)
+			_manipulators->trackNode(idToTrack);
+	}
+
+	traverse(node, nv);
 }

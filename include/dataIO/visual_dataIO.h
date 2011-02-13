@@ -79,13 +79,12 @@ private:
 		/**
 		 * \brief Constructor, for setting the member variables.
 		 * 
-		 * @param viewer_ : Pointer to the viewer.
-		 * @param sceneCamera_ : Pointer to the scene camera.
+		 * @param dataIO_ : Pointer to the dataIO class.
 		 */ 
 		dataIO_eventCallback(visual_dataIO* dataIO_):dataIO(dataIO_){};
 
 		/**
-		 * \brief This function is execute d as callback during update traversal.
+		 * \brief This function is executed as callback during event traversal.
 		 * 
 		 */ 
 		virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);

@@ -62,8 +62,35 @@ public:
 	void trackNode( osg::Node* node_ );
 	void trackNode( int trackingID );
 	int getCurrentTrackingID(){return _currentTrackingID;};
+	void setTrackingIdUpdaterSlot(std::string updaterSlot){_updaterSlot=updaterSlot;};
+	std::string getTrackingIdUpdaterSlot(){return _updaterSlot;};
 
 private:
+	class core_manipulatorCallback : public osg::NodeCallback
+	{
+	public: 
+		/**
+		 * \brief Constructor, for setting the member variables.
+		 * 
+		 * @param manipulators : Pointer to the manipulator and tracking class.
+		 */ 
+		core_manipulatorCallback(core_manipulator* manipulators):_manipulators(manipulators){};
+
+		/**
+		 * \brief This function is executed as callback during event traversal.
+		 * 
+		 */ 
+		virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
+	private:
+		/** Pointer to the manipulator class to edit its value */
+		core_manipulator* _manipulators;
+	};
+
+	/** Pointer to the callback isntalled to update the tracking ID */
+	osg::ref_ptr<core_manipulatorCallback> _callback;
+
+	/** core_manipulatorCallback must be a freind of this class to allow the callback to edit the member values of this class directly */ 
+	friend class core_manipulatorCallback;
 
 #ifdef USE_SPACENAVIGATOR
 	/**
@@ -92,10 +119,18 @@ private:
 	 */ 
 	int _currentTrackingID;
 
+	/** Slotname to use for dynamic updated tracking ID. */
+	std::string _updaterSlot;
+
 	/**
 	 * Pointer to the  scene root node
 	 */ 
 	osg::ref_ptr<osg::Node> _rootNode;
+
+	/**
+	 * Referenced pointer to the applications viewer.
+	 */ 
+	osg::ref_ptr<osgViewer::Viewer> _viewer;
 };
 
 }	// END NAMESPACE
