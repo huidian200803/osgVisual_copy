@@ -270,7 +270,7 @@ class NodeTrackerSpaceMouse : public osgGA::OrbitManipulator
 		float					_lastDistance;
 
 		/** 
-		 * Pointer to Space Navigator interfacce class.
+		 * Pointer to Space Navigator interface class.
 		 */ 
 		SpaceMouse* _spaceMouse;
 
