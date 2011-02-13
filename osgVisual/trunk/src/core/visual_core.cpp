@@ -214,8 +214,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 						std::string attr_name=reinterpret_cast<const char*>(attr->name);
 						std::string attr_value=reinterpret_cast<const char*>(attr->children->content);
 						if( attr_name == "id" ) manipulators->trackNode( util::strToInt(attr_value) );
-
-
+						if( attr_name == "updater_slot" ) manipulators->setTrackingIdUpdaterSlot(attr_value);
 						attr = attr->next; 
 					}
 					

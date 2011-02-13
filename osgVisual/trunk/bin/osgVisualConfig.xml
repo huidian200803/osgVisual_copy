@@ -70,7 +70,7 @@
           <scalefactor scale_x="1.0" scale_y="1.0" scale_z="1.0"></scalefactor>
         </geometry>
       </model>
-      <trackmodel id="2" updater_slot=""></trackmodel> 
+      <trackmodel id="2" updater_slot="trackID"></trackmodel> 
     </models>
     <datetime day="0" month="0" year="0" hour="12" minute="30"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
