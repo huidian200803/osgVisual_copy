@@ -290,7 +290,7 @@ SET(SOURCES
 	include/core/visual_core.h
 	src/core/visual_core.cpp
 	src/core/osgVisual.cpp
-	src/core/core_manipulator.h
+	include/core/core_manipulator.h
 	src/core/core_manipulator.cpp
 	# Memory Leak debugging
 	include/core/leakDetection.h
