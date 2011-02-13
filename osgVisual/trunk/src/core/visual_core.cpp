@@ -183,11 +183,6 @@ bool visual_core::loadTerrain(osg::ArgumentParser& arguments_)
 	return false;
 }
 
-void visual_core::addManipulators()
-{
-
-}
-
 void visual_core::parseScenery(xmlNode* a_node)
 {
 	OSG_ALWAYS << "parseScenery()" << std::endl;
