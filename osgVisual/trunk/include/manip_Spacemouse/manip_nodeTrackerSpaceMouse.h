@@ -199,6 +199,12 @@ class NodeTrackerSpaceMouse : public osgGA::OrbitManipulator
         /** Add the current mouse GUIEvent to internal stack.*/
         void addMouseEvent(const GUIEventAdapter& ea);
 
+		/** Computes the world to local matrix */ 
+		void computeNodeWorldToLocal(osg::Matrixd& worldToLocal) const;
+
+		/** Computes the local to world matrix */ 
+        void computeNodeLocalToWorld(osg::Matrixd& localToWorld) const;
+
         void computeNodeCenterAndRotation(osg::Vec3d& center, osg::Quat& rotation) const;
 
         void computePosition(const osg::Vec3d& eye,const osg::Vec3d& lv,const osg::Vec3d& up);
