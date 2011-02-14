@@ -12,7 +12,7 @@
 #		 e.g. PATH=%PATH%;%OSG%																	#
 #																								#
 #	NOTE:	On Visual Studio and x64 Arch, CMAKE uses the project settings to specify the		#
-#			correct x64 OSG path, so you can use osg as 32 bit in your system path.				#
+#			correct x64 OSG path, so you can use the 32bit OSG in your system path.				#
 #																								#
 #																								#
 #################################################################################################
@@ -61,6 +61,13 @@ IF ( WIN32 )
 	
 	SET(USE_SKY_SILVERLINING ON CACHE BOOL "Enable to use Sundog-soft's Silverlining SDK for sky & weather")
 	IF(USE_SKY_SILVERLINING )
+	
+		SET(checkSL $ENV{SILVERLINING_PATH})
+		IF(NOT checkSL)
+			MESSAGE( FATAL_ERROR “You have activated SilverLining (SL) in CMake, but the SL installation path couldn't be found! Please deactivate SL or setup it's pathes in CMake manually!” )
+		ENDIF(checkSL)
+
+	
 		SET(SOURCES
 			${SOURCES}
 			include/sky_Silverlining/skySilverLining_AtmosphereReference.h
