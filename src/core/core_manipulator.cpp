@@ -107,10 +107,10 @@ void core_manipulator::shutdown()
 		_mouse->shutdown();
 		delete _mouse;
 	}
+	_mouseTrackerManip = NULL;
 #endif
 
 	_objectMountedCameraManip = NULL;
-	_mouseTrackerManip = NULL;
 	_nt = NULL;
 	_rootNode = NULL;
 	_viewer = NULL;
