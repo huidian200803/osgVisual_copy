@@ -65,7 +65,7 @@ IF ( WIN32 )
 		SET(checkSL $ENV{SILVERLINING_PATH})
 		IF(NOT checkSL)
 			MESSAGE( FATAL_ERROR “You have activated SilverLining (SL) in CMake, but the SL installation path couldn't be found! Please deactivate SL or setup it's pathes in CMake manually!” )
-		ENDIF(checkSL)
+		ENDIF()
 
 	
 		SET(SOURCES
