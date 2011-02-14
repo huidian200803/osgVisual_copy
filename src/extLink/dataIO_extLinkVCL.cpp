@@ -219,7 +219,7 @@ void dataIO_extLinkVCL::addChannels(xmlNode * a_node, std::string channelName_, 
 			std::string attr_name=reinterpret_cast<const char*>(attr->name);
 			if( attr_name == "name" )
 				entryName = reinterpret_cast<const char*>(attr->children->content);
-			//OSG_DEBUG << "Attribute name: " << attr->name << " value: " << attr->children->content << std::endl;
+			//OSG_ALWAYS << "Attribute name: " << attr->name << " value: " << attr->children->content << std::endl;
 			attr = attr->next; 
 		} 
 

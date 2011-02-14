@@ -379,7 +379,7 @@ void visual_core::setupScenery()
 	testObj4->loadGeometry( "../models/saenger2.flt" );
 	testObj4->addUpdater( new object_updater(testObj4) );
 	testObj4->addLabel("testLabel", "Object4 :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
-	testObj4->setTrackingId(5);
+	testObj4->setTrackingId(2);
 
 	//osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
 	//testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
