@@ -94,9 +94,9 @@ void visual_skySilverLining::setTime( int hour_, int minute_, int second_ )
 		return;
 	
 	SilverLining::LocalTime t = atmosphere->GetConditions()->GetTime();
-	t.SetHour( hour_ );
-	t.SetMinutes( minute_ );
-	t.SetSeconds( second_ );
+	if(hour_) t.SetHour( hour_ );
+	if(minute_) t.SetMinutes( minute_ );
+	if(second_) t.SetSeconds( second_ );
 	atmosphere->GetConditions()->SetTime( t );
 }
 
@@ -107,9 +107,9 @@ void visual_skySilverLining::setDate( int year_, int month_, int day_ )
 		return;
 
 	SilverLining::LocalTime t = atmosphere->GetConditions()->GetTime();
-	t.SetYear( year_ );
-	t.SetMonth( month_ );
-	t.SetDay( day_ );
+	if(year_) t.SetYear( year_ );
+	if(month_) t.SetMonth( month_ );
+	if(day_) t.SetDay( day_ );
 }
 
 void visual_skySilverLining::setDateByEpoch( int secondsSince1970_ )
