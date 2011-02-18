@@ -225,8 +225,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 #ifdef USE_SKY_SILVERLINING
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "datetime")
 		{
-			int hour, minute;
-			int day=0,month=0,year=0;
+			int day=-1,month=1-,year=-1, hour=-1, minute=-1;
 
 			xmlAttr  *attr = cur_node->properties;
 			while ( attr ) 

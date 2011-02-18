@@ -96,7 +96,7 @@ bool visual_distortion::processXMLConfiguration()
 						else
 							OSG_NOTIFY(osg::WARN) << "WARNING: Unable to parse Frustum values from '" << pre_cfg<<channelname<<post_cfg << "' -- continue without valid frustum values." << std::endl;
 					}
-					if( attr_name == "renderimplemmentation" )
+					if( attr_name == "renderimplementation" )
 					{
 						if(attr_value=="fbo")
 							renderImplementation = osg::Camera::FRAME_BUFFER_OBJECT;

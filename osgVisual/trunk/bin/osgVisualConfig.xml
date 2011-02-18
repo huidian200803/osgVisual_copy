@@ -1,36 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <osgvisualconfiguration>
   <module name="distortion" enabled="no">
-    <!-- XML configuration of the module "distortion"
-      channelname = name of the channel, used to load the distortion- and blendmaps
-      renderimplementation = technique to distort.
-      Available options: 
-          fbo : renderImplementation = osg::Camera::FRAME_BUFFER_OBJECT
-          pbuffer : renderImplementation = osg::Camera::PIXEL_BUFFER
-          pbuffer-rtt :  renderImplementation = osg::Camera::PIXEL_BUFFER_RTT
-          fb : renderImplementation = osg::Camera::FRAME_BUFFER
-          window : renderImplementation = osg::Camera::SEPERATE_WINDOW
-    -->
-    <distortion channelname="center" renderimplemmentation="fbo" width="2048" height="2048" useshader="yes" hdr="yes" usetexturerectangle="no"></distortion>
-    <!-- optional: <distortionmap filename="distmap.png"></distortionmap> to set distortionmap independend from channel map-->
-    <!-- optional: <blendmap filename="blendmap.png"></blendmap> to set blendmap independend from channel map -->
+    <distortion channelname="center" renderimplementation="fbo" width="2048" height="2048" useshader="yes" hdr="yes" usetexturerectangle="no"></distortion>
   </module>
- 
   <module name="sky_silverlining" enabled="yes"></module>
-
   <module name="vista2d" enabled="yes">
     <vista2d filename="D:\osgVisual\osgVisual\bin\altimeterSimple.v" paintBackground="no" position_x="1" position_y="1" zoom="1.0" playanimation="yes"></vista2d>
   </module>
-
   <module name="dataio" enabled="yes">
-    <!-- XML configuration of the module "dataIO" 
-        The parameter "enabled" is ignored, because dataIO is mandatory for the visual system to place object etc.
-        
-        Available clusterroles:
-        master: This role recieves all relevant information via the extLink implementation and sends it via cluster implementation to the slave nodes.
-        slave: This role recieves all relevant rendering information via the cluster implementation.
-        standalone: This role recieves all relevant data via the extLink and renders it. No cluster functionality is used.    
-    -->
     <dataio clusterrole="standalone"></dataio>
     <cluster implementation="enet" hardsync="yes" master_ip="10.10.10.10" port="1234" use_zlib_compressor="yes" ></cluster>
     <extlink implementation="vcl" filename="osgVisual.xml"></extlink>
@@ -72,7 +49,7 @@
       </model>
       <trackmodel id="2" updater_slot="TRACKING_ID"></trackmodel> 
     </models>
-    <datetime day="0" month="0" year="0" hour="12" minute="30"></datetime>
+    <datetime day="0" month="0" year="0" hour="12" minute="50"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
     <clouds>
       <!--<cloudlayer slot="0" type="CUMULONIMBUS_CAPPILATUS" enabled="yes" fadetime="15">

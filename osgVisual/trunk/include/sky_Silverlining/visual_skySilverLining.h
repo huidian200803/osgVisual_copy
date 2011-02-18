@@ -143,7 +143,7 @@ public:
 	void setDateTime( int year_, int month_, int day_, int hour_, int minute_, int second_, bool daylightSaving_, double timezoneOffset_ );
 
 	/**
-	 * \brief Set time for the sky system.
+	 * \brief Set time for the sky system. Only values >0 are set.
 	 * 
 	 * @param hour_ : Hour to set. Ranging from 0 to 23
 	 * @param minute_ : Minute to set. Ranging from 0 to 59.
@@ -152,7 +152,7 @@ public:
 	void setTime( int hour_, int minute_, int second_ );
 
 	/**
-	 * \brief Sets the date for the sky system.
+	 * \brief Sets the date for the sky system. Only values >0 are set.
 	 * 
 	 * @param year_ : Year to set. SilverLining can only handle Gregorian calendar years, which means that years before 1582 will not be accurately simulated.
 	 * @param month_ : Month to set. Ranging from 1 (Jan) to 12 (Dec)

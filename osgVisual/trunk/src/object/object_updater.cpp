@@ -26,6 +26,8 @@ object_updater::object_updater(osgVisual::visual_object* object_ )
 	updater_rot_x_rad = object_->getName()+"_ROT_X";
 	updater_rot_y_rad = object_->getName()+"_ROT_Y";
 	updater_rot_z_rad = object_->getName()+"_ROT_Z";
+	updater_label = object_->getName()+"_LABEL";
+	object_->addLabel("default", " ");
 }
 
 object_updater::~object_updater(void)
@@ -78,24 +80,11 @@ void object_updater::addUpdater( object_updater* updater_ )
 
 void object_updater::setUpdaterSlotNames( osgVisual::visual_object* object_, std::string lat_rad_, std::string lon_rad_, std::string alt_, std::string rot_x_rad_, std::string rot_y_rad_, std::string rot_z_rad_, std::string label_)
 {
-	if(lat_rad_!="")
-		updater_lat_rad = lat_rad_;
-	if(lon_rad_!="")
-		updater_lon_rad = lon_rad_;
-	if(alt_!="")
-		updater_alt = alt_;
-	if(rot_x_rad_!="")
-		updater_rot_x_rad = rot_x_rad_;
-	if(rot_y_rad_!="")
-		updater_rot_y_rad = rot_y_rad_;
-	if(rot_z_rad_!="")
-		updater_rot_z_rad = rot_z_rad_;
-
-	if(label_!="")
-		updater_label = label_;
-	else
-	{
-		updater_label = object_->getName()+"_LABEL";
-		object_->addLabel("default", " ");
-	}
+	updater_lat_rad = lat_rad_;
+	updater_lon_rad = lon_rad_;
+	updater_alt = alt_;
+	updater_rot_x_rad = rot_x_rad_;
+	updater_rot_y_rad = rot_y_rad_;
+	updater_rot_z_rad = rot_z_rad_;
+	updater_label = label_;
 }
