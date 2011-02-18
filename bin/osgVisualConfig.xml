@@ -17,19 +17,6 @@
     <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive"></terrain>
     <animationpath filename="salzburg.path"></animationpath>
     <models>
-      <!-- Models can be loaded and placed in the scenery.
-        - objectname: Name of the object to identify it in the scenegraph.
-        - tracking ID: ID to manage which object should be tracked
-        - label: text to label the model with.
-        - dynamic: "yes" to add an standard updater to the model. 
-        - position: Position to place the model
-        - attitude: Orientation in degree to place the model
-        - updater [optional]: Channels to use for position, attitude and label update
-        - cameraoffset [optional]: Rotational (in degree) and translational offset for the object mounted camera manipulator to the visual_object   
-        - Geometry [optional]: 3D model to display. Leave empty to use model without 3D model.
-        - Geometryoffset [optional]: Rotational offset (in degree) for the loaded 3D model to the visual_object (if the 3D model has a wrong coordinate frame)
-        - Geometryscale [optional]: Scale factors for the loaded 3D model in all three dimensions.
-     -->
       <model objectname="TestObject" trackingid="1" label="TestText!" dynamic="no">
         <position lat="47.8123" lon="12.94088" alt="700.0"></position>
         <attitude rot_x="0.0" rot_y="0.0" rot_z="0.0"></attitude>
