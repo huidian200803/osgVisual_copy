@@ -16,6 +16,8 @@
 
 
 #include <visual_core.h>
+#include <visual_util.h>
+#include <osgTerrain/Terrain>
 
 using namespace osgVisual;
 
@@ -171,7 +173,15 @@ bool visual_core::loadTerrain(osg::ArgumentParser& arguments_)
 	osg::ref_ptr<osg::Node> model = osgDB::readNodeFiles(util::getTerrainFromXMLConfig(configFilename));
 	if( model.valid() )
 	{
-        rootNode->addChild( model.get() );
+        osgTerrain::Terrain* terrain = util::findTopMostNodeOfType<osgTerrain::Terrain>(model.get());
+		if (!terrain)
+		{
+			terrain = new osgTerrain::Terrain;
+			terrain->addChild(model.get());
+
+			model = terrain;			
+		}
+		rootNode->addChild( terrain );
 		return true;
 	}
 	else
@@ -352,6 +362,16 @@ void visual_core::setupScenery()
 		xmlFreeDoc(tmpDoc); xmlCleanupParser();
 	}
 
+	osgTerrain::Terrain* terrain = util::findTopMostNodeOfType<osgTerrain::Terrain>(rootNode);
+    if (!terrain)
+    {
+        OSG_ALWAYS << "No TerrainNode found!" << std::endl;
+    }
+	else
+	{
+		OSG_ALWAYS << "BorderEqual activated" << std::endl;
+		terrain->setEqualizeBoundaries(true);
+	}
 
 	//testObj = new visual_object( rootNode, "testStab", objectMountedCameraManip );
 	//testObj->setNewPosition( osg::DegreesToRadians(47.7123), osg::DegreesToRadians(12.84088), 600 );

@@ -295,6 +295,42 @@ public:
 	 */ 
 	static bool strToBool(std::string s);
 
+	template<class T>
+	class FindTopMostNodeOfTypeVisitor : public osg::NodeVisitor
+	{
+	public:
+		FindTopMostNodeOfTypeVisitor():
+			osg::NodeVisitor(osg::NodeVisitor::TRAVERSE_ALL_CHILDREN),
+			_foundNode(0)
+		{}
+
+		void apply(osg::Node& node)
+		{
+			T* result = dynamic_cast<T*>(&node);
+			if (result)
+			{
+				_foundNode = result;
+			}
+			else
+			{
+				traverse(node);
+			}
+		}
+
+		T* _foundNode;
+	};
+
+	template<class T>
+	static T* findTopMostNodeOfType(osg::Node* node)
+	{
+		if (!node) return 0;
+
+		FindTopMostNodeOfTypeVisitor<T> fnotv;
+		node->accept(fnotv);
+
+		return fnotv._foundNode;
+	}
+
 private: 
 	/**
 	 * \brief This functions checks a list of nodes and all of its children for the specified module configuration.
