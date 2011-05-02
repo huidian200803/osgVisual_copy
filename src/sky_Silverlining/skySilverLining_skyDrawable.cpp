@@ -204,8 +204,7 @@ void skySilverLining_skyDrawable::drawImplementation(osg::RenderInfo& renderInfo
         initializeSilverLining(ar);
 		const_cast<skySilverLining_skyDrawable*>(this)->seedAndAddCloudLayers(atmosphere);
 
-
-        atmosphere->BeginFrame(true, true, _skyboxSize);
+		atmosphere->DrawSky(true, true, _skyboxSize);
         setLighting(atmosphere);
 		setSceneFog(atmosphere);
     }

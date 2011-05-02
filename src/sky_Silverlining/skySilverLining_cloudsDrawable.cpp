@@ -56,7 +56,7 @@ void skySilverLining_cloudsDrawable::drawImplementation(osg::RenderInfo& renderI
 
     if (atmosphere)
     {
-        atmosphere->EndFrame(true);
+        atmosphere->DrawObjects(true);
     }
 
 	renderInfo.getState()->dirtyAllVertexArrays();
