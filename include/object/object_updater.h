@@ -96,8 +96,9 @@ public:
 	 * 
 	 * If a lot is empty, the objectname will be used with a suffix describing the channel. For details look for the implementation.
 	 * 
-	 * @param lat_ 
-	 * @param lon_ 
+	 * @param object_
+	 * @param lat_rad_ 
+	 * @param lon_rad_ 
 	 * @param alt_ 
 	 * @param rot_x_rad_ 
 	 * @param rot_y_rad_
