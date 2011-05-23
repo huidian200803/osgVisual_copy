@@ -316,7 +316,7 @@ public:
 	 * 
 	 * See also getTrackingId() and trackingId
 	 * 
-	 * @param trackindID_ : trackingId to set.
+	 * @param trackingId_ : trackingId to set.
 	 */ 
 	void setTrackingId(int trackingId_) {trackingId = trackingId_;};
 
