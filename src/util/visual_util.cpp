@@ -15,6 +15,7 @@
 */
 
 #include <visual_util.h>
+#include <osg/Material>
 
 using namespace osgVisual;
 
@@ -567,4 +568,45 @@ bool util::strToBool(std::string s)
 		return(false);
 	OSG_ALWAYS << __FUNCTION__ << "Warning:Unable to convert "<< s <<" to bool, using false as default!" << std::endl;
 	return(false);
+}
+
+void util::AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, float length, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup)
+{
+	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+	osg::Vec3d center;
+	float height;
+	osg::ref_ptr<osg::Cylinder> cylinder;
+	osg::ref_ptr<osg::Drawable> cylinderDrawable;
+	osg::ref_ptr<osg::Material> pMaterial;
+
+	//height = (StartPoint-EndPoint).length();
+	height  = length;
+	center = osg::Vec3( (StartPoint.x() + EndPoint.x()) / 2, (StartPoint.y() + EndPoint.y()) / 2, (StartPoint.z() + EndPoint.z()) / 2);
+
+	// This is the default direction for the cylinders to face in OpenGL
+	osg::Vec3d z = osg::Vec3d(0,0,1);
+
+	// Get diff between two points you want cylinder along
+	osg::Vec3d p = StartPoint - EndPoint;
+
+	// Get CROSS product (the axis of rotation)
+	osg::Vec3d t = z ^ p;
+
+	// Get angle. length is magnitude of the vector
+	double angle = acos( (z * p) / p.length());
+
+	// Create a cylinder between the two points with the given radius
+	cylinder = new osg::Cylinder(center,radius,height);
+	cylinder->setRotation(osg::Quat(angle, osg::Vec3(t.x(), t.y(), t.z())));
+
+	cylinderDrawable = new osg::ShapeDrawable(cylinder );
+	geode->addDrawable(cylinderDrawable);
+
+	// Set the color of the cylinder that extends between the two points.
+	pMaterial = new osg::Material;
+	pMaterial->setDiffuse( osg::Material::FRONT, CylinderColor);
+	geode->getOrCreateStateSet()->setAttribute( pMaterial, osg::StateAttribute::OVERRIDE );
+
+	// Add the cylinder between the two points to an existing group
+	pAddToThisGroup->addChild(geode);
 }

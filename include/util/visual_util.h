@@ -295,6 +295,17 @@ public:
 	 */ 
 	static bool strToBool(std::string s);
 
+	/**
+	 * \brief \todo : Kommentieren
+	 * 
+	 * @param StartPoint 
+	 * @param EndPoint 
+	 * @param radius 
+	 * @param CylinderColor 
+	 * @param pAddToThisGroup 
+	 */ 
+	static void AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, float length, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup);
+
 	template<class T>
 	class FindTopMostNodeOfTypeVisitor : public osg::NodeVisitor
 	{
@@ -351,6 +362,7 @@ private:
 	 * @return : NULL if the module configuration was not found, otherwise pointer to the XML Node with the configuration for the specified module. 
 	 */ 
 	static xmlNode* checkXMLNodeChildrenForScenery(xmlNode* node);
+
 };
 
 } //END NAMESPACE

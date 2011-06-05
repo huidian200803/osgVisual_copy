@@ -14,7 +14,7 @@
   </module>
   
   <scenery>
-    <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive.terrainmod" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive.terrainmod"></terrain>
+    <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive.terrainmod" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive.terrainmod" filename3="axes.osg.10000000.scale"></terrain>
     <animationpath filename="airport_muc.path"></animationpath>
     <models>
       <model objectname="TestObject" trackingid="1" label="TestText!" dynamic="no">
