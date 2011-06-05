@@ -69,17 +69,19 @@ void skySilverLining_skyDrawable::setLighting(SilverLining::Atmosphere *atmosphe
         atmosphere->GetSunOrMoonPosition(&x, &y, &z);
 
         direction = osg::Vec3(x, y, z);
-        ambient = osg::Vec4(ra, ga, ba, 1.0);
+		ambient = osg::Vec4(ra, ga, ba, 1.0);
+        //ambient = osg::Vec4(ra*0.1, ga*0.1, ba*0.1, 1.0);	// For use with shadow
         diffuse = osg::Vec4(rd, gd, bd, 1.0);
 
         // xform the light direction into camera coordinates
-        osg::Quat view = _view->getCamera()->getViewMatrix().getRotate();
+        //osg::Quat view = _view->getCamera()->getViewMatrix().getRotate();
         //direction = view * direction;
         direction.normalize();
 
         light->setAmbient(ambient);
         light->setDiffuse(diffuse);
-        light->setSpecular(osg::Vec4(0,0,0,1));
+        //light->setSpecular(osg::Vec4(0,0,0,1));
+		light->setSpecular(osg::Vec4(1.0,1.0,1.0,1));	// Test
         light->setPosition(osg::Vec4(direction.x(), direction.y(), direction.z(), 0));
     }
 }
