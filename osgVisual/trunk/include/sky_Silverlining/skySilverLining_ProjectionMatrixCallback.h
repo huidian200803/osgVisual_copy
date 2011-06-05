@@ -66,14 +66,24 @@ public:
 		//											Flughöhe				near		far
 		keys->push_back(osgAnimation::Vec2Keyframe(      0.0, osg::Vec2(     1.0,     80000.0)));
 		keys->push_back(osgAnimation::Vec2Keyframe(     50.0, osg::Vec2(     5.0,     90000.0)));
-	//keys->push_back(osgAnimation::Vec2Keyframe(    500.0, osg::Vec2(     5.0,    100000.0)));
-	//keys->push_back(osgAnimation::Vec2Keyframe(   1000.0, osg::Vec2(    10.0,    100000.0)));
-	//keys->push_back(osgAnimation::Vec2Keyframe(  10000.0, osg::Vec2(   100.0,   1000000.0)));
-	//keys->push_back(osgAnimation::Vec2Keyframe(1000000.0, osg::Vec2(100000.0, 200000000.0)));
 		keys->push_back(osgAnimation::Vec2Keyframe(    500.0, osg::Vec2(     5.0,    100000.0)));
 		keys->push_back(osgAnimation::Vec2Keyframe(   1000.0, osg::Vec2(    10.0,    100000.0)));
-		keys->push_back(osgAnimation::Vec2Keyframe(  10000.0, osg::Vec2(   50.0,   1000000.0)));
-		keys->push_back(osgAnimation::Vec2Keyframe(1000000.0, osg::Vec2(100.0, 200000000.0)));
+	//keys->push_back(osgAnimation::Vec2Keyframe(  10000.0, osg::Vec2(   100.0,   1000000.0)));
+	//keys->push_back(osgAnimation::Vec2Keyframe(1000000.0, osg::Vec2(100000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe(   10000.0, osg::Vec2(   50.0,   1000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 1000000.0, osg::Vec2(  100.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 2000000.0, osg::Vec2(  250.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 3000000.0, osg::Vec2(  500.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 4000000.0, osg::Vec2( 1000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 5000000.0, osg::Vec2(10000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 6000000.0, osg::Vec2(  10000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 7000000.0, osg::Vec2( 100000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 8000000.0, osg::Vec2(1000000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe( 9000000.0, osg::Vec2(1250000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe(10000000.0, osg::Vec2(2500000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe(11000000.0, osg::Vec2(5000000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe(12000000.0, osg::Vec2(7500000.0, 200000000.0)));
+		keys->push_back(osgAnimation::Vec2Keyframe(50000000.0, osg::Vec2(15000000.0,2000000000.0)));
 
     }
 
