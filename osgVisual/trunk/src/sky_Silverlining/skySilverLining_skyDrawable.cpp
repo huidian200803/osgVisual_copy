@@ -77,11 +77,14 @@ void skySilverLining_skyDrawable::setLighting(SilverLining::Atmosphere *atmosphe
         //osg::Quat view = _view->getCamera()->getViewMatrix().getRotate();
         //direction = view * direction;
         direction.normalize();
+		
+//OSG_NOTIFY(osg::ALWAYS)	<< "Light Vector: X:"<<direction.x()<<" Y:"<<direction.y()<<" Z:"<<direction.z() << std::endl;
+util::AddCylinderBetweenPoints(osg::Vec3d(0,0,0), direction , 10000.0, 15000000.0, osg::Vec4d(1.0, 1.0, 0.0, 1 ), sceneRoot);
 
         light->setAmbient(ambient);
         light->setDiffuse(diffuse);
         //light->setSpecular(osg::Vec4(0,0,0,1));
-		light->setSpecular(osg::Vec4(1.0,1.0,1.0,1));	// Test
+		//light->setSpecular(osg::Vec4(1.0,1.0,1.0,1));	// Test
         light->setPosition(osg::Vec4(direction.x(), direction.y(), direction.z(), 0));
     }
 }
