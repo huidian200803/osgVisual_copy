@@ -304,7 +304,7 @@ public:
 	 * @param CylinderColor 
 	 * @param pAddToThisGroup 
 	 */ 
-	static void AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, float length, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup);
+	static void AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup);
 
 	template<class T>
 	class FindTopMostNodeOfTypeVisitor : public osg::NodeVisitor

@@ -570,7 +570,7 @@ bool util::strToBool(std::string s)
 	return(false);
 }
 
-void util::AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, float length, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup)
+void util::AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, float radius, osg::Vec4d CylinderColor, osg::Group *pAddToThisGroup)
 {
 	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
 	osg::Vec3d center;
@@ -579,8 +579,7 @@ void util::AddCylinderBetweenPoints(osg::Vec3d StartPoint, osg::Vec3d EndPoint, 
 	osg::ref_ptr<osg::Drawable> cylinderDrawable;
 	osg::ref_ptr<osg::Material> pMaterial;
 
-	//height = (StartPoint-EndPoint).length();
-	height  = length;
+	height = (StartPoint-EndPoint).length();
 	center = osg::Vec3( (StartPoint.x() + EndPoint.x()) / 2, (StartPoint.y() + EndPoint.y()) / 2, (StartPoint.z() + EndPoint.z()) / 2);
 
 	// This is the default direction for the cylinders to face in OpenGL
