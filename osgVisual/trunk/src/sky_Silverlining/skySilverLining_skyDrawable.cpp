@@ -66,7 +66,9 @@ void skySilverLining_skyDrawable::setLighting(SilverLining::Atmosphere *atmosphe
         float ra, ga, ba, rd, gd, bd, x, y, z;
         atmosphere->GetAmbientColor(&ra, &ga, &ba);
         atmosphere->GetSunOrMoonColor(&rd, &gd, &bd);
-        atmosphere->GetSunOrMoonPosition(&x, &y, &z);
+        //atmosphere->GetSunOrMoonPosition(&x, &y, &z);
+		atmosphere->GetSunOrMoonPositionGeographic(&x, &y, &z);
+		
 
         direction = osg::Vec3(x, y, z);
 		ambient = osg::Vec4(ra, ga, ba, 1.0);
@@ -78,12 +80,16 @@ void skySilverLining_skyDrawable::setLighting(SilverLining::Atmosphere *atmosphe
         //direction = view * direction;
         direction.normalize();
 		
-//OSG_NOTIFY(osg::ALWAYS)	<< "Light Vector: X:"<<direction.x()<<" Y:"<<direction.y()<<" Z:"<<direction.z() << std::endl;
-util::AddCylinderBetweenPoints(osg::Vec3d(0,0,0), direction , 10000.0, 15000000.0, osg::Vec4d(1.0, 1.0, 0.0, 1 ), sceneRoot);
+//double cx,cy,cz, lat, lon, height;
+//util::getWGS84ofCamera( _view->getCamera(), sceneRoot, lat, lon, height );
+//util::calculateXYZAtWGS84Coordinate(lat, lon, 0, sceneRoot, cx, cy, cz);
+//util::AddCylinderBetweenPoints(osg::Vec3d(cx,cy,cz), direction*-15000000 , 500.0, osg::Vec4d(1.0, 1.0, 0.0, 1 ), sceneRoot);
+//util::AddCylinderBetweenPoints(osg::Vec3d(0,0,0), direction*-15000000 , 500.0, osg::Vec4d(0.0, 1.0, 1.0, 1 ), sceneRoot);
+
 
         light->setAmbient(ambient);
         light->setDiffuse(diffuse);
-        //light->setSpecular(osg::Vec4(0,0,0,1));
+        light->setSpecular(osg::Vec4(0,0,0,1));
 		//light->setSpecular(osg::Vec4(1.0,1.0,1.0,1));	// Test
         light->setPosition(osg::Vec4(direction.x(), direction.y(), direction.z(), 0));
     }
