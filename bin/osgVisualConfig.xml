@@ -36,7 +36,7 @@
       </model>
       <trackmodel id="2" updater_slot="TRACKING_ID"></trackmodel> 
     </models>
-    <datetime day="0" month="0" year="0" hour="20" minute="20"></datetime>
+    <datetime day="0" month="0" year="0" hour="12" minute="00"></datetime>
     <visibility range="50000" turbidity="2.2" ></visibility>
     <clouds>
       <!--<cloudlayer slot="0" type="CUMULONIMBUS_CAPPILATUS" enabled="yes" fadetime="15">

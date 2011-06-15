@@ -261,10 +261,9 @@ void visual_skySilverLining::updateUpVector()
 {
 	double x,y,z;
     util::getXYZofCamera(sceneCamera, x, y, z);
-
     osg::Vec3d up(x, y, z);
-
     up.normalize();
+
     osg::Vec3d north(0, 0, 1);	// Z is north
     osg::Vec3d east = north ^ up;	// Cross product
     east.normalize();
