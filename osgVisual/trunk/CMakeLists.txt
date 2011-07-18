@@ -17,7 +17,7 @@
 #																								#
 #################################################################################################
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.8)
 
 
 PROJECT(osgVisual)
@@ -41,7 +41,7 @@ IF(DESTINATION_ARCH STREQUAL "x64")
 ENDIF ()
 
 SET(OpenSceneGraph_MARK_AS_ADVANCED ON)
-FIND_PACKAGE(OpenSceneGraph 2.9.9 REQUIRED osgViewer OpenThreads osgDB osgTerrain osgGA osgText osgSim osgUtil)
+FIND_PACKAGE(OpenSceneGraph 3.0.0 REQUIRED osgViewer OpenThreads osgDB osgTerrain osgGA osgText osgSim osgUtil)
 FIND_PACKAGE(OpenGL REQUIRED)
 
 
