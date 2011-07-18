@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <osgvisualconfiguration>
   <module name="distortion" enabled="no">
-    <distortion channelname="center" renderimplementation="fbo" width="2048" height="2048" useshader="yes" hdr="yes" usetexturerectangle="no"></distortion>
+    <distortion channelname="right" renderimplementation="fbo" width="1920" height="1200" useshader="yes" hdr="no" usetexturerectangle="no"></distortion>
   </module>
   <module name="sky_silverlining" enabled="yes"></module>
   <module name="vista2d" enabled="yes">
@@ -14,7 +14,8 @@
   </module>
   
   <scenery>
-    <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive.terrainmod" filename2="J:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive.terrainmod" filename3="axes.osg.10000000.scale"></terrain>
+    <!-- <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive.terrainmod" filename2="H:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive" filename3="axes.osg.10000000.scale"></terrain>-->
+    <terrain filename="D:/OpenSceneGraph/VPB-Testdatensatz/DB_Small/database.ive.terrainmod" filename2="H:\BRD1m_MUC0.25m_srtmEU_BM\terrain.ive"></terrain>
     <animationpath filename="airport_muc.path"></animationpath>
     <models>
       <model objectname="TestObject" trackingid="1" label="TestText!" dynamic="no">

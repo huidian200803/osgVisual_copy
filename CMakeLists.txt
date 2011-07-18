@@ -17,7 +17,7 @@
 #																								#
 #################################################################################################
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 
 PROJECT(osgVisual)
@@ -304,6 +304,8 @@ SET(SOURCES
 	# Util
 	include/util/visual_util.h
 	src/util/visual_util.cpp
+	include/util/terrainQuery.h
+	src/util/terrainQuery.cpp
 	# Draw 2D
 	include/draw2D/visual_draw2D.h
 	src/draw2D/visual_draw2D.cpp
