@@ -14,30 +14,36 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSGSIM_HEIGHTABOVETERRAIN
-#define OSGSIM_HEIGHTABOVETERRAIN 1
+#ifndef osgVisual_HEIGHTABOVETERRAIN
+#define osgVisual_HEIGHTABOVETERRAIN 1
 
 #include <osgUtil/IntersectionVisitor>
 
 // include so we can get access to the DatabaseCacheReadCallback
 #include <osgSim/LineOfSight>
 
-namespace osgSim {
+namespace osgVisual {
 
 /** Helper class for setting up and acquiring height above terrain intersections with terrain.
-  * By default assigns a osgSim::DatabaseCacheReadCallback that enables automatic loading
+  * By default assigns a osgVisual::DatabaseCacheReadCallback that enables automatic loading
   * of external PagedLOD tiles to ensure that the highest level of detail is used in intersections.
   * This automatic loading of tiles is done by the intersection traversal that is done within
   * the computeIntersections(..) method, so can result in long intersection times when external
   * tiles have to be loaded.
   * The external loading of tiles can be disabled by removing the read callback, this is done by
   * calling the setDatabaseCacheReadCallback(DatabaseCacheReadCallback*) method with a value of 0.*/
-class OSGSIM_EXPORT HeightAboveTerrain
+class terrainQuery
 {
     public :
 
+		enum DataSource
+		{
+			LOADED_SCENE,
+			PAGE_HIGHEST_LOD
+			
+		};
     
-        HeightAboveTerrain(bool loadHighestLOD = true);
+        terrainQuery();
         
     
         /** Clear the internal HAT List so it contains no height above terrain tests.*/
@@ -80,10 +86,10 @@ class OSGSIM_EXPORT HeightAboveTerrain
         void computeIntersections(osg::Node* scene, osg::Node::NodeMask traversalMask=0xffffffff);
 
         /** Compute the vertical distance between the specified scene graph and a single HAT point. */
-        static double computeHeightAboveTerrain(osg::Node* scene, const osg::Vec3d& point, bool loadHighestLOD = true, osg::Node::NodeMask traversalMask=0xffffffff);
+        static double computeHeightAboveTerrain(osg::Node* scene, const osg::Vec3d& point, DataSource pagingBehaviour, osg::Node::NodeMask traversalMask=0xffffffff);
         
 		/** Compute the vertical position of the scene at a single HOT point. */
-        static double computeHeightOfTerrain(osg::Node* scene, const osg::Vec3d& point, bool loadHighestLOD = true, osg::Node::NodeMask traversalMask=0xffffffff);
+        static double computeHeightOfTerrain(osg::Node* scene, const osg::Vec3d& point, DataSource pagingBehaviour, osg::Node::NodeMask traversalMask=0xffffffff);
 
         
         /** Clear the database cache.*/
@@ -92,10 +98,10 @@ class OSGSIM_EXPORT HeightAboveTerrain
         /** Set the ReadCallback that does the reading of external PagedLOD models, and caching of loaded subgraphs.
           * Note, if you have multiple LineOfSight or HeightAboveTerrain objects in use at one time then you should share a single
           * DatabaseCacheReadCallback between all of them. */
-        void setDatabaseCacheReadCallback(DatabaseCacheReadCallback* dcrc);
+		void setDatabaseCacheReadCallback(osgSim::DatabaseCacheReadCallback* dcrc);
 
         /** Get the ReadCallback that does the reading of external PagedLOD models, and caching of loaded subgraphs.*/
-        DatabaseCacheReadCallback* getDatabaseCacheReadCallback() { return _dcrc.get(); }
+		osgSim::DatabaseCacheReadCallback* getDatabaseCacheReadCallback() { return _dcrc.get(); }
         
     protected :
     
@@ -117,8 +123,7 @@ class OSGSIM_EXPORT HeightAboveTerrain
         double                                  _lowestHeight;
         HATList                                 _HATList;
 
-        
-        osg::ref_ptr<DatabaseCacheReadCallback> _dcrc;
+		osg::ref_ptr<osgSim::DatabaseCacheReadCallback> _dcrc;
         osgUtil::IntersectionVisitor            _intersectionVisitor;
 
 

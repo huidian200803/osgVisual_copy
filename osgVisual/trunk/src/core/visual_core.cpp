@@ -47,6 +47,9 @@ void visual_core::initialize()
 	// Configure osg to use KdTrees
 	osgDB::Registry::instance()->setBuildKdTreesHint(osgDB::ReaderWriter::Options::BUILD_KDTREES);
 
+	// Configure Multisampling
+	osg::DisplaySettings::instance()->setNumMultiSamples(4);
+
 	// Setup pathes
 	osgDB::Registry::instance()->getDataFilePathList().push_back( "D:\\DA\\osgVisual\\models" );
 	
@@ -369,8 +372,8 @@ void visual_core::setupScenery()
     }
 	else
 	{
-		OSG_ALWAYS << "BorderEqual activated" << std::endl;
-		terrain->setEqualizeBoundaries(true);
+		//OSG_ALWAYS << "BorderEqual activated" << std::endl;
+		//terrain->setEqualizeBoundaries(true);
 	}
 
 	//testObj = new visual_object( rootNode, "testStab", objectMountedCameraManip );
