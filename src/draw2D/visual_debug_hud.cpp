@@ -15,7 +15,7 @@
 */
 
 #include <visual_debug_hud.h>
-#include <osgSim/HeightAboveTerrain>
+#include <terrainQuery.h>
 
 using namespace osgVisual;
 
@@ -141,16 +141,16 @@ void visual_debug_hud::HudUpdateCallback::operator()(osg::Node* node, osg::NodeV
 	double alt = 0;
 
 	util::getWGS84ofCamera( sceneCamera, csn, lat, lon, alt ); 
-	//util::queryHeightAboveTerrainInWGS84(hat, csn, lat, lon, alt);
-	//util::queryHeightOfTerrain(hot, csn, lat, lon);
+	util::queryHeightAboveTerrainInWGS84(hat, csn, lat, lon, alt);
+	util::queryHeightOfTerrain(hot, csn, lat, lon);
 
-	double x = 0;
+	/*double x = 0;
 	double y = 0;
 	double z = 0;
 
 	util::getXYZofCamera( sceneCamera, x, y, z ); 
-	hat = osgSim::HeightAboveTerrain::computeHeightAboveTerrain(csn, osg::Vec3d(x,y,z), false);
-	hot = osgSim::HeightAboveTerrain::computeHeightOfTerrain(csn, osg::Vec3d(x,y,z), false);
+	hat = terrainQuery::computeHeightAboveTerrain(csn, osg::Vec3d(x,y,z), terrainQuery::PAGE_HIGHEST_LOD);
+	hot = terrainQuery::computeHeightOfTerrain(csn, osg::Vec3d(x,y,z), terrainQuery::PAGE_HIGHEST_LOD);*/
 
 
 	// Updating Display Elements:

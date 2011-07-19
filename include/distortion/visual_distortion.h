@@ -480,11 +480,6 @@ private:
 	std::string configFileName;
 
 	/**
-	 * Target implementation which should be used to distort.
-	 */ 
-	osg::Camera::RenderTargetImplementation renderImplementation;
-
-	/**
 	 * Reference to the global ArgumentParser. The arguments are required to add the help entry for the toggle distortion key. All other configuration is located in the XML file.
 	 */ 
 	osg::ArgumentParser& arguments;

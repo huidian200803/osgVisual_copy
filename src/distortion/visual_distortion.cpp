@@ -96,20 +96,7 @@ bool visual_distortion::processXMLConfiguration()
 						else
 							OSG_NOTIFY(osg::WARN) << "WARNING: Unable to parse Frustum values from '" << pre_cfg<<channelname<<post_cfg << "' -- continue without valid frustum values." << std::endl;
 					}
-					if( attr_name == "renderimplementation" )
-					{
-						if(attr_value=="fbo")
-							renderImplementation = osg::Camera::FRAME_BUFFER_OBJECT;
-						if(attr_value=="pbuffer")
-							renderImplementation = osg::Camera::PIXEL_BUFFER;
-						if(attr_value=="pbuffer-rtt")
-							renderImplementation = osg::Camera::PIXEL_BUFFER_RTT;
-						if(attr_value=="fb")
-							renderImplementation = osg::Camera::FRAME_BUFFER;
-						if(attr_value=="window")
-							renderImplementation = osg::Camera::SEPERATE_WINDOW;           
-					}
-					if( attr_name == "width" )
+         			if( attr_name == "width" )
 					{
 						std::stringstream sstr(attr_value);
 						sstr >> tex_width;
@@ -184,8 +171,6 @@ osg::Group* visual_distortion::initialize(osg::Group* subgraph, const osg::Vec4&
 	// Initialize variables:
 	tex_width = 2048;
     tex_height = 2048;
-	renderImplementation = osg::Camera::FRAME_BUFFER_OBJECT;
-	useTextureRectangle = false;
 	useShaderDistortion = false;
 	useHDR = false; 
 	distortMapFileName = "..\\resources\\distortion\\distort_distDisabled.bmp";
@@ -269,27 +254,14 @@ osg::Group* visual_distortion::createPreRenderSubGraph(osg::Group* subgraph, con
     osg::Group* parent = new osg::Group;
 
     // texture to render to and to use for rendering of flag.
-    osg::Texture* texture = 0;
-    if (useTextureRectangle)
-    {
-        osg::TextureRectangle* textureRect = new osg::TextureRectangle;
-        textureRect->setTextureSize(tex_width, tex_height);
-        textureRect->setInternalFormat(GL_RGBA);
-        textureRect->setFilter(osg::Texture2D::MIN_FILTER,osg::Texture2D::LINEAR);
-        textureRect->setFilter(osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR);
-        
-        texture = textureRect;
-    }
-    else
-    {
-        osg::Texture2D* texture2D = new osg::Texture2D;
-        texture2D->setTextureSize(tex_width, tex_height);
-        texture2D->setInternalFormat(GL_RGBA);
-        texture2D->setFilter(osg::Texture2D::MIN_FILTER,osg::Texture2D::LINEAR);
-        texture2D->setFilter(osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR);
-        
-        texture = texture2D;
-    } 
+    //osg::Texture* texture = 0;
+    osg::Texture2D* texture = new osg::Texture2D;
+    texture->setTextureSize(tex_width, tex_height);
+    texture->setInternalFormat(GL_RGBA);
+    texture->setFilter(osg::Texture2D::MIN_FILTER,osg::Texture2D::LINEAR);
+    texture->setFilter(osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR);
+    
+    //texture = texture2D;
 
     if (useHDR)
     {
@@ -327,8 +299,8 @@ osg::Group* visual_distortion::createPreRenderSubGraph(osg::Group* subgraph, con
         osg::Vec3 xAxis(1.0f,0.0f,0.0f);
         osg::Vec3 yAxis(0.0f,1.0f,0.0f);
         osg::Vec3 zAxis(0.0f,0.0f,1.0f);
-        float height = 1024.0f;
-        float width = 1280.0f;
+        float width = 1600.0f;
+		float height = 900.0f;
         int noSteps = 128;
         if (useShaderDistortion)
             noSteps = 2;
@@ -422,13 +394,11 @@ osg::Group* visual_distortion::createPreRenderSubGraph(osg::Group* subgraph, con
         // just inherit the main cameras view
         camera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
         camera->setViewMatrix(osg::Matrix::identity());
-        //sceneCamera->setProjectionMatrixAsOrtho2D(0,viewer->getCamera()->getViewport()->width(),0,viewer->getCamera()->getViewport()->height());
-		camera->setProjectionMatrixAsOrtho2D(0,1280,0,1024);
-		/** \todo: use screen size dynamically */
-
+		camera->setProjectionMatrixAsOrtho2D(0,1600,0,900);		/** \todo: use screen size dynamically */
+		
         // set the camera to render before the main camera.
         camera->setRenderOrder(osg::Camera::POST_RENDER, 200);
-
+		
         // only clear the depth buffer
         camera->setClearMask(0);
 
@@ -494,11 +464,11 @@ osg::Group* visual_distortion::createPreRenderSubGraph(osg::Group* subgraph, con
 		sceneCamera = camera;
 
         // tell the camera to use OpenGL frame buffer object where supported.
-        camera->setRenderTargetImplementation(renderImplementation);
+        camera->setRenderTargetImplementation(osg::Camera::FRAME_BUFFER_OBJECT);
 
         // attach the texture and use it as the color buffer.
-        camera->attach(osg::Camera::COLOR_BUFFER, texture);	// No Multisampling/Antialiasing
-		//camera->attach(osg::Camera::COLOR_BUFFER, texture, 0, 0, false, 4, 4); // 4x Multisampling/Antialiasing
+        //camera->attach(osg::Camera::COLOR_BUFFER, texture);	// No Multisampling/Antialiasing
+		camera->attach(osg::Camera::COLOR_BUFFER, texture, 0, 0, false, 4, 4); // 4x Multisampling/Antialiasing
 
         // add subgraph to render
         camera->addChild(subgraph);

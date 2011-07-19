@@ -20,29 +20,29 @@
 #include <osg/Notify>
 #include <osgUtil/LineSegmentIntersector>
 
+using namespace osgVisual;
 using namespace osgSim;
 
-HeightAboveTerrain::HeightAboveTerrain(bool loadHighestLOD)
+terrainQuery::terrainQuery()
 {
     _lowestHeight = -1000.0;
     
-	if(loadHighestLOD)
-		setDatabaseCacheReadCallback(new DatabaseCacheReadCallback);
+	setDatabaseCacheReadCallback(new DatabaseCacheReadCallback);
 }
 
-void HeightAboveTerrain::clear()
+void terrainQuery::clear()
 {
     _HATList.clear();
 }
 
-unsigned int HeightAboveTerrain::addPoint(const osg::Vec3d& point)
+unsigned int terrainQuery::addPoint(const osg::Vec3d& point)
 {
     unsigned int index = _HATList.size();
     _HATList.push_back(HAT(point));
     return index;
 }
 
-void HeightAboveTerrain::computeIntersections(osg::Node* scene, osg::Node::NodeMask traversalMask)
+void terrainQuery::computeIntersections(osg::Node* scene, osg::Node::NodeMask traversalMask)
 {
     osg::CoordinateSystemNode* csn = dynamic_cast<osg::CoordinateSystemNode*>(scene);
     osg::EllipsoidModel* em = csn ? csn->getEllipsoidModel() : 0;
@@ -127,23 +127,25 @@ void HeightAboveTerrain::computeIntersections(osg::Node* scene, osg::Node::NodeM
     
 }
 
-double HeightAboveTerrain::computeHeightAboveTerrain(osg::Node* scene, const osg::Vec3d& point, bool loadHighestLOD, osg::Node::NodeMask traversalMask)
+double terrainQuery::computeHeightAboveTerrain(osg::Node* scene, const osg::Vec3d& point, DataSource pagingBehaviour, osg::Node::NodeMask traversalMask)
 {
-    HeightAboveTerrain hat(loadHighestLOD);
-    unsigned int index = hat.addPoint(point);
-    hat.computeIntersections(scene, traversalMask);
-    return hat.getHeightAboveTerrain(index);
+    terrainQuery qt;
+	/*if(!loadHighestLOD)
+		qt.setDatabaseCacheReadCallback(0);*/
+    unsigned int index = qt.addPoint(point);
+    qt.computeIntersections(scene, traversalMask);
+    return qt.getHeightAboveTerrain(index);
 }
 
-double HeightAboveTerrain::computeHeightOfTerrain(osg::Node* scene, const osg::Vec3d& point, bool loadHighestLOD, osg::Node::NodeMask traversalMask)
+double terrainQuery::computeHeightOfTerrain(osg::Node* scene, const osg::Vec3d& point, DataSource pagingBehaviour, osg::Node::NodeMask traversalMask)
 {
-	HeightAboveTerrain hat(loadHighestLOD);
-    unsigned int index = hat.addPoint(point);
-    hat.computeIntersections(scene, traversalMask);
-    return hat.getHeightOfTerrain(index);
+	terrainQuery qt;
+    unsigned int index = qt.addPoint(point);
+    qt.computeIntersections(scene, traversalMask);
+    return qt.getHeightOfTerrain(index);
 }
 
-void HeightAboveTerrain::setDatabaseCacheReadCallback(DatabaseCacheReadCallback* dcrc)
+void terrainQuery::setDatabaseCacheReadCallback(DatabaseCacheReadCallback* dcrc)
 {
     _dcrc = dcrc;
     _intersectionVisitor.setReadCallback(dcrc);
