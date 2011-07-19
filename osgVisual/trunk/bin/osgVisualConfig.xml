@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <osgvisualconfiguration>
-  <module name="distortion" enabled="no">
-    <distortion channelname="right" renderimplementation="fbo" width="1920" height="1200" useshader="yes" hdr="no" usetexturerectangle="no"></distortion>
+  <module name="distortion" enabled="yes">
+    <distortion channelname="left" renderimplementation="fbo" width="1600" height="900" useshader="yes" hdr="no"></distortion>
   </module>
   <module name="sky_silverlining" enabled="yes"></module>
   <module name="vista2d" enabled="yes">
