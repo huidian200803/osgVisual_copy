@@ -141,8 +141,8 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "updater")
 		{
 			for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
-			{
-				std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
+			{ 
+				std::string sub_node_name=reinterpret_cast<const char*>(sub_cur_node->name);
 				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "position")
 				{
 					xmlAttr  *attr = sub_cur_node->properties;
