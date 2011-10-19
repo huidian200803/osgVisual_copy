@@ -194,7 +194,7 @@ visual_object* visual_object::createNodeFromXMLConfig(osg::CoordinateSystemNode*
 		{
 			for (xmlNode *sub_cur_node = cur_node->children; sub_cur_node; sub_cur_node = sub_cur_node->next)
 			{
-				std::string sub_node_name=reinterpret_cast<const char*>(cur_node->children->name);
+				std::string sub_node_name=reinterpret_cast<const char*>(sub_cur_node->children->name);
 				if(sub_cur_node->type == XML_ELEMENT_NODE && sub_node_name == "translation")
 				{
 					xmlAttr  *attr = sub_cur_node->properties;
