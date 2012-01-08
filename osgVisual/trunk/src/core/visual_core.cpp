@@ -18,6 +18,7 @@
 #include <visual_core.h>
 #include <visual_util.h>
 #include <osgTerrain/Terrain>
+#include <osgDB/FileNameUtils>
 
 using namespace osgVisual;
 
@@ -173,7 +174,13 @@ void visual_core::shutdown()
 
 bool visual_core::loadTerrain(osg::ArgumentParser& arguments_)
 {
-	osg::ref_ptr<osg::Node> model = osgDB::readNodeFiles(util::getTerrainFromXMLConfig(configFilename));
+	std::vector<std::string> terrainFile = util::getTerrainFromXMLConfig(configFilename);
+
+	// Add each terrain path to the FilePath list to help OSG to find the subtiles. 
+	for(unsigned int i=0;i<terrainFile.size();i++)
+		osgDB::Registry::instance()->getDataFilePathList().push_back(osgDB::getFilePath(terrainFile[i]));
+
+	osg::ref_ptr<osg::Node> model = osgDB::readNodeFiles(terrainFile);
 	if( model.valid() )
 	{
         osgTerrain::Terrain* terrain = util::findTopMostNodeOfType<osgTerrain::Terrain>(model.get());
