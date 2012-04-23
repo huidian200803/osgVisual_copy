@@ -52,7 +52,9 @@ void visual_core::initialize()
 	osg::DisplaySettings::instance()->setNumMultiSamples(4);
 
 	// Setup pathes
+	osgDB::Registry::instance()->getDataFilePathList().push_front("H:\AllInOnDB");
 	osgDB::Registry::instance()->getDataFilePathList().push_back( "D:\\DA\\osgVisual\\models" );
+
 	
 	// Setup viewer
 	viewer = new osgViewer::Viewer(arguments);
@@ -214,7 +216,7 @@ void visual_core::parseScenery(xmlNode* a_node)
 		std::string node_name=reinterpret_cast<const char*>(cur_node->name);
 
 		// terrain is parsend seperately
-		// animationpath is parsend seperately
+		// animationpath is parsend seperately in util::getAnimationPathFromXMLConfig(..) which invokes this function.
 
 		if(cur_node->type == XML_ELEMENT_NODE && node_name == "models")
 		{
@@ -403,12 +405,12 @@ void visual_core::setupScenery()
 	//testObj3->addUpdater( new object_updater(testObj3) );
 	//testObj3->setTrackingId(4);
 
-	osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER2" );	// todo memleak
-	testObj4->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 650 );
-	testObj4->loadGeometry( "../models/saenger2.flt" );
-	testObj4->addUpdater( new object_updater(testObj4) );
-	testObj4->addLabel("testLabel", "Object4 :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
-	testObj4->setTrackingId(2);
+	//osg::ref_ptr<visual_object> testObj4 = new visual_object( rootNode, "SAENGER2" );	// todo memleak
+	//testObj4->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 650 );
+	//testObj4->loadGeometry( "../models/saenger2.flt" );
+	//testObj4->addUpdater( new object_updater(testObj4) );
+	//testObj4->addLabel("testLabel", "Object4 :)",osg::Vec4(1.0f,0.25f,1.0f,1.0f));
+	//testObj4->setTrackingId(2);
 
 	//osg::ref_ptr<visual_object> testObj5 = new visual_object( rootNode, "SAENGER" );	// todo memleak
 	//testObj5->setNewPosition( osg::DegreesToRadians(47.8123), osg::DegreesToRadians(12.94088), 550 );
@@ -417,7 +419,7 @@ void visual_core::setupScenery()
 	//testObj5->addUpdater( new object_updater(testObj5) );
 	//testObj5->setTrackingId(6);
 
-	manipulators->trackNode( testObj4 );
+	//manipulators->trackNode( testObj4 );
 
 	// Load EDDF
 	//std::string filename = "D:\\DA\\EDDF_test\\eddf.ive";
